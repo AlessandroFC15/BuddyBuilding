@@ -13,8 +13,9 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Input1Goal"
-        android:label="Objetivo">
+        <activity
+            android:name=".Input1Goal"
+            android:label="Objetivo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +24,17 @@
         </activity>
         <activity
             android:name=".Input2Activity"
-            android:label="Nível de Atividade">
+            android:label="Nível de Atividade" >
+        </activity>
+        <activity
+            android:name=".Input3Info"
+            android:label="@string/title_activity_input3_info"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Input4Info"
+            android:label="@string/title_activity_input4_info"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 
