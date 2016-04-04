@@ -60,6 +60,7 @@
         android:visibility="gone">
 
         <RadioButton
+            android:id="@+id/gain250g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="selectWeeklyGoal"
@@ -67,6 +68,7 @@
             android:padding="15dp"/>
 
         <RadioButton
+            android:id="@+id/gain500g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="selectWeeklyGoal"
@@ -83,6 +85,7 @@
         >
 
         <RadioButton
+            android:id="@+id/lose250g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="selectWeeklyGoal"
@@ -90,6 +93,7 @@
             android:padding="15dp"/>
 
         <RadioButton
+            android:id="@+id/lose500g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="selectWeeklyGoal"
@@ -97,6 +101,7 @@
             android:padding="15dp"/>
 
         <RadioButton
+            android:id="@+id/lose750g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="selectWeeklyGoal"
@@ -104,11 +109,23 @@
             android:padding="15dp"/>
 
         <RadioButton
+            android:id="@+id/lose1kg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="selectWeeklyGoal"
             android:text="Perder 1kg p/ semana"
             android:padding="15dp"/>
     </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textAllCaps="true"
+        android:padding="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:onClick="changeActivity"
+        />
 
 </LinearLayout>

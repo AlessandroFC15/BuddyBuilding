@@ -18,8 +18,16 @@ public class User extends Person{
     public static final int ACTIVE = 2;
     public static final int VERY_ACTIVE = 3;
 
+    public static final int GAIN_250G = 0;
+    public static final int GAIN_500G = 1;
+    public static final int LOSE_250G = 2;
+    public static final int LOSE_500G = 3;
+    public static final int LOSE_750G = 4;
+    public static final int LOSE_1KG = 5;
+
     private int goal;
     private int activityLevel;
+    private int weeklyGoal;
 
     public void setGoal(int choice)
     {
@@ -39,6 +47,14 @@ public class User extends Person{
         if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
         {
             activityLevel = choice;
+        }
+    }
+
+    public void setWeeklyGoal(int choice)
+    {
+        if ((choice >= GAIN_250G) && (choice <= LOSE_1KG))
+        {
+            weeklyGoal = choice;
         }
     }
 }

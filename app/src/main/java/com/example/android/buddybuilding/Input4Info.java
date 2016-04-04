@@ -47,8 +47,6 @@ public class Input4Info extends AppCompatActivity {
 
                 startActivity(new Intent(this, Input5Goals.class));
             }
-
-
         }
     }
 
