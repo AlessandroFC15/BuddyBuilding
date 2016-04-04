@@ -23,10 +23,15 @@ public class User extends Person{
 
     public void setGoal(int choice)
     {
-        if ((choice >= LOSE_WEIGHT) && (choice <= MAINTAIN_WEIGHT))
+        if ((choice >= LOSE_WEIGHT) && (choice <= GAIN_WEIGHT))
         {
             goal = choice;
         }
+    }
+
+    public int getGoal()
+    {
+        return goal;
     }
 
     public void setActivityLevel(int choice)
