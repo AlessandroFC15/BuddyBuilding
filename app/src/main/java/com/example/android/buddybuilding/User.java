@@ -3,7 +3,7 @@ package com.example.android.buddybuilding;
 /**
  * Created by Alessandro on 03/04/2016.
  */
-public class User {
+public class User extends Person{
 
     private static final User userData = new User();
     public static User getInstance() {return userData;}
@@ -23,7 +23,7 @@ public class User {
 
     public void setGoal(int choice)
     {
-        if ((choice == LOSE_WEIGHT) || (choice == MAINTAIN_WEIGHT) || (choice == GAIN_WEIGHT))
+        if ((choice >= LOSE_WEIGHT) && (choice <= MAINTAIN_WEIGHT))
         {
             goal = choice;
         }
@@ -31,6 +31,9 @@ public class User {
 
     public void setActivityLevel(int choice)
     {
-        //if (choice )
+        if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
+        {
+            activityLevel = choice;
+        }
     }
 }
