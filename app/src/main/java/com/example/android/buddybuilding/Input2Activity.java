@@ -1,5 +1,6 @@
 package com.example.android.buddybuilding;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,32 +27,28 @@ public class Input2Activity extends AppCompatActivity {
             case R.id.notVeryActive:
                 if (checked) {
                     userData.setActivityLevel(User.NOT_VERY_ACTIVE);
-                    Helper.makeToast("0", getApplicationContext());
                     break;
                 }
             case R.id.lightlyActive:
                 if (checked)
                 {
                     userData.setActivityLevel(User.LIGHTLY_ACTIVE);
-                    Helper.makeToast("1", getApplicationContext());
                     break;
                 }
             case R.id.active:
                 if (checked)
                 {
                     userData.setActivityLevel(User.ACTIVE);
-                    Helper.makeToast("2", getApplicationContext());
                     break;
                 }
             case R.id.veryActive:
                 if (checked)
                 {
                     userData.setActivityLevel(User.VERY_ACTIVE);
-                    Helper.makeToast("3", getApplicationContext());
                     break;
                 }
         }
 
-        // startActivity(new Intent(this, Input2Activity.class));
+        startActivity(new Intent(this, Input3Info.class));
     }
 }
