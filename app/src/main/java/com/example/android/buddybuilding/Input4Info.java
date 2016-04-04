@@ -1,5 +1,6 @@
 package com.example.android.buddybuilding;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,9 +45,7 @@ public class Input4Info extends AppCompatActivity {
                 userData.setHeight(height);
                 userData.setWeight(weight);
 
-                Helper.makeToast("I'm the danger!", this);
-
-                // Start new activity
+                startActivity(new Intent(this, Input5Goals.class));
             }
 
 

@@ -36,6 +36,11 @@
             android:label="@string/title_activity_input4_info"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".Input5Goals"
+            android:label="@string/title_activity_input5_goals"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
