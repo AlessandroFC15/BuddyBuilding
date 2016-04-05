@@ -12,9 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private User userData = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,88 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        calculateBMR();
+
+        updateGoal();
+    }
+
+    /*
+    Calculo da Taxa Metabólica Basal
+    Assumiu-se a formula 32 * kg
+     */
+
+    private int calculateGoal()
+    {
+        switch (userData.getWeeklyGoal())
+        {
+            case (User.GAIN_250G):
+                return 500;
+            case (User.GAIN_500G):
+                return 750;
+            case (User.LOSE_250G):
+                return -200;
+            case (User.LOSE_500G):
+                return -300;
+            case (User.LOSE_750G):
+                return -400;
+            case (User.LOSE_1KG):
+                return -500;
+            default:
+                Helper.makeToast("Error calculating goal",this);
+                return -1;
+        }
+    }
+
+    private void calculateBMR()
+    {
+        userData.setBMR();
+    }
+
+    private void updateGoal()
+    {
+        TextView caloriesGoal = (TextView) findViewById(R.id.caloriesGoal);
+
+        caloriesGoal.setText(Integer.toString(userData.getBMR() + calculateGoal()));
+
+        updateCaloriesRemaining();
+    }
+
+    private int getCaloriesGoal()
+    {
+        int bmr = userData.getBMR();
+
+        int calories = calculateGoal();
+
+        if (userData.getGoal() == User.GAIN_WEIGHT)
+        {
+            return bmr + calories;
+        } else if (userData.getGoal() == User.LOSE_WEIGHT)
+        {
+            return bmr - calories;
+        } else if (userData.getGoal() == User.MAINTAIN_WEIGHT)
+        {
+            return bmr;
+        } else
+        {
+            Helper.makeToast("Erro em getCaloriesGoal", this);
+            return -1;
+        }
+    }
+
+    private void updateCaloriesRemaining()
+    {
+        TextView textCaloriesGoal = (TextView) findViewById(R.id.caloriesGoal);
+        TextView textFoodIntake = (TextView) findViewById(R.id.foodIntake);
+
+        int caloriesGoal = Integer.parseInt(textCaloriesGoal.getText().toString());
+        int foodIntake = Integer.parseInt(textFoodIntake.getText().toString());
+
+        TextView textRemainingCalories = (TextView) findViewById(R.id.remainingCalories);
+
+        int remainingCalories = caloriesGoal - foodIntake;
+
+        textRemainingCalories.setText(Integer.toString(remainingCalories));
     }
 
     @Override

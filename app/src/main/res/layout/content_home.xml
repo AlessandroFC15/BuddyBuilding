@@ -42,7 +42,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:padding="15dp"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal">
@@ -52,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/caloriesGoal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2500"
@@ -82,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/foodIntake"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -112,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/remainingCalories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2480"
