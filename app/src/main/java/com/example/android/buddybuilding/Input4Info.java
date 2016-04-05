@@ -45,7 +45,14 @@ public class Input4Info extends AppCompatActivity {
                 userData.setHeight(height);
                 userData.setWeight(weight);
 
-                startActivity(new Intent(this, Input5Goals.class));
+                if (userData.getGoal() == User.MAINTAIN_WEIGHT)
+                {
+                    startActivity(new Intent(this, Home.class));
+                } else
+                {
+                    startActivity(new Intent(this, Input5Goals.class));
+                }
+
             }
         }
     }
