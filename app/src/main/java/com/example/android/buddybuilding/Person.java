@@ -21,6 +21,7 @@ public class Person {
     private int age;
     private double height;
     private double weight;
+    private int bmr;
 
     public void setGender(int choice)
     {
@@ -52,6 +53,25 @@ public class Person {
         {
             this.weight = weight;
         }
+    }
+
+    public double getWeight()
+    {
+        return weight;
+    }
+
+    /*
+    Calculo da Taxa Metabólica Basal
+    Assumiu-se a formula 32 * kg
+     */
+    public void setBMR()
+    {
+        bmr = 32 * (int) getWeight();
+    }
+
+    public int getBMR()
+    {
+        return bmr;
     }
 
 }
