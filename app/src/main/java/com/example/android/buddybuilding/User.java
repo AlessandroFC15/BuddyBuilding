@@ -57,4 +57,9 @@ public class User extends Person{
             weeklyGoal = choice;
         }
     }
+
+    public int getWeeklyGoal()
+    {
+        return weeklyGoal;
+    }
 }
