@@ -44,10 +44,10 @@ public class Input5Goals extends AppCompatActivity {
     {
         if (userData.getGoal() == userData.LOSE_WEIGHT)
         {
-            selectGainGoal(view);
+            selectLossGoal(view);
         } else if (userData.getGoal() == userData.GAIN_WEIGHT)
         {
-            selectLossGoal(view);
+            selectGainGoal(view);
         } else
         {
             Helper.makeToast("Error selecting weekly goal", this);
@@ -124,8 +124,6 @@ public class Input5Goals extends AppCompatActivity {
                 Helper.makeToast("Select a weekly goal!", this);
             }
         }
-
-
     }
 
     private double getWeightGoal()
@@ -137,21 +135,55 @@ public class Input5Goals extends AppCompatActivity {
         try {
             double number = Double.parseDouble(height);
 
-            if ((number >= User.MIN_WEIGHT) && (number <= User.MAX_WEIGHT))
+            if (isWeightGoalValid(number))
             {
                 return number;
-            } else
-            {
-                Helper.makeToast("Goal weight must be between " + User.MIN_WEIGHT
-                        + " and " + User.MAX_WEIGHT + "!", this);
-                return -1;
             }
+
+            return -1;
+
         } catch (NumberFormatException e)
         {
             Helper.makeToast("Enter a valid weight!", this);
             return -1;
         }
     }
+
+    private boolean isWeightGoalValid(double number)
+    {
+        if ((number >= User.MIN_WEIGHT) && (number <= User.MAX_WEIGHT))
+        {
+            if (userData.getGoal() == User.GAIN_WEIGHT)
+            {
+                if (number > userData.getWeight())
+                {
+                    return true;
+                } else
+                {
+                    Helper.makeToast("O peso desejado deve ser maior que o seu peso atual", this);
+                    return false;
+                }
+            } else
+            {
+                if (number < userData.getWeight())
+                {
+                    return true;
+                } else
+                {
+                    Helper.makeToast("O peso desejado deve ser menor que o seu peso atual", this);
+                    return false;
+                }
+            }
+
+            // return number;
+        } else
+        {
+            Helper.makeToast("Goal weight must be between " + User.MIN_WEIGHT
+                    + " and " + User.MAX_WEIGHT + "!", this);
+            return false;
+        }
+    }
+
 
     private boolean isWeeklyGoalSelected()
     {
