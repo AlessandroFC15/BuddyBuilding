@@ -8,6 +8,13 @@ public class User extends Person{
     private static final User userData = new User();
     public static User getInstance() {return userData;}
 
+    User()
+    {
+        goal = GAIN_WEIGHT;
+        activityLevel = NOT_VERY_ACTIVE;
+        weeklyGoal = GAIN_250G;
+    }
+
     // Constants
     public static final int LOSE_WEIGHT = 0;
     public static final int MAINTAIN_WEIGHT = 1;
