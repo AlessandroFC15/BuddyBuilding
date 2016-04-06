@@ -23,6 +23,15 @@ public class Person {
     private double weight;
     private int bmr;
 
+    Person()
+    {
+        gender = Person.MALE;
+        age = 20;
+        height = 165;
+        weight = 60;
+        setBMR();
+    }
+
     public void setGender(int choice)
     {
         if ((choice == MALE) || (choice == FEMALE))
