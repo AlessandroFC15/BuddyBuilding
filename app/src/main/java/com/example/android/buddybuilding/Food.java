@@ -40,4 +40,6 @@ public class Food {
         return totalFat;
     }
 
+    public double getCalories() { return calories; }
+
 }

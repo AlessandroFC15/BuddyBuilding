@@ -35,6 +35,7 @@ public class User extends Person{
     private int goal;
     private int activityLevel;
     private int weeklyGoal;
+    private Diet diet;
 
     public void setGoal(int choice)
     {
