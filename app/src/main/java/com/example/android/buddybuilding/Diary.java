@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Diary extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -97,5 +99,23 @@ public class Diary extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void addFoodToMeal(View view)
+    {
+        LinearLayout meal = (LinearLayout) view.getParent().getParent();
+
+        printFood("Food", meal);
+    }
+
+    private void printFood(String nameOfFood, LinearLayout meal)
+    {
+        TextView food = new TextView(this);
+
+        food.setText(nameOfFood);
+
+        food.setTextColor(getResources().getColor(R.color.colorAccent));
+
+        meal.addView(food, 1);
     }
 }
