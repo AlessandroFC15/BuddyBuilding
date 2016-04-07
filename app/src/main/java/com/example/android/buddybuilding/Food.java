@@ -5,13 +5,15 @@ package com.example.android.buddybuilding;
  */
 public class Food {
     String name;
+    double servingSize;
     double protein;
     double carbohydrates;
     double calories;
     double totalFat;
 
-    Food(String name, double protein, double carbohydrates, double totalFat)
+    Food(String name, double servingSize, double protein, double carbohydrates, double totalFat)
     {
+        this.servingSize = servingSize;
         this.name = name;
         this.protein = protein;
         this.carbohydrates = carbohydrates;
@@ -41,5 +43,9 @@ public class Food {
     }
 
     public double getCalories() { return calories; }
+
+    public String getName() {
+        return name;
+    }
 
 }
