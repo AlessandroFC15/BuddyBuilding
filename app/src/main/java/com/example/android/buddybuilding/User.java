@@ -35,7 +35,7 @@ public class User extends Person{
     private int goal;
     private int activityLevel;
     private int weeklyGoal;
-    private Diet diet;
+    private Diet diet = new Diet();
 
     public void setGoal(int choice)
     {
@@ -69,5 +69,15 @@ public class User extends Person{
     public int getWeeklyGoal()
     {
         return weeklyGoal;
+    }
+
+    public void addFood(int nameOfMeal, Food food)
+    {
+        diet.addFoodToMeal(nameOfMeal, food);
+    }
+
+    public double getCaloriesFromMeal(int nameOfMeal)
+    {
+        return diet.getCaloriesFromMeal(nameOfMeal);
     }
 }
