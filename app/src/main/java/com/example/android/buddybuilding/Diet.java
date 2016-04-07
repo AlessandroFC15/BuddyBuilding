@@ -1,13 +1,17 @@
 package com.example.android.buddybuilding;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Alessandro on 06/04/2016.
  */
 public class Diet {
+    private double totalCalories;
+    private double proteinIntake;
+    private double carbsIntake;
+    private double fatIntake;
 
-    ArrayList<Meal> meals = new ArrayList<>();
+    HashMap<Integer, Meal> meals = new HashMap<>();
 
     Diet()
     {
@@ -16,10 +20,39 @@ public class Diet {
 
     private void addDefaultMeals()
     {
-        meals.add(new Meal("Breakfast"));
-        meals.add(new Meal("Lunch"));
-        meals.add(new Meal("Dinner"));
-        meals.add(new Meal("Snacks"));
+        meals.put(Meal.BREAKFAST, new Meal(Meal.BREAKFAST));
+        meals.put(Meal.LUNCH, new Meal(Meal.LUNCH));
+        meals.put(Meal.DINNER, new Meal(Meal.DINNER));
+        meals.put(Meal.SNACKS, new Meal(Meal.SNACKS));
+    }
+
+    public void addFoodToMeal(int nameOfmeal, Food food)
+    {
+        if (nameOfmeal >= Meal.BREAKFAST && nameOfmeal <= Meal.SNACKS)
+        {
+            Meal meal = meals.get(nameOfmeal);
+
+            meal.addFood(food);
+        }
+    }
+
+    public double getDietTotalCalories()
+    {
+        double calories = 0;
+
+        for (int nameOfMeal : meals.keySet())
+        {
+            Meal meal = meals.get(nameOfMeal);
+
+            calories += meal.getMealTotalCalories();
+        }
+
+        return calories;
+    }
+
+    public double getCaloriesFromMeal(int nameOfMeal)
+    {
+        return meals.get(nameOfMeal).getMealTotalCalories();
     }
 
 }
