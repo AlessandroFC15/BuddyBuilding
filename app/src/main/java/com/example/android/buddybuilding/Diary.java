@@ -16,6 +16,8 @@ import android.widget.TextView;
 public class Diary extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private User userData = User.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,19 +94,85 @@ public class Diary extends AppCompatActivity
 
     public void addFoodToMeal(View view)
     {
-        LinearLayout meal = (LinearLayout) view.getParent().getParent();
+        // Creating just for test
+        // This process will be replaced by a choice of food.
+        Food newFood = new Food("Pasta de Amendoim", 10, 3, 1.7, 5.5);
 
-        printFood("Food", meal);
+        // 1st Step = Find which meal we have to update
+        int nameOfMeal = getCorrectMeal(view);
+
+        // 2nd Step = Add food to the user data to be shown in the Home Page
+        userData.addFood(nameOfMeal, newFood);
+
+        // 3rd Step = Find the layout that contains the meal
+        LinearLayout layout = (LinearLayout) view.getParent().getParent();
+
+        printFood(newFood, layout);
+
+        updateMealCalories(nameOfMeal);
     }
 
-    private void printFood(String nameOfFood, LinearLayout meal)
+    private int getCorrectMeal(View view)
+    {
+        LinearLayout meal = (LinearLayout) view.getParent().getParent();
+
+        int id = meal.getId();
+
+        switch (id)
+        {
+            case R.id.mealBreakfast:
+                return Meal.BREAKFAST;
+            case R.id.mealLunch:
+                return Meal.LUNCH;
+            case R.id.mealDinner:
+                return Meal.DINNER;
+            case R.id.mealSnacks:
+                return Meal.SNACKS;
+            default:
+                Helper.makeToast("Error in getting correct meal", this);
+                return -1;
+        }
+    }
+
+    private void printFood(Food newFood, LinearLayout meal)
     {
         TextView food = new TextView(this);
 
-        food.setText(nameOfFood);
+        food.setText(newFood.getName());
 
         food.setTextColor(getResources().getColor(R.color.colorAccent));
 
-        meal.addView(food, 1);
+        meal.addView(food, 2);
+    }
+
+    private void updateMealCalories(int nameOfMeal)
+    {
+        // 1st Step = Find the correct id based on the name of meal
+        int caloriesMealID;
+
+        switch (nameOfMeal)
+        {
+            case Meal.BREAKFAST:
+                caloriesMealID = R.id.caloriesMealBreakfast;
+                break;
+            case Meal.LUNCH:
+                caloriesMealID = R.id.caloriesMealLunch;
+                break;
+            case Meal.DINNER:
+                caloriesMealID = R.id.caloriesMealDinner;
+                break;
+            case Meal.SNACKS:
+                caloriesMealID = R.id.caloriesMealSnacks;
+                break;
+            default:
+                Helper.makeToast("Eoor in updating meal calories", this);
+                return;
+        }
+
+        // 2nd Step = Find the correct text view
+        TextView calories = (TextView) findViewById(caloriesMealID);
+
+        // 3rd Step = Change it according to the correct value
+        calories.setText(Double.toString(userData.getCaloriesFromMeal(nameOfMeal)));
     }
 }
