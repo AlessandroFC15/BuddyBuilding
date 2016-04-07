@@ -7,7 +7,13 @@ import java.util.ArrayList;
  */
 public class Meal {
 
-    String name;
+    public final static int BREAKFAST = 0;
+    public final static int LUNCH = 1;
+    public final static int DINNER = 2;
+    public final static int SNACKS = 3;
+    public final static int GENERIC_MEAL = 4;
+
+    int name;
     double totalProtein;
     double totalCarbs;
     double totalCalories;
@@ -17,14 +23,14 @@ public class Meal {
 
     Meal()
     {
-        name = "Meal";
+        name = GENERIC_MEAL;
         totalProtein = 0;
         totalCarbs = 0;
         totalCalories = 0;
         totalFat = 0;
     }
 
-    Meal(String nameOfMeal)
+    Meal(int nameOfMeal)
     {
         name = nameOfMeal;
         totalProtein = 0;
@@ -33,9 +39,9 @@ public class Meal {
         totalFat = 0;
     }
 
-    public void addFood(String name, double protein, double carbohydrates, double totalFat)
+    public void addFood(String name, double serving, double protein, double carbohydrates, double totalFat)
     {
-        Food newFood = new Food(name, protein, carbohydrates, totalFat);
+        Food newFood = new Food(name, serving, protein, carbohydrates, totalFat);
 
         foods.add(newFood);
 
@@ -43,5 +49,25 @@ public class Meal {
         this.totalCarbs += newFood.getCarbs();
         this.totalCalories += newFood.getCalories();
         this.totalFat += newFood.getTotalFat();
+    }
+
+    public void addFood(Food newFood)
+    {
+        foods.add(newFood);
+
+        this.totalProtein += newFood.getProtein();
+        this.totalCarbs += newFood.getCarbs();
+        this.totalCalories += newFood.getCalories();
+        this.totalFat += newFood.getTotalFat();
+    }
+
+    public int getName()
+    {
+        return name;
+    }
+
+    public double getMealTotalCalories()
+    {
+        return totalCalories;
     }
 }
