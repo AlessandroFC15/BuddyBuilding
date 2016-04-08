@@ -70,4 +70,9 @@ public class Meal {
     {
         return totalCalories;
     }
+
+    public ArrayList<Food> getFoodsFromMeal()
+    {
+        return foods;
+    }
 }

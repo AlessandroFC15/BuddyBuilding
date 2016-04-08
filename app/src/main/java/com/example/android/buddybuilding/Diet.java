@@ -116,6 +116,11 @@ public class Diet {
         return totalCaloriesTarget;
     }
 
+    public HashMap<Integer, Meal> getAllMeals()
+    {
+        return meals;
+    }
+
     // Constants
     public static final int LOSE_WEIGHT = 0;
     public static final int MAINTAIN_WEIGHT = 1;

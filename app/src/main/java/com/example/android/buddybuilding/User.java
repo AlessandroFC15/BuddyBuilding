@@ -1,5 +1,7 @@
 package com.example.android.buddybuilding;
 
+import java.util.HashMap;
+
 /**
  * Created by Alessandro on 03/04/2016.
  */
@@ -87,5 +89,10 @@ public class User extends Person{
     public double getCaloriesIntake()
     {
         return diet.getDietCaloriesIntake();
+    }
+
+    public HashMap<Integer, Meal> getAllMeals()
+    {
+        return diet.getAllMeals();
     }
 }

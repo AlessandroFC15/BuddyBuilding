@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Diary extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,8 +36,56 @@ public class Diary extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        updateAllMeals();
     }
 
+    private void updateAllMeals()
+    {
+        HashMap<Integer, Meal> meals = userData.getAllMeals();
+
+        for (int nameOfMeal : meals.keySet())
+        {
+            Meal meal = meals.get(nameOfMeal);
+
+            switch (nameOfMeal)
+            {
+                case (Meal.BREAKFAST):
+                    // updateBreakfast(meal);
+                    updateMeal(meal, R.id.caloriesMealBreakfast, R.id.mealBreakfast);
+                    break;
+                case (Meal.LUNCH):
+                    updateMeal(meal, R.id.caloriesMealLunch, R.id.mealLunch);
+                    break;
+                case (Meal.DINNER):
+                    updateMeal(meal, R.id.caloriesMealDinner, R.id.mealDinner);
+                    break;
+                case (Meal.SNACKS):
+                    updateMeal(meal, R.id.caloriesMealSnacks, R.id.mealSnacks);
+                    break;
+                default:
+                    Helper.makeToast("Error updateAllMeals", this);
+                    break;
+            }
+        }
+    }
+
+    private void updateMeal(Meal meal, int caloriesMealID, int  mealLayoutID)
+    {
+        TextView mealCalories = (TextView) findViewById(caloriesMealID);
+
+        mealCalories.setText(Double.toString(meal.getMealTotalCalories()));
+
+        LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
+
+        ArrayList<Food> foodsFromMeal = meal.getFoodsFromMeal();
+
+        for (Food food : foodsFromMeal)
+        {
+            printFood(food, layout);
+        }
+    }
+    
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
