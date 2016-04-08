@@ -32,31 +32,6 @@ public class Input4Info extends AppCompatActivity {
         });
     }
 
-    public void changeActivity(View view)
-    {
-        double height = getHeight();
-
-        if (height != -1)
-        {
-            double weight = getWeight();
-
-            if (weight != -1)
-            {
-                userData.setHeight(height);
-                userData.setWeight(weight);
-
-                if (userData.getGoal() == User.MAINTAIN_WEIGHT)
-                {
-                    startActivity(new Intent(this, Home.class));
-                } else
-                {
-                    startActivity(new Intent(this, Input5Goals.class));
-                }
-
-            }
-        }
-    }
-
     private double getHeight()
     {
         EditText input = (EditText) findViewById(R.id.height);
@@ -104,6 +79,31 @@ public class Input4Info extends AppCompatActivity {
         {
             Helper.makeToast("Enter a valid weight!", this);
             return -1;
+        }
+    }
+
+    public void changeActivity(View view)
+    {
+        double height = getHeight();
+
+        if (height != -1)
+        {
+            double weight = getWeight();
+
+            if (weight != -1)
+            {
+                userData.setHeight(height);
+                userData.setWeight(weight);
+
+                if (userData.getGoal() == Diet.MAINTAIN_WEIGHT)
+                {
+                    startActivity(new Intent(this, Home.class));
+                } else
+                {
+                    startActivity(new Intent(this, Input5Goals.class));
+                }
+
+            }
         }
     }
 
