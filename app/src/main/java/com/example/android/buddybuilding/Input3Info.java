@@ -39,26 +39,9 @@ public class Input3Info extends AppCompatActivity {
             case R.id.female:
                 if (checked)
                 {
-                    userData.setActivityLevel(User.FEMALE);
+                    userData.setGender(User.FEMALE);
                     break;
                 }
-        }
-    }
-
-    public void changeActivity(View view)
-    {
-        if (isGenderSelected())
-        {
-            int age = getAge();
-
-            if (age != -1) {
-                userData.setAge(age);
-
-                startActivity(new Intent(this, Input4Info.class));
-            }
-        } else
-        {
-            Helper.makeToast("Select a gender!", this);
         }
     }
 
@@ -92,4 +75,20 @@ public class Input3Info extends AppCompatActivity {
         }
     }
 
+    public void changeActivity(View view)
+    {
+        if (isGenderSelected())
+        {
+            int age = getAge();
+
+            if (age != -1) {
+                userData.setAge(age);
+
+                startActivity(new Intent(this, Input4Info.class));
+            }
+        } else
+        {
+            Helper.makeToast("Select a gender!", this);
+        }
+    }
 }
