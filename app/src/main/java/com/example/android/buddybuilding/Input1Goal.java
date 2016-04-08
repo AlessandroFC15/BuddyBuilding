@@ -26,19 +26,19 @@ public class Input1Goal extends AppCompatActivity {
         {
             case R.id.loseWeight:
                 if (checked) {
-                    userData.setGoal(User.LOSE_WEIGHT);
+                    userData.setGoal(Diet.LOSE_WEIGHT);
                     break;
                 }
             case R.id.maintainWeight:
                 if (checked)
                 {
-                    userData.setGoal(User.MAINTAIN_WEIGHT);
+                    userData.setGoal(Diet.MAINTAIN_WEIGHT);
                     break;
                 }
             case R.id.gainWeight:
                 if (checked)
                 {
-                    userData.setGoal(User.GAIN_WEIGHT);
+                    userData.setGoal(Diet.GAIN_WEIGHT);
                     break;
                 }
         }
