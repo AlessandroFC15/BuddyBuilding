@@ -17,11 +17,12 @@ public class Person {
     public static final int MALE = 0;
     public static final int FEMALE = 1;
 
-    private int gender;
-    private int age;
-    private double height;
-    private double weight;
-    private int bmr;
+    protected int gender;
+    protected int age;
+    protected double height;
+    protected double weight;
+    protected int bmr;
+    protected int activityLevel;
 
     Person()
     {
@@ -29,6 +30,7 @@ public class Person {
         age = 20;
         height = 165;
         weight = 60;
+        activityLevel = NOT_VERY_ACTIVE;
         setBMR();
     }
 
@@ -61,6 +63,8 @@ public class Person {
         if ((weight >= MIN_WEIGHT) || (weight <= MAX_WEIGHT))
         {
             this.weight = weight;
+
+            setBMR(); // Update BMR
         }
     }
 
@@ -82,5 +86,19 @@ public class Person {
     {
         return bmr;
     }
+
+    public void setActivityLevel(int choice)
+    {
+        if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
+        {
+            activityLevel = choice;
+        }
+    }
+
+    // Constants
+    public static final int NOT_VERY_ACTIVE = 0;
+    public static final int LIGHTLY_ACTIVE = 1;
+    public static final int ACTIVE = 2;
+    public static final int VERY_ACTIVE = 3;
 
 }
