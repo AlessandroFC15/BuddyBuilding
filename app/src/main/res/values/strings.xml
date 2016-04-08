@@ -9,4 +9,5 @@
     <string name="title_activity_input4_info">Input4Info</string>
     <string name="title_activity_input5_goals">Input5Goals</string>
     <string name="title_activity_diary">Diary</string>
+    <string name="title_activity_food">FoodActivity</string>
 </resources>

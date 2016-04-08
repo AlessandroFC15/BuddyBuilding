@@ -46,6 +46,11 @@
             android:label="@string/title_activity_diary"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".AddNewFood"
+            android:label="@string/title_activity_food"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
