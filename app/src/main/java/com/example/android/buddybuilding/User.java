@@ -10,21 +10,13 @@ public class User extends Person{
 
     User()
     {
-        goal = GAIN_WEIGHT;
-        activityLevel = NOT_VERY_ACTIVE;
         weeklyGoal = GAIN_250G;
+
+        setBMR();
+        setCaloriesTarget();
     }
 
     // Constants
-    public static final int LOSE_WEIGHT = 0;
-    public static final int MAINTAIN_WEIGHT = 1;
-    public static final int GAIN_WEIGHT = 2;
-
-    public static final int NOT_VERY_ACTIVE = 0;
-    public static final int LIGHTLY_ACTIVE = 1;
-    public static final int ACTIVE = 2;
-    public static final int VERY_ACTIVE = 3;
-
     public static final int GAIN_250G = 0;
     public static final int GAIN_500G = 1;
     public static final int LOSE_250G = 2;
@@ -32,30 +24,20 @@ public class User extends Person{
     public static final int LOSE_750G = 4;
     public static final int LOSE_1KG = 5;
 
-    private int goal;
-    private int activityLevel;
     private int weeklyGoal;
     private Diet diet = new Diet();
 
     public void setGoal(int choice)
     {
-        if ((choice >= LOSE_WEIGHT) && (choice <= GAIN_WEIGHT))
-        {
-            goal = choice;
-        }
+        diet.setDietGoal(choice);
+
+        // If you changed your goal, we must update your calories target
+        setCaloriesTarget();
     }
 
     public int getGoal()
     {
-        return goal;
-    }
-
-    public void setActivityLevel(int choice)
-    {
-        if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
-        {
-            activityLevel = choice;
-        }
+        return diet.getDietGoal();
     }
 
     public void setWeeklyGoal(int choice)
@@ -63,6 +45,9 @@ public class User extends Person{
         if ((choice >= GAIN_250G) && (choice <= LOSE_1KG))
         {
             weeklyGoal = choice;
+
+            // If you change your weekly goal, you must change your calories target.
+            setCaloriesTarget();
         }
     }
 
@@ -79,5 +64,28 @@ public class User extends Person{
     public double getCaloriesFromMeal(int nameOfMeal)
     {
         return diet.getCaloriesFromMeal(nameOfMeal);
+    }
+
+    public void setCaloriesTarget()
+    {
+        // If the goal of the user is to maintain weight, then its calories goal is the
+        // same as its BMR.
+        if (diet.getDietGoal() == Diet.MAINTAIN_WEIGHT)
+        {
+            diet.setCaloriesTarget(getBMR());
+        } else
+        {
+            diet.setCaloriesTarget(getBMR(), getWeeklyGoal());
+        }
+    }
+
+    public double getCaloriesTarget()
+    {
+        return diet.getCaloriesTarget();
+    }
+
+    public double getCaloriesIntake()
+    {
+        return diet.getDietCaloriesIntake();
     }
 }
