@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Input1Goal"
-            android:label="Objetivo" >
+            android:name=".Input1Goal">
         </activity>
         <activity
             android:name=".Input2Activity"

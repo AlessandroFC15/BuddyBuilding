@@ -14,6 +14,7 @@ public class Input1Goal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input1_goal);
+        setTitle("Objetivo");
     }
 
     public void selectGoal(View view)
