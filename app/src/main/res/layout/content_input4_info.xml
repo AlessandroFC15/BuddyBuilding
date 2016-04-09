@@ -12,12 +12,9 @@
     tools:context="com.example.android.buddybuilding.Input4Info">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/questionOption"
         android:text="Altura"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:padding="15dp"/>
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -39,13 +36,9 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/questionOption"
         android:layout_marginTop="50dp"
-        android:text="Peso"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:padding="15dp"/>
+        android:text="Peso" />
 
     <LinearLayout
         android:layout_width="wrap_content"
