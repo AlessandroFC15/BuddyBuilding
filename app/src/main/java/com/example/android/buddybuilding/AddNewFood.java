@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 public class AddNewFood extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,5 +88,30 @@ public class AddNewFood extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void changeScreen(View view)
+    {
+        int id = view.getId();
+
+        LinearLayout showFoodsLayout = (LinearLayout) findViewById(R.id.showFoods);
+        LinearLayout addFoodLayout = (LinearLayout) findViewById(R.id.addFood);
+
+        switch (id)
+        {
+            case (R.id.buttonShowFoods):
+                if (showFoodsLayout.getVisibility() != View.VISIBLE)
+                {
+                    addFoodLayout.setVisibility(View.GONE);
+                    showFoodsLayout.setVisibility(View.VISIBLE);
+                }
+                break;
+            case (R.id.buttonAddFood):
+                if (addFoodLayout.getVisibility() != View.VISIBLE)
+                {
+                    showFoodsLayout.setVisibility(View.GONE);
+                    addFoodLayout.setVisibility(View.VISIBLE);
+                }
+        }
     }
 }
