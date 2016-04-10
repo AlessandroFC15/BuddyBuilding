@@ -134,7 +134,7 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_diary) {
             startActivity(new Intent(this, Diary.class));
         } else if (id == R.id.nav_foods) {
-            startActivity(new Intent(this, AddNewFood.class));
+            startActivity(new Intent(this, FoodActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.buddybuilding.AddNewFood"
+    tools:context="com.example.android.buddybuilding.FoodActivity"
     tools:showIn="@layout/app_bar_food">
 
     <LinearLayout
