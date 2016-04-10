@@ -16,7 +16,7 @@ public class Meal {
     int name;
     double totalProtein;
     double totalCarbs;
-    double totalCalories;
+    int totalCalories;
     double totalFat;
 
     ArrayList<Food> foods = new ArrayList<>();
@@ -39,7 +39,7 @@ public class Meal {
         totalFat = 0;
     }
 
-    public void addFood(String name, double serving, double protein, double carbohydrates, double totalFat)
+    public void addFood(String name, int serving, double protein, double carbohydrates, double totalFat)
     {
         Food newFood = new Food(name, serving, protein, carbohydrates, totalFat);
 
@@ -66,7 +66,7 @@ public class Meal {
         return name;
     }
 
-    public double getMealTotalCalories()
+    public int getMealTotalCalories()
     {
         return totalCalories;
     }

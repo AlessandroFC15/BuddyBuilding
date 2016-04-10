@@ -4,14 +4,17 @@ package com.example.android.buddybuilding;
  * Created by Alessandro on 05/04/2016.
  */
 public class Food {
+    public static final int MIN_SERVING_SIZE = 1;
+    public static final int MAX_SERVING_SIZE = 1000;
+
     String name;
-    double servingSize;
+    int servingSize;
     double protein;
     double carbohydrates;
-    double calories;
+    int calories;
     double totalFat;
 
-    Food(String name, double servingSize, double protein, double carbohydrates, double totalFat)
+    Food(String name, int servingSize, double protein, double carbohydrates, double totalFat)
     {
         this.servingSize = servingSize;
         this.name = name;
@@ -24,7 +27,7 @@ public class Food {
 
     private void calculateCalories()
     {
-        calories = (9 * getTotalFat()) + (4 * getProtein()) + (4 * getCarbs());
+        calories = (int) ((9 * getTotalFat()) + (4 * getProtein()) + (4 * getCarbs()));
     }
 
     public double getProtein()
@@ -42,10 +45,12 @@ public class Food {
         return totalFat;
     }
 
-    public double getCalories() { return calories; }
+    public int getCalories() { return calories; }
 
     public String getName() {
         return name;
     }
+
+    public int getServingSize() {return servingSize; }
 
 }
