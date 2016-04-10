@@ -70,7 +70,7 @@ public class Diary extends AppCompatActivity
         }
     }
 
-    private void updateMeal(Meal meal, int caloriesMealID, int  mealLayoutID)
+    private void updateMeal(Meal meal, int caloriesMealID, int mealLayoutID)
     {
         TextView mealCalories = (TextView) findViewById(caloriesMealID);
 
@@ -216,7 +216,7 @@ public class Diary extends AppCompatActivity
                 caloriesMealID = R.id.caloriesMealSnacks;
                 break;
             default:
-                Helper.makeToast("Eoor in updating meal calories", this);
+                Helper.makeToast("Error in updating meal calories", this);
                 return;
         }
 

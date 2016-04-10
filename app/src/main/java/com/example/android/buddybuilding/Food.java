@@ -8,11 +8,11 @@ public class Food {
     public static final int MAX_SERVING_SIZE = 1000;
 
     String name;
-    int servingSize;
     double protein;
     double carbohydrates;
-    int calories;
     double totalFat;
+    int calories;
+    int servingSize;
 
     Food(String name, int servingSize, double protein, double carbohydrates, double totalFat)
     {

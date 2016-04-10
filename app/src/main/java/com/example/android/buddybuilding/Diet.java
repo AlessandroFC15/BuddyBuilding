@@ -8,14 +8,13 @@ import java.util.HashMap;
 public class Diet {
 
     private int goal;
-
     private double totalCaloriesTarget;
     private double totalCaloriesIntake;
     private double proteinIntake;
     private double carbsIntake;
     private double fatIntake;
 
-    HashMap<Integer, Meal> meals = new HashMap<>();
+    private HashMap<Integer, Meal> meals = new HashMap<>();
 
     Diet()
     {
