@@ -107,13 +107,13 @@
         <item name="android:textSize">10sp</item>
     </style>
 
-    <!-- Styles from Add Food Activity -->
+    <!-- Styles from Food Activity -->
 
     <style name="changeScreenButton">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">#ffffff</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="macroContainer">

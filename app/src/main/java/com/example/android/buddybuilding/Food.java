@@ -6,6 +6,7 @@ package com.example.android.buddybuilding;
 public class Food {
     public static final int MIN_SERVING_SIZE = 1;
     public static final int MAX_SERVING_SIZE = 1000;
+    public static final int MAX_LENGTH_NAME = 25;
 
     String name;
     double protein;
