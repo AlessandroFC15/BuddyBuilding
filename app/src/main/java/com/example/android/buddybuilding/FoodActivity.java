@@ -1,5 +1,8 @@
 package com.example.android.buddybuilding;
 
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,11 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class FoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +41,92 @@ public class FoodActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        changeScreenToShowFood();
+
+        printFoodsOnDatabase();
+    }
+
+    private void printFoodsOnDatabase()
+    {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.listOfFoods);
+
+        Cursor cursor = foodData.getAllFoodsNames();
+
+        try {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex(FoodData.COLUMN_NAME));
+
+                printFood(name, layout);
+            }
+        } finally {
+            cursor.close();
+        }
+    }
+
+    private void printFood(String name, LinearLayout layout)
+    {
+        TextView textView = new TextView(this);
+
+        textView.setText(name);
+
+        int padding = convertDPToPixel(15);
+
+        textView.setPadding(padding, padding, padding, padding);
+        layout.addView(textView);
+
+        View view = getSeparatorView();
+        layout.addView(view);
+    }
+
+    private static int convertDPToPixel(float dp){
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return Math.round(px);
+    }
+
+    private View getSeparatorView()
+    {
+        View view = new View(this);
+
+        LinearLayout.LayoutParams params =
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        view.setLayoutParams(params);
+
+        ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.gray));
+        view.setBackground(color);
+
+        return view;
+    }
+
+    private void changeScreenToShowFood()
+    {
+        LinearLayout showFoodsLayout = (LinearLayout) findViewById(R.id.showFoods);
+        LinearLayout addFoodLayout = (LinearLayout) findViewById(R.id.addFood);
+
+        addFoodLayout.setVisibility(View.GONE);
+        showFoodsLayout.setVisibility(View.VISIBLE);
+
+        setIndicatorVisible(R.id.indicatorShowFoods);
+    }
+
+    private void setIndicatorVisible(int id)
+    {
+        View showFoodsIndicator = findViewById(R.id.indicatorShowFoods);
+        View addFoodIndicator = findViewById(R.id.indicatorAddFood);
+
+        if (id == R.id.indicatorAddFood)
+        {
+            showFoodsIndicator.setVisibility(View.INVISIBLE);
+            addFoodIndicator.setVisibility(View.VISIBLE);
+        } else if (id == R.id.indicatorShowFoods)
+        {
+            showFoodsIndicator.setVisibility(View.VISIBLE);
+            addFoodIndicator.setVisibility(View.INVISIBLE);
+        } else
+        {
+            Helper.makeToast("Error in setIndicatorVisible", this);
+        }
     }
 
     @Override
@@ -105,19 +197,22 @@ public class FoodActivity extends AppCompatActivity
                 if (showFoodsLayout.getVisibility() != View.VISIBLE) {
                     addFoodLayout.setVisibility(View.GONE);
                     showFoodsLayout.setVisibility(View.VISIBLE);
+                    setIndicatorVisible(R.id.indicatorShowFoods);
                 }
                 break;
             case (R.id.buttonAddFood):
                 if (addFoodLayout.getVisibility() != View.VISIBLE) {
                     showFoodsLayout.setVisibility(View.GONE);
                     addFoodLayout.setVisibility(View.VISIBLE);
+                    setIndicatorVisible(R.id.indicatorAddFood);
                 }
         }
     }
 
     public void addFoodToDatabase(View view) {
         String nameOfFood = getNameOfFood();
-        if (nameOfFood.equals("")) {
+        if (nameOfFood.equals(""))
+        {
             return;
         }
 
@@ -126,25 +221,47 @@ public class FoodActivity extends AppCompatActivity
             return;
         }
 
-        double totalCarbs = getDoubleValue(R.id.carbsInput, Food.MIN_SERVING_SIZE,
-                Food.MAX_SERVING_SIZE, "carbs");
-        if (totalCarbs <= 0) {
+        double totalCarbs = getDoubleValue(R.id.carbsInput, Food.MIN_SERVING_SIZE - 1,
+                Food.MAX_SERVING_SIZE, "Carbs");
+        if (totalCarbs < 0) {
             return;
         }
 
-        double protein = getDoubleValue(R.id.proteinInput, Food.MIN_SERVING_SIZE,
-                Food.MAX_SERVING_SIZE, "protein");
-        if (protein <= 0) {
+        double protein = getDoubleValue(R.id.proteinInput, Food.MIN_SERVING_SIZE - 1,
+                Food.MAX_SERVING_SIZE, "Protein");
+        if (protein < 0) {
             return;
         }
 
-        double totalFat = getDoubleValue(R.id.fatInput, Food.MIN_SERVING_SIZE,
-                Food.MAX_SERVING_SIZE, "fat");
-        if (totalFat <= 0) {
+        double totalFat = getDoubleValue(R.id.fatInput, Food.MIN_SERVING_SIZE - 1,
+                Food.MAX_SERVING_SIZE, "Fat");
+        if (totalFat < 0) {
             return;
         }
 
-        Helper.makeToast("OK", this);
+        Food newFood = new Food(nameOfFood, servingSize, protein, totalCarbs, totalFat);
+
+        if (!isFoodRegistered(newFood.getName()))
+        {
+            foodData.addFood(newFood);
+            updateListOfFoods(newFood);
+            Helper.makeToast("Food successfully added!", this);
+        } else
+        {
+            Helper.makeToast("Food is already registered!", this);
+        }
+    }
+
+    private void updateListOfFoods(Food food)
+    {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.listOfFoods);
+
+        printFood(food.getName(), layout);
+    }
+
+    private boolean isFoodRegistered(String nameOfFood)
+    {
+        return foodData.isFoodRegistered(nameOfFood);
     }
 
     private double getDoubleValue(int editTextID, int minValue, int maxValue, String name)

@@ -15,20 +15,49 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonShowFoods"
-            style="@style/changeScreenButton"
-            android:onClick="changeScreen"
-            android:text="Show Foods" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonAddFood"
-            style="@style/changeScreenButton"
-            android:onClick="changeScreen"
-            android:text="Add Food" />
+            <Button
+                android:id="@+id/buttonShowFoods"
+                style="@style/changeScreenButton"
+                android:onClick="changeScreen"
+                android:text="Show Foods" />
+
+            <View
+                android:id="@+id/indicatorShowFoods"
+                style="@style/separatorLine"
+                android:layout_height="5dp"
+                android:background="@color/colorPrimary"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonAddFood"
+                style="@style/changeScreenButton"
+                android:onClick="changeScreen"
+                android:text="Add Food" />
+
+            <View
+                android:id="@+id/indicatorAddFood"
+                style="@style/separatorLine"
+                android:layout_height="5dp"
+                android:background="@color/colorPrimary"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-    <View style="@style/separatorLine" />
 
     <LinearLayout
         android:id="@+id/showFoods"
@@ -39,10 +68,34 @@
 
         <TextView
             style="@style/tableHeader"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="Foods Registered"
             android:textSize="14sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/listOfFoods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="Pasta de Amendoim" />
+
+                <View style="@style/separatorLine"></View>
+            </LinearLayout>
+        </ScrollView>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -60,9 +113,9 @@
             android:id="@+id/foodName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
             android:hint="ex. Pasta de Amendoim"
             android:inputType="textCapSentences"
-            android:layout_marginLeft="15dp"
             android:textSize="14sp" />
 
         <TextView
@@ -108,12 +161,15 @@
                 style="@style/macroName"
                 android:text="Total Carbs (g)" />
 
-            <EditText style="@style/macroInput"
-                android:id="@+id/carbsInput"/>
+            <EditText
+                android:id="@+id/carbsInput"
+                style="@style/macroInput" />
 
         </RelativeLayout>
 
-        <View style="@style/separatorLine" />
+        <View
+            android:id="@+id/separator"
+            style="@style/separatorLine" />
 
         <RelativeLayout style="@style/macroContainer">
 
@@ -121,8 +177,9 @@
                 style="@style/macroName"
                 android:text="Protein (g)" />
 
-            <EditText style="@style/macroInput"
-                android:id="@+id/proteinInput"/>
+            <EditText
+                android:id="@+id/proteinInput"
+                style="@style/macroInput" />
 
         </RelativeLayout>
 
@@ -134,20 +191,21 @@
                 style="@style/macroName"
                 android:text="Total Fat (g)" />
 
-            <EditText style="@style/macroInput"
-                android:id="@+id/fatInput"/>
+            <EditText
+                android:id="@+id/fatInput"
+                style="@style/macroInput" />
 
         </RelativeLayout>
 
         <View style="@style/separatorLine" />
 
         <Button
-            android:onClick="addFoodToDatabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimary"
+            android:onClick="addFoodToDatabase"
             android:text="Add New Food"
             android:textColor="@color/white"
             android:textSize="10sp" />

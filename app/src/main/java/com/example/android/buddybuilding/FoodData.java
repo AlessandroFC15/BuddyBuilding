@@ -2,6 +2,7 @@ package com.example.android.buddybuilding;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -9,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Alessandro on 09/04/2016.
  */
 public class FoodData extends SQLiteOpenHelper{
-    private static final String DATABASE_NAME = "FoodData";
+    public static final String DATABASE_NAME = "FoodData";
     private static final int DATABASE_VERSION = 1;
 
     private static final String TEXT_TYPE = " TEXT";
@@ -19,7 +20,7 @@ public class FoodData extends SQLiteOpenHelper{
     private static final String COMMA_SEP = ",";
 
     /* Table of Food
-     * ID | Name | Carbs | Protein | Fat | Calories
+     * ID | Name | Carbs | Protein | Fat | ServingSize | Calories
      */
 
     public static final String TABLE_NAME = "foods";
@@ -77,9 +78,11 @@ public class FoodData extends SQLiteOpenHelper{
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(TABLE_NAME, "null", values);
+
     }
 
     public void addFood(Food food) {
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
@@ -93,5 +96,62 @@ public class FoodData extends SQLiteOpenHelper{
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(TABLE_NAME, "null", values);
+    }
+
+    public boolean isFoodRegistered(String nameOfFood)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                COLUMN_NAME,
+        };
+
+        Cursor cursor = db.query(
+                TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                          // The sort order
+        );
+
+        try {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+
+                if (nameOfFood.equals(name))
+                {
+                    return true;
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return false;
+    }
+
+    public Cursor getAllFoodsNames()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                COLUMN_NAME,
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                COLUMN_NAME + " DESC";
+
+        return db.query(
+                TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                               // The sort order
+        );
     }
 }
