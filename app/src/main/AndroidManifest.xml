@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".AddNewFood"
+            android:name=".FoodActivity"
             android:label="@string/title_activity_food"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

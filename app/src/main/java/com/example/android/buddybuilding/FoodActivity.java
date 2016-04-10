@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-public class AddNewFood extends AppCompatActivity
+public class FoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FoodData foodData = new FoodData(this);
@@ -143,7 +143,7 @@ public class AddNewFood extends AppCompatActivity
         if (totalFat <= 0) {
             return;
         }
-        
+
         Helper.makeToast("OK", this);
     }
 
