@@ -62,7 +62,7 @@
             android:layout_height="match_parent"
             android:hint="ex. Pasta de Amendoim"
             android:inputType="textCapSentences"
-            android:paddingLeft="15dp"
+            android:layout_marginLeft="15dp"
             android:textSize="14sp" />
 
         <TextView
@@ -108,7 +108,8 @@
                 style="@style/macroName"
                 android:text="Total Carbs (g)" />
 
-            <EditText style="@style/macroInput" />
+            <EditText style="@style/macroInput"
+                android:id="@+id/carbsInput"/>
 
         </RelativeLayout>
 
@@ -120,7 +121,8 @@
                 style="@style/macroName"
                 android:text="Protein (g)" />
 
-            <EditText style="@style/macroInput" />
+            <EditText style="@style/macroInput"
+                android:id="@+id/proteinInput"/>
 
         </RelativeLayout>
 
@@ -132,13 +134,15 @@
                 style="@style/macroName"
                 android:text="Total Fat (g)" />
 
-            <EditText style="@style/macroInput" />
+            <EditText style="@style/macroInput"
+                android:id="@+id/fatInput"/>
 
         </RelativeLayout>
 
         <View style="@style/separatorLine" />
 
         <Button
+            android:onClick="addFoodToDatabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
