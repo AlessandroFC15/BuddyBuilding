@@ -154,4 +154,42 @@ public class FoodData extends SQLiteOpenHelper{
                 null                               // The sort order
         );
     }
+
+    public Cursor getFoodData(String nameOfFood)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                COLUMN_SERVING_SIZE,
+                COLUMN_CALORIES,
+                COLUMN_CARBS,
+                COLUMN_PROTEIN,
+                COLUMN_FAT
+        };
+
+        String selection = COLUMN_NAME + " LIKE ?";
+
+        String[] selectionArgs = {nameOfFood};
+
+        Cursor cursor =  db.query(
+                TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                               // The sort order
+        );
+
+        // We are expecting a single row of data from the query, therefore
+        // we will only return that if it is a single row.
+
+        if (cursor.getCount() == 1)
+        {
+            return cursor;
+        } else
+        {
+            return null;
+        }
+    }
 }
