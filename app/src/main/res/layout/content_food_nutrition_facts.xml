@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.buddybuilding.FoodNutritionFacts"
+    tools:showIn="@layout/activity_food_nutrition_facts">
+
+    <RelativeLayout style="@style/macroContainer">
+
+        <TextView
+            style="@style/macroName"
+            android:text="Name of Food" />
+
+        <TextView
+            android:id="@+id/foodName"
+            style="@style/macroInput"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/separatorLine" />
+
+    <RelativeLayout style="@style/macroContainer">
+
+        <TextView
+            style="@style/macroName"
+            android:text="Serving Size (g)" />
+
+        <TextView
+            android:id="@+id/servingSize"
+            style="@style/macroInput"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/separatorLine" />
+
+    <RelativeLayout style="@style/macroContainer">
+
+        <TextView
+            style="@style/macroName"
+            android:text="Calories" />
+
+        <TextView
+            android:id="@+id/calories"
+            style="@style/macroInput"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/separatorLine" />
+
+    <RelativeLayout style="@style/macroContainer">
+
+        <TextView
+            style="@style/macroName"
+            android:text="Total Carbohydrates (g)" />
+
+        <TextView
+            android:id="@+id/carbs"
+            style="@style/macroInput"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/separatorLine" />
+
+    <RelativeLayout style="@style/macroContainer">
+
+        <TextView
+            style="@style/macroName"
+            android:text="Protein (g)" />
+
+        <TextView
+            android:id="@+id/protein"
+            style="@style/macroInput"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/separatorLine" />
+
+    <RelativeLayout style="@style/macroContainer">
+
+        <TextView
+            style="@style/macroName"
+            android:text="Total Fat (g)" />
+
+        <TextView
+            android:id="@+id/fat"
+            style="@style/macroInput"
+            android:textAlignment="textEnd"
+            android:gravity="end"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/separatorLine" />
+
+</LinearLayout>

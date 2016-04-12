@@ -18,8 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Input1Goal">
+        <activity android:name=".Input1Goal" >
         </activity>
         <activity
             android:name=".Input2Activity"
@@ -48,6 +47,11 @@
         <activity
             android:name=".FoodActivity"
             android:label="@string/title_activity_food"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".FoodNutritionFacts"
+            android:label="@string/title_activity_food_nutrition_facts"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
