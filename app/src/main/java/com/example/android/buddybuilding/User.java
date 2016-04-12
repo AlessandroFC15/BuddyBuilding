@@ -14,7 +14,6 @@ public class User extends Person{
     {
         weeklyGoal = GAIN_250G;
 
-        setBMR();
         setCaloriesTarget();
     }
 

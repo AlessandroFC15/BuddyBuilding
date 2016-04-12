@@ -5,6 +5,12 @@ package com.example.android.buddybuilding;
  */
 public class Person {
 
+    // Constants
+    public static final int NOT_VERY_ACTIVE = 0;
+    public static final int LIGHTLY_ACTIVE = 1;
+    public static final int ACTIVE = 2;
+    public static final int VERY_ACTIVE = 3;
+
     public static final double MIN_HEIGHT = 57;
     public static final double MAX_HEIGHT = 260;
 
@@ -21,7 +27,6 @@ public class Person {
     protected int age;
     protected double height;
     protected double weight;
-    protected int bmr;
     protected int activityLevel;
 
     Person()
@@ -31,7 +36,6 @@ public class Person {
         height = 165;
         weight = 60;
         activityLevel = NOT_VERY_ACTIVE;
-        setBMR();
     }
 
     public void setGender(int choice)
@@ -63,8 +67,6 @@ public class Person {
         if ((weight >= MIN_WEIGHT) || (weight <= MAX_WEIGHT))
         {
             this.weight = weight;
-
-            setBMR(); // Update BMR
         }
     }
 
@@ -77,14 +79,10 @@ public class Person {
     Calculo da Taxa Metabólica Basal
     Assumiu-se a formula 32 * kg
      */
-    public void setBMR()
-    {
-        bmr = 32 * (int) getWeight();
-    }
 
     public int getBMR()
     {
-        return bmr;
+        return 32 * (int) getWeight();
     }
 
     public void setActivityLevel(int choice)
@@ -94,11 +92,4 @@ public class Person {
             activityLevel = choice;
         }
     }
-
-    // Constants
-    public static final int NOT_VERY_ACTIVE = 0;
-    public static final int LIGHTLY_ACTIVE = 1;
-    public static final int ACTIVE = 2;
-    public static final int VERY_ACTIVE = 3;
-
 }
