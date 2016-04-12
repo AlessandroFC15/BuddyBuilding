@@ -1,5 +1,6 @@
 package com.example.android.buddybuilding;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 
 public class FoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String foodNameExtra = "FoodName";
 
     private FoodData foodData = new FoodData(this);
 
@@ -69,6 +72,12 @@ public class FoodActivity extends AppCompatActivity
         TextView textView = new TextView(this);
 
         textView.setText(name);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFoodNutritionFacts(v);
+            }
+        });
 
         int padding = convertDPToPixel(15);
 
@@ -287,6 +296,15 @@ public class FoodActivity extends AppCompatActivity
             Helper.makeToast("Enter a valid " + name + " value!", this);
             return -1;
         }
+    }
+
+    public void showFoodNutritionFacts(View view)
+    {
+        Intent intent = new Intent(this, FoodNutritionFacts.class);
+
+        intent.putExtra(foodNameExtra, ((TextView) view).getText().toString());
+
+        startActivity(intent);
     }
 
     private String getNameOfFood()
