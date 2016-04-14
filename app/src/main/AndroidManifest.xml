@@ -54,6 +54,8 @@
             android:label="@string/title_activity_food_nutrition_facts"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".SelectFood" >
+        </activity>
     </application>
 
 </manifest>
