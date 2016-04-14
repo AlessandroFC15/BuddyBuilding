@@ -1,5 +1,6 @@
 package com.example.android.buddybuilding;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -51,7 +52,6 @@ public class Diary extends AppCompatActivity
             switch (nameOfMeal)
             {
                 case (Meal.BREAKFAST):
-                    // updateBreakfast(meal);
                     updateMeal(meal, R.id.caloriesMealBreakfast, R.id.mealBreakfast);
                     break;
                 case (Meal.LUNCH):
@@ -147,20 +147,28 @@ public class Diary extends AppCompatActivity
     {
         // Creating just for test
         // This process will be replaced by a choice of food.
-        Food newFood = new Food("Pasta de Amendoim", 10, 3, 1.7, 5.5);
+        // Food newFood = new Food("Pasta de Amendoim", 10, 3, 1.7, 5.5);
 
         // 1st Step = Find which meal we have to update
         int nameOfMeal = getCorrectMeal(view);
 
-        // 2nd Step = Add food to the user data to be shown in the Home Page
+        // 2nd Step = Ask the user to select the food from the dabatase
+        // Add food to the user data to be shown in the Home Page
+        Intent intent = new Intent(this, SelectFood.class);
+
+        intent.putExtra("MealName", nameOfMeal);
+
+        startActivity(intent);
+
+        /*
         userData.addFood(nameOfMeal, newFood);
 
         // 3rd Step = Find the layout that contains the meal
         LinearLayout layout = (LinearLayout) view.getParent().getParent();
 
-        printFood(newFood, layout);
+        printFood(newFood, layout); */
 
-        updateMealCalories(nameOfMeal);
+        // updateMealCalories(nameOfMeal);
     }
 
     private int getCorrectMeal(View view)
