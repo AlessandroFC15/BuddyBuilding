@@ -255,6 +255,7 @@ public class FoodActivity extends AppCompatActivity
             foodData.addFood(newFood);
             updateListOfFoods(newFood);
             Helper.makeToast("Food successfully added!", this);
+            clearAllInputFields();
         } else
         {
             Helper.makeToast("Food is already registered!", this);
@@ -262,10 +263,28 @@ public class FoodActivity extends AppCompatActivity
     }
 
     private void updateListOfFoods(Food food)
+    private void clearAllInputFields()
     {
-        LinearLayout layout = (LinearLayout) findViewById(R.id.listOfFoods);
+        cleanInputField(R.id.foodName);
+        cleanInputField(R.id.servingSize);
+        cleanInputField(R.id.carbsInput);
+        cleanInputField(R.id.proteinInput);
+        cleanInputField(R.id.fatInput);
+    }
 
         printFood(food.getName(), layout);
+    private void cleanInputField(int id)
+    {
+        EditText input = (EditText) findViewById(id);
+        input.setText("");
+    }
+
+    // Helper Functions
+
+    private static int convertDPToPixel(float dp){
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return Math.round(px);
     }
 
     private boolean isFoodRegistered(String nameOfFood)
