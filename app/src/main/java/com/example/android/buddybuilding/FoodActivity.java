@@ -50,6 +50,63 @@ public class FoodActivity extends AppCompatActivity
         printFoodsOnDatabase();
     }
 
+    // Functions related to changing the content of the screen
+
+    public void changeScreen(View view) {
+        int id = view.getId();
+
+        LinearLayout showFoodsLayout = (LinearLayout) findViewById(R.id.showFoods);
+        LinearLayout addFoodLayout = (LinearLayout) findViewById(R.id.addFood);
+
+        switch (id) {
+            case (R.id.buttonShowFoods):
+                if (showFoodsLayout.getVisibility() != View.VISIBLE) {
+                    addFoodLayout.setVisibility(View.GONE);
+                    showFoodsLayout.setVisibility(View.VISIBLE);
+                    setIndicatorVisible(R.id.indicatorShowFoods);
+                }
+                break;
+            case (R.id.buttonAddFood):
+                if (addFoodLayout.getVisibility() != View.VISIBLE) {
+                    showFoodsLayout.setVisibility(View.GONE);
+                    addFoodLayout.setVisibility(View.VISIBLE);
+                    setIndicatorVisible(R.id.indicatorAddFood);
+                }
+        }
+    }
+
+    private void changeScreenToShowFood()
+    {
+        LinearLayout showFoodsLayout = (LinearLayout) findViewById(R.id.showFoods);
+        LinearLayout addFoodLayout = (LinearLayout) findViewById(R.id.addFood);
+
+        addFoodLayout.setVisibility(View.GONE);
+        showFoodsLayout.setVisibility(View.VISIBLE);
+
+        setIndicatorVisible(R.id.indicatorShowFoods);
+    }
+
+    private void setIndicatorVisible(int id)
+    {
+        View showFoodsIndicator = findViewById(R.id.indicatorShowFoods);
+        View addFoodIndicator = findViewById(R.id.indicatorAddFood);
+
+        if (id == R.id.indicatorAddFood)
+        {
+            showFoodsIndicator.setVisibility(View.INVISIBLE);
+            addFoodIndicator.setVisibility(View.VISIBLE);
+        } else if (id == R.id.indicatorShowFoods)
+        {
+            showFoodsIndicator.setVisibility(View.VISIBLE);
+            addFoodIndicator.setVisibility(View.INVISIBLE);
+        } else
+        {
+            Helper.makeToast("Error in setIndicatorVisible", this);
+        }
+    }
+
+    // Functions related to showing foods registered
+
     private void printFoodsOnDatabase()
     {
         LinearLayout layout = (LinearLayout) findViewById(R.id.listOfFoods);
@@ -88,12 +145,6 @@ public class FoodActivity extends AppCompatActivity
         layout.addView(view);
     }
 
-    private static int convertDPToPixel(float dp){
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        float px = dp * (metrics.densityDpi / 160f);
-        return Math.round(px);
-    }
-
     private View getSeparatorView()
     {
         View view = new View(this);
@@ -108,35 +159,160 @@ public class FoodActivity extends AppCompatActivity
         return view;
     }
 
-    private void changeScreenToShowFood()
+    private void updateListOfFoods(Food food)
     {
-        LinearLayout showFoodsLayout = (LinearLayout) findViewById(R.id.showFoods);
-        LinearLayout addFoodLayout = (LinearLayout) findViewById(R.id.addFood);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.listOfFoods);
 
-        addFoodLayout.setVisibility(View.GONE);
-        showFoodsLayout.setVisibility(View.VISIBLE);
-
-        setIndicatorVisible(R.id.indicatorShowFoods);
+        printFood(food.getName(), layout);
     }
 
-    private void setIndicatorVisible(int id)
+    public void showFoodNutritionFacts(View view)
     {
-        View showFoodsIndicator = findViewById(R.id.indicatorShowFoods);
-        View addFoodIndicator = findViewById(R.id.indicatorAddFood);
+        Intent intent = new Intent(this, FoodNutritionFacts.class);
 
-        if (id == R.id.indicatorAddFood)
+        intent.putExtra(foodNameExtra, ((TextView) view).getText().toString());
+
+        startActivity(intent);
+    }
+
+    // Functions related to add foods
+
+    public void addFoodToDatabase(View view) {
+        String nameOfFood = getNameOfFood();
+        if (nameOfFood.equals(""))
         {
-            showFoodsIndicator.setVisibility(View.INVISIBLE);
-            addFoodIndicator.setVisibility(View.VISIBLE);
-        } else if (id == R.id.indicatorShowFoods)
+            return;
+        }
+
+        int servingSize = getServingSize();
+        if (servingSize <= 0) {
+            return;
+        }
+
+        double totalCarbs = getDoubleValue(R.id.carbsInput, Food.MIN_SERVING_SIZE - 1,
+                Food.MAX_SERVING_SIZE, "Carbs");
+        if (totalCarbs < 0) {
+            return;
+        }
+
+        double protein = getDoubleValue(R.id.proteinInput, Food.MIN_SERVING_SIZE - 1,
+                Food.MAX_SERVING_SIZE, "Protein");
+        if (protein < 0) {
+            return;
+        }
+
+        double totalFat = getDoubleValue(R.id.fatInput, Food.MIN_SERVING_SIZE - 1,
+                Food.MAX_SERVING_SIZE, "Fat");
+        if (totalFat < 0) {
+            return;
+        }
+
+        Food newFood = new Food(nameOfFood, servingSize, protein, totalCarbs, totalFat);
+
+        if (!isFoodRegistered(newFood.getName()))
         {
-            showFoodsIndicator.setVisibility(View.VISIBLE);
-            addFoodIndicator.setVisibility(View.INVISIBLE);
+            foodData.addFood(newFood);
+            updateListOfFoods(newFood);
+            clearAllInputFields();
+            Helper.makeToast(nameOfFood + " successfully added!", this);
         } else
         {
-            Helper.makeToast("Error in setIndicatorVisible", this);
+            Helper.makeToast(nameOfFood + " is already registered!", this);
         }
     }
+
+    private void clearAllInputFields()
+    {
+        cleanInputField(R.id.foodName);
+        cleanInputField(R.id.servingSize);
+        cleanInputField(R.id.carbsInput);
+        cleanInputField(R.id.proteinInput);
+        cleanInputField(R.id.fatInput);
+    }
+
+    private void cleanInputField(int id)
+    {
+        EditText input = (EditText) findViewById(id);
+        input.setText("");
+    }
+
+    // Helper Functions
+
+    private static int convertDPToPixel(float dp){
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return Math.round(px);
+    }
+
+    private boolean isFoodRegistered(String nameOfFood)
+    {
+        return foodData.isFoodRegistered(nameOfFood);
+    }
+
+    private double getDoubleValue(int editTextID, int minValue, int maxValue, String name)
+    {
+        EditText value = (EditText) findViewById(editTextID);
+
+        String input = value.getText().toString();
+
+        try {
+            double number = Double.parseDouble(input);
+
+            if ((number >= minValue) && (number <= maxValue))
+            {
+                return number;
+            } else
+            {
+                Helper.makeToast(name + " must be between " +
+                        Integer.toString(minValue) + "g and " +
+                        Integer.toString(maxValue) + "g!", this);
+                return -1;
+            }
+        } catch (NumberFormatException e) {
+            Helper.makeToast("Enter a valid " + name + " value!", this);
+            return -1;
+        }
+    }
+
+    private String getNameOfFood()
+    {
+        EditText input = (EditText) findViewById(R.id.foodName);
+        String name = input.getText().toString();
+
+        if (!TextUtils.isEmpty(name))
+        {
+            return name;
+        } else {
+            input.setError("Enter a valid name!");
+            return "";
+        }
+    }
+
+    private int getServingSize()
+    {
+        EditText servingSize = (EditText) findViewById(R.id.servingSize);
+
+        String input = servingSize.getText().toString();
+
+        try {
+            int number = Integer.parseInt(input);
+
+            if ((number >= Food.MIN_SERVING_SIZE) && (number <= Food.MAX_SERVING_SIZE))
+            {
+                return number;
+            } else
+            {
+                Helper.makeToast("Serving size must be between " +
+                        Integer.toString(Food.MIN_SERVING_SIZE) + "g and" +
+                        Integer.toString(Food.MAX_SERVING_SIZE) + "g!", this);
+                return -1;
+            }
+        } catch (NumberFormatException e) {
+            Helper.makeToast("Enter a valid serving size!", this);
+            return -1;
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -195,173 +371,5 @@ public class FoodActivity extends AppCompatActivity
         return true;
     }
 
-    public void changeScreen(View view) {
-        int id = view.getId();
 
-        LinearLayout showFoodsLayout = (LinearLayout) findViewById(R.id.showFoods);
-        LinearLayout addFoodLayout = (LinearLayout) findViewById(R.id.addFood);
-
-        switch (id) {
-            case (R.id.buttonShowFoods):
-                if (showFoodsLayout.getVisibility() != View.VISIBLE) {
-                    addFoodLayout.setVisibility(View.GONE);
-                    showFoodsLayout.setVisibility(View.VISIBLE);
-                    setIndicatorVisible(R.id.indicatorShowFoods);
-                }
-                break;
-            case (R.id.buttonAddFood):
-                if (addFoodLayout.getVisibility() != View.VISIBLE) {
-                    showFoodsLayout.setVisibility(View.GONE);
-                    addFoodLayout.setVisibility(View.VISIBLE);
-                    setIndicatorVisible(R.id.indicatorAddFood);
-                }
-        }
-    }
-
-    public void addFoodToDatabase(View view) {
-        String nameOfFood = getNameOfFood();
-        if (nameOfFood.equals(""))
-        {
-            return;
-        }
-
-        int servingSize = getServingSize();
-        if (servingSize <= 0) {
-            return;
-        }
-
-        double totalCarbs = getDoubleValue(R.id.carbsInput, Food.MIN_SERVING_SIZE - 1,
-                Food.MAX_SERVING_SIZE, "Carbs");
-        if (totalCarbs < 0) {
-            return;
-        }
-
-        double protein = getDoubleValue(R.id.proteinInput, Food.MIN_SERVING_SIZE - 1,
-                Food.MAX_SERVING_SIZE, "Protein");
-        if (protein < 0) {
-            return;
-        }
-
-        double totalFat = getDoubleValue(R.id.fatInput, Food.MIN_SERVING_SIZE - 1,
-                Food.MAX_SERVING_SIZE, "Fat");
-        if (totalFat < 0) {
-            return;
-        }
-
-        Food newFood = new Food(nameOfFood, servingSize, protein, totalCarbs, totalFat);
-
-        if (!isFoodRegistered(newFood.getName()))
-        {
-            foodData.addFood(newFood);
-            updateListOfFoods(newFood);
-            Helper.makeToast("Food successfully added!", this);
-            clearAllInputFields();
-        } else
-        {
-            Helper.makeToast("Food is already registered!", this);
-        }
-    }
-
-    private void updateListOfFoods(Food food)
-    private void clearAllInputFields()
-    {
-        cleanInputField(R.id.foodName);
-        cleanInputField(R.id.servingSize);
-        cleanInputField(R.id.carbsInput);
-        cleanInputField(R.id.proteinInput);
-        cleanInputField(R.id.fatInput);
-    }
-
-        printFood(food.getName(), layout);
-    private void cleanInputField(int id)
-    {
-        EditText input = (EditText) findViewById(id);
-        input.setText("");
-    }
-
-    // Helper Functions
-
-    private static int convertDPToPixel(float dp){
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        float px = dp * (metrics.densityDpi / 160f);
-        return Math.round(px);
-    }
-
-    private boolean isFoodRegistered(String nameOfFood)
-    {
-        return foodData.isFoodRegistered(nameOfFood);
-    }
-
-    private double getDoubleValue(int editTextID, int minValue, int maxValue, String name)
-    {
-        EditText value = (EditText) findViewById(editTextID);
-
-        String input = value.getText().toString();
-
-        try {
-            double number = Double.parseDouble(input);
-
-            if ((number >= minValue) && (number <= maxValue))
-            {
-                return number;
-            } else
-            {
-                Helper.makeToast(name + " must be between " +
-                        Integer.toString(minValue) + "g and " +
-                        Integer.toString(maxValue) + "g!", this);
-                return -1;
-            }
-        } catch (NumberFormatException e) {
-            Helper.makeToast("Enter a valid " + name + " value!", this);
-            return -1;
-        }
-    }
-
-    public void showFoodNutritionFacts(View view)
-    {
-        Intent intent = new Intent(this, FoodNutritionFacts.class);
-
-        intent.putExtra(foodNameExtra, ((TextView) view).getText().toString());
-
-        startActivity(intent);
-    }
-
-    private String getNameOfFood()
-    {
-        EditText input = (EditText) findViewById(R.id.foodName);
-        String name = input.getText().toString();
-
-        if (!TextUtils.isEmpty(name))
-        {
-            return name;
-        } else {
-            input.setError("Enter a valid name!");
-            return "";
-        }
-    }
-
-    private int getServingSize()
-    {
-        EditText servingSize = (EditText) findViewById(R.id.servingSize);
-
-        String input = servingSize.getText().toString();
-
-        try {
-            int number = Integer.parseInt(input);
-
-            if ((number >= Food.MIN_SERVING_SIZE) && (number <= Food.MAX_SERVING_SIZE))
-            {
-                return number;
-            } else
-            {
-                Helper.makeToast("Serving size must be between " +
-                        Integer.toString(Food.MIN_SERVING_SIZE) + "g and" +
-                        Integer.toString(Food.MAX_SERVING_SIZE) + "g!", this);
-                return -1;
-            }
-        } catch (NumberFormatException e) {
-            Helper.makeToast("Enter a valid serving size!", this);
-            return -1;
-        }
-    }
 }
