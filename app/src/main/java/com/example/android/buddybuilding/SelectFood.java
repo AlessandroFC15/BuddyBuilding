@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import static android.widget.LinearLayout.*;
+
 public class SelectFood extends AppCompatActivity {
 
     private FoodData foodData = new FoodData(this);
@@ -64,22 +66,27 @@ public class SelectFood extends AppCompatActivity {
 
         nameOfFood.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
 
-        /* textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFoodNutritionFacts(v);
-            }
-        }); */
-
         TextView foodInfo = new TextView(this);
-        foodInfo.setText(Integer.toString(servingSize) + "g, " + Integer.toString(calories) + " cal");
-        foodInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        foodInfo.setText(String.format("%dg, %dcal", servingSize, calories));
+        foodInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         foodInfo.setPadding(leftPadding, 0, 0, Helper.convertDPToPixel(10));
 
         View separator = getSeparatorView();
 
-        layout.addView(nameOfFood);
-        layout.addView(foodInfo);
+        // Create the LinearLayout container to hold all these views
+        final LinearLayout container = new LinearLayout(this);
+        container.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectServingSize(v);
+            }
+        });
+        container.setOrientation(VERTICAL);
+
+        container.addView(nameOfFood);
+        container.addView(foodInfo);
+
+        layout.addView(container);
         layout.addView(separator);
     }
 
@@ -114,5 +121,11 @@ public class SelectFood extends AppCompatActivity {
         view.setBackground(color);
 
         return view;
+    }
+
+    public void selectServingSize(View view)
+    {
+        // view.setBackgroundColor(getResources().getColor(R.color.gray));
+        Helper.makeToast("Selected", this);
     }
 }
