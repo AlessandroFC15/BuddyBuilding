@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,14 +62,18 @@ public class FoodActivity extends AppCompatActivity
                 if (showFoodsLayout.getVisibility() != View.VISIBLE) {
                     addFoodLayout.setVisibility(View.GONE);
                     showFoodsLayout.setVisibility(View.VISIBLE);
+
                     setIndicatorVisible(R.id.indicatorShowFoods);
+                    changeButtonTextColor(R.id.buttonShowFoods);
                 }
                 break;
             case (R.id.buttonAddFood):
                 if (addFoodLayout.getVisibility() != View.VISIBLE) {
                     showFoodsLayout.setVisibility(View.GONE);
                     addFoodLayout.setVisibility(View.VISIBLE);
+
                     setIndicatorVisible(R.id.indicatorAddFood);
+                    changeButtonTextColor(R.id.buttonAddFood);
                 }
         }
     }
@@ -82,6 +87,27 @@ public class FoodActivity extends AppCompatActivity
         showFoodsLayout.setVisibility(View.VISIBLE);
 
         setIndicatorVisible(R.id.indicatorShowFoods);
+
+        changeButtonTextColor(R.id.buttonShowFoods);
+    }
+
+    private void changeButtonTextColor(int id)
+    {
+        Button buttonShowFoods = (Button) findViewById(R.id.buttonShowFoods);
+        Button buttonAddFood = (Button) findViewById(R.id.buttonAddFood);
+
+        switch (id)
+        {
+            case (R.id.buttonShowFoods):
+                buttonShowFoods.setTextColor(getResources().getColor(R.color.colorPrimary));
+                buttonAddFood.setTextColor(getResources().getColor(R.color.black));
+                break;
+            case (R.id.buttonAddFood):
+                buttonAddFood.setTextColor(getResources().getColor(R.color.colorPrimary));
+                buttonShowFoods.setTextColor(getResources().getColor(R.color.black));
+        }
+
+
     }
 
     private void setIndicatorVisible(int id)
