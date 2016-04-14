@@ -155,6 +155,13 @@ public class FoodData extends SQLiteOpenHelper{
         );
     }
 
+    public Cursor getAllFoodData()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    }
+
     public Cursor getFoodData(String nameOfFood)
     {
         SQLiteDatabase db = this.getReadableDatabase();
