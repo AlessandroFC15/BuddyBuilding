@@ -1,7 +1,6 @@
 package com.example.android.buddybuilding;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -136,7 +134,7 @@ public class FoodActivity extends AppCompatActivity
             }
         });
 
-        int padding = convertDPToPixel(15);
+        int padding = Helper.convertDPToPixel(15);
 
         textView.setPadding(padding, padding, padding, padding);
         layout.addView(textView);
@@ -238,11 +236,7 @@ public class FoodActivity extends AppCompatActivity
 
     // Helper Functions
 
-    private static int convertDPToPixel(float dp){
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        float px = dp * (metrics.densityDpi / 160f);
-        return Math.round(px);
-    }
+
 
     private boolean isFoodRegistered(String nameOfFood)
     {
