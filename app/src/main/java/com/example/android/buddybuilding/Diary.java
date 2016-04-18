@@ -14,13 +14,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Diary extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private User userData = User.getInstance();
+    HashMap<Integer, Meal> meals = userData.getAllMeals();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +41,32 @@ public class Diary extends AppCompatActivity
         updateAllMeals();
     }
 
-    private void updateAllMeals()
+    public void onResume()
     {
-        HashMap<Integer, Meal> meals = userData.getAllMeals();
+        super.onResume();
 
-        for (int nameOfMeal : meals.keySet())
+        if (userData.hasDietChanged())
         {
-            Meal meal = meals.get(nameOfMeal);
+            int mealChanged = userData.getMealChanged();
 
-            switch (nameOfMeal)
-            {
+            updateMeal(mealChanged);
+        }
+    }
+
+    private void updateAllMeals() {
+        for (int nameOfMeal : meals.keySet()) {
+            switch (nameOfMeal) {
                 case (Meal.BREAKFAST):
-                    updateMeal(meal, R.id.caloriesMealBreakfast, R.id.mealBreakfast);
+                    updateMeal(Meal.BREAKFAST);
                     break;
                 case (Meal.LUNCH):
-                    updateMeal(meal, R.id.caloriesMealLunch, R.id.mealLunch);
+                    updateMeal(Meal.LUNCH);
                     break;
                 case (Meal.DINNER):
-                    updateMeal(meal, R.id.caloriesMealDinner, R.id.mealDinner);
+                    updateMeal(Meal.DINNER);
                     break;
                 case (Meal.SNACKS):
-                    updateMeal(meal, R.id.caloriesMealSnacks, R.id.mealSnacks);
+                    updateMeal(Meal.SNACKS);
                     break;
                 default:
                     Helper.makeToast("Error updateAllMeals", this);
@@ -70,22 +75,6 @@ public class Diary extends AppCompatActivity
         }
     }
 
-    private void updateMeal(Meal meal, int caloriesMealID, int mealLayoutID)
-    {
-        TextView mealCalories = (TextView) findViewById(caloriesMealID);
-
-        mealCalories.setText(Double.toString(meal.getMealTotalCalories()));
-
-        LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
-
-        ArrayList<Food> foodsFromMeal = meal.getFoodsFromMeal();
-
-        for (Food food : foodsFromMeal)
-        {
-            printFood(food, layout);
-        }
-    }
-    
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -143,8 +132,7 @@ public class Diary extends AppCompatActivity
         return true;
     }
 
-    public void addFoodToMeal(View view)
-    {
+    public void addFoodToMeal(View view) {
         // Creating just for test
         // This process will be replaced by a choice of food.
         // Food newFood = new Food("Pasta de Amendoim", 10, 3, 1.7, 5.5);
@@ -160,25 +148,74 @@ public class Diary extends AppCompatActivity
 
         startActivity(intent);
 
-        /*
-        userData.addFood(nameOfMeal, newFood);
-
-        // 3rd Step = Find the layout that contains the meal
-        LinearLayout layout = (LinearLayout) view.getParent().getParent();
-
-        printFood(newFood, layout); */
-
-        // updateMealCalories(nameOfMeal);
+        // 3rd Step = Update the meal on resume
     }
 
-    private int getCorrectMeal(View view)
+    private void updateMeal(int nameOfMeal) {
+        // 1st Step = Get the object meal
+
+        Meal meal = meals.get(nameOfMeal);
+
+        // 2nd Step = Get the correct ids for the given meal
+
+        int caloriesMealID = getCaloriesMealID(nameOfMeal);
+
+        int mealLayoutID = getMealLayoutID(nameOfMeal);
+
+        // 3rd Step = Find the view and the layout
+
+        TextView mealCalories = (TextView) findViewById(caloriesMealID);
+
+        LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
+
+        mealCalories.setText(Integer.toString(meal.getMealTotalCalories()));
+
+        for (Food food : meal.getFoodsFromMeal()) {
+            printFood(food, layout);
+        }
+
+        Diet.foodAdded = false;
+    }
+
+    private int getCaloriesMealID(int nameOfMeal) {
+        switch (nameOfMeal) {
+            case Meal.BREAKFAST:
+                return R.id.caloriesMealBreakfast;
+            case Meal.LUNCH:
+                return R.id.caloriesMealLunch;
+            case Meal.DINNER:
+                return R.id.caloriesMealDinner;
+            case Meal.SNACKS:
+                return R.id.caloriesMealSnacks;
+            default:
+                Helper.makeToast("Error in getCaloriesMealID", this);
+                return -1;
+        }
+    }
+
+    private int getMealLayoutID(int nameOfMeal)
     {
+        switch (nameOfMeal) {
+            case Meal.BREAKFAST:
+                return R.id.mealBreakfast;
+            case Meal.LUNCH:
+                return R.id.mealLunch;
+            case Meal.DINNER:
+                return R.id.mealDinner;
+            case Meal.SNACKS:
+                return R.id.mealSnacks;
+            default:
+                Helper.makeToast("Error in getMealLayoutID", this);
+                return -1;
+        }
+    }
+
+    private int getCorrectMeal(View view) {
         LinearLayout meal = (LinearLayout) view.getParent().getParent();
 
         int id = meal.getId();
 
-        switch (id)
-        {
+        switch (id) {
             case R.id.mealBreakfast:
                 return Meal.BREAKFAST;
             case R.id.mealLunch:
@@ -193,8 +230,7 @@ public class Diary extends AppCompatActivity
         }
     }
 
-    private void printFood(Food newFood, LinearLayout meal)
-    {
+    private void printFood(Food newFood, LinearLayout meal) {
         TextView food = new TextView(this);
 
         food.setText(newFood.getName());
@@ -204,29 +240,9 @@ public class Diary extends AppCompatActivity
         meal.addView(food, 2);
     }
 
-    private void updateMealCalories(int nameOfMeal)
-    {
+    private void updateMealCalories(int nameOfMeal) {
         // 1st Step = Find the correct id based on the name of meal
-        int caloriesMealID;
-
-        switch (nameOfMeal)
-        {
-            case Meal.BREAKFAST:
-                caloriesMealID = R.id.caloriesMealBreakfast;
-                break;
-            case Meal.LUNCH:
-                caloriesMealID = R.id.caloriesMealLunch;
-                break;
-            case Meal.DINNER:
-                caloriesMealID = R.id.caloriesMealDinner;
-                break;
-            case Meal.SNACKS:
-                caloriesMealID = R.id.caloriesMealSnacks;
-                break;
-            default:
-                Helper.makeToast("Error in updating meal calories", this);
-                return;
-        }
+        int caloriesMealID = getCaloriesMealID(nameOfMeal);
 
         // 2nd Step = Find the correct text view
         TextView calories = (TextView) findViewById(caloriesMealID);

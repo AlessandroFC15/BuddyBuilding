@@ -16,7 +16,10 @@ import static android.widget.LinearLayout.*;
 
 public class SelectFood extends AppCompatActivity {
 
-    private FoodData foodData = new FoodData(this);
+    private FoodData foodDatabase = new FoodData(this);
+    private Cursor allFoodData;
+    private User userData = User.getInstance();
+    private int nameOfMeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,31 +28,26 @@ public class SelectFood extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        int meal = intent.getIntExtra("MealName", -1);
+        nameOfMeal = intent.getIntExtra("MealName", -1);
 
-        setTitle(getNameOfMeal(meal));
+        setTitle(getNameOfMeal(nameOfMeal));
 
         printAllFoodsRegistered();
     }
 
-    private void printAllFoodsRegistered()
-    {
+    private void printAllFoodsRegistered() {
+        getAllFoodData();
+
         LinearLayout layout = (LinearLayout) findViewById(R.id.foodsRegistered);
 
-        Cursor cursor = foodData.getAllFoodData();
+        while (allFoodData.moveToNext()) {
+            String name = allFoodData.getString(allFoodData.getColumnIndex(FoodData.COLUMN_NAME));
 
-        try {
-            while (cursor.moveToNext()) {
-                String name = cursor.getString(cursor.getColumnIndex(FoodData.COLUMN_NAME));
+            int servingSize = allFoodData.getInt(allFoodData.getColumnIndex(FoodData.COLUMN_SERVING_SIZE));
 
-                int servingSize = cursor.getInt(cursor.getColumnIndex(FoodData.COLUMN_SERVING_SIZE));
+            int calories = allFoodData.getInt(allFoodData.getColumnIndex(FoodData.COLUMN_CALORIES));
 
-                int calories = cursor.getInt(cursor.getColumnIndex(FoodData.COLUMN_CALORIES));
-
-                printFood(name, servingSize, calories, layout);
-            }
-        } finally {
-            cursor.close();
+            printFood(name, servingSize, calories, layout);
         }
     }
 
@@ -125,7 +123,57 @@ public class SelectFood extends AppCompatActivity {
 
     public void selectServingSize(View view)
     {
-        // view.setBackgroundColor(getResources().getColor(R.color.gray));
-        Helper.makeToast("Selected", this);
+        // 1st Step | Get the name of the food clicked
+
+        String nameOfFood = getNameOfFood(view);
+
+        // 2nd Step | Make a Food object with that name
+
+        Food food = getFood(nameOfFood);
+
+        // 3rd Step | Add food to the user diary
+        userData.addFood(nameOfMeal, food);
+
+        Helper.makeToast(nameOfFood + " successfully added to " + getNameOfMeal(nameOfMeal), this);
+
+        finish();
+    }
+
+    private Food getFood(String nameOfFood)
+    {
+        allFoodData.moveToPosition(-1);
+
+        while (allFoodData.moveToNext()) {
+            String name = allFoodData.getString(allFoodData.getColumnIndex(FoodData.COLUMN_NAME));
+
+            if (name.equals(nameOfFood))
+            {
+                int servingSize = allFoodData.getInt(allFoodData.getColumnIndex(FoodData.COLUMN_SERVING_SIZE));
+
+                double protein = allFoodData.getDouble(allFoodData.getColumnIndex(FoodData.COLUMN_PROTEIN));
+
+                double carbs = allFoodData.getDouble(allFoodData.getColumnIndex(FoodData.COLUMN_CARBS));
+
+                double fat = allFoodData.getDouble(allFoodData.getColumnIndex(FoodData.COLUMN_FAT));
+
+                return new Food(nameOfFood, servingSize, protein, carbs, fat);
+            }
+            // printFood(name, servingSize, calories, layout);
+        }
+
+        return null;
+
+    }
+
+    private String getNameOfFood(View view)
+    {
+        View name = ((LinearLayout) view).getChildAt(0);
+
+        return ((TextView) name).getText().toString();
+    }
+
+    private void getAllFoodData()
+    {
+        allFoodData = foodDatabase.getAllFoodData();
     }
 }
