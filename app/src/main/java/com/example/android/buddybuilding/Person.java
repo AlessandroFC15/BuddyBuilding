@@ -3,13 +3,7 @@ package com.example.android.buddybuilding;
 /**
  * Created by Alessandro on 04/04/2016.
  */
-public abstract class Person implements Comparable<Person>{
-
-    // Constants
-    public static final int NOT_VERY_ACTIVE = 0;
-    public static final int LIGHTLY_ACTIVE = 1;
-    public static final int ACTIVE = 2;
-    public static final int VERY_ACTIVE = 3;
+public abstract class Person implements Comparable<Person>, PhysicallyActive{
 
     public static final double MIN_HEIGHT = 57;
     public static final double MAX_HEIGHT = 260;
@@ -85,14 +79,6 @@ public abstract class Person implements Comparable<Person>{
         return 32 * (int) getWeight();
     }
 
-    public void setActivityLevel(int choice)
-    {
-        if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
-        {
-            activityLevel = choice;
-        }
-    }
-
     public int compareTo(Person person)
     {
         if (weight > person.weight)
@@ -105,5 +91,19 @@ public abstract class Person implements Comparable<Person>{
         {
             return -1;
         }
+    }
+
+    // Implementação da interface PhysicallyActive
+
+    public void setActivityLevel(int choice)
+    {
+        if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
+        {
+            activityLevel = choice;
+        }
+    }
+
+    public int getActivityLevel(){
+        return activityLevel;
     }
 }
