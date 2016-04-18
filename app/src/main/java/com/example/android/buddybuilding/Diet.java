@@ -74,7 +74,7 @@ public class Diet {
         {
             Meal meal = meals.get(nameOfMeal);
 
-            calories += meal.getMealTotalCalories();
+            calories += meal.getCalories();
         }
 
         return calories;
@@ -82,7 +82,7 @@ public class Diet {
 
     public double getCaloriesFromMeal(int nameOfMeal)
     {
-        return meals.get(nameOfMeal).getMealTotalCalories();
+        return meals.get(nameOfMeal).getCalories();
     }
 
     public void setCaloriesTarget(int bmr, int weeklyGoal)

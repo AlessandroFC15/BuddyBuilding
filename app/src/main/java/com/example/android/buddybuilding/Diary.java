@@ -168,7 +168,7 @@ public class Diary extends AppCompatActivity
 
         LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
 
-        mealCalories.setText(Integer.toString(meal.getMealTotalCalories()));
+        mealCalories.setText(Integer.toString(meal.getCalories()));
 
         for (Food food : meal.getFoodsFromMeal()) {
             printFood(food, layout);
