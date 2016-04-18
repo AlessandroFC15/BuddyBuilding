@@ -3,7 +3,7 @@ package com.example.android.buddybuilding;
 /**
  * Created by Alessandro on 04/04/2016.
  */
-public class Person {
+public abstract class Person implements Comparable<Person>{
 
     // Constants
     public static final int NOT_VERY_ACTIVE = 0;
@@ -90,6 +90,20 @@ public class Person {
         if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
         {
             activityLevel = choice;
+        }
+    }
+
+    public int compareTo(Person person)
+    {
+        if (weight > person.weight)
+        {
+            return 1;
+        } else if (weight == person.weight)
+        {
+            return 0;
+        } else
+        {
+            return -1;
         }
     }
 }

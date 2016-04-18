@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Alessandro on 06/04/2016.
  */
-public class Meal {
+public class Meal implements Comparable<Meal>{
 
     public final static int BREAKFAST = 0;
     public final static int LUNCH = 1;
@@ -13,11 +13,11 @@ public class Meal {
     public final static int SNACKS = 3;
     public final static int GENERIC_MEAL = 4;
 
-    int name;
-    double totalProtein;
-    double totalCarbs;
-    int totalCalories;
-    double totalFat;
+    protected int name;
+    protected double totalProtein;
+    protected double totalCarbs;
+    protected int totalCalories;
+    protected double totalFat;
 
     ArrayList<Food> foods = new ArrayList<>();
 
@@ -74,5 +74,30 @@ public class Meal {
     public ArrayList<Food> getFoodsFromMeal()
     {
         return foods;
+    }
+
+    public int compareTo(Meal meal)
+    {
+        if (totalCalories > meal.totalCalories)
+        {
+            return 1;
+        } else if (totalCalories == meal.totalCalories)
+        {
+            return 0;
+        } else
+        {
+            return -1;
+        }
+    }
+
+    public boolean equals(Object object)
+    {
+        if (object instanceof Meal)
+        {
+            return (totalCalories == ((Meal) object).totalCalories);
+        } else
+        {
+            return false;
+        }
     }
 }
