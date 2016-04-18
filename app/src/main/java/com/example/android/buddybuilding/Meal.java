@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Alessandro on 06/04/2016.
  */
-public class Meal implements Comparable<Meal>{
+public class Meal implements Comparable<Meal>, CaloriesMeasurable{
 
     public final static int BREAKFAST = 0;
     public final static int LUNCH = 1;
@@ -39,18 +39,6 @@ public class Meal implements Comparable<Meal>{
         totalFat = 0;
     }
 
-    public void addFood(String name, int serving, double protein, double carbohydrates, double totalFat)
-    {
-        Food newFood = new Food(name, serving, protein, carbohydrates, totalFat);
-
-        foods.add(newFood);
-
-        this.totalProtein += newFood.getProtein();
-        this.totalCarbs += newFood.getCarbs();
-        this.totalCalories += newFood.getCalories();
-        this.totalFat += newFood.getTotalFat();
-    }
-
     public void addFood(Food newFood)
     {
         foods.add(newFood);
@@ -64,11 +52,6 @@ public class Meal implements Comparable<Meal>{
     public int getName()
     {
         return name;
-    }
-
-    public int getMealTotalCalories()
-    {
-        return totalCalories;
     }
 
     public ArrayList<Food> getFoodsFromMeal()
@@ -100,4 +83,18 @@ public class Meal implements Comparable<Meal>{
             return false;
         }
     }
+
+    // Implementação da interface CaloriesMeasurable
+
+    public void calculateCalories()
+    {
+        totalCalories = 0;
+
+        for (Food food : foods)
+        {
+            totalCalories += food.getCalories();
+        }
+    }
+
+    public int getCalories() { return totalCalories;}
 }

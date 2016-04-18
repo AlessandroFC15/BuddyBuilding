@@ -3,7 +3,7 @@ package com.example.android.buddybuilding;
 /**
  * Created by Alessandro on 05/04/2016.
  */
-public class Food implements Comparable<Food>{
+public class Food implements Comparable<Food>, CaloriesMeasurable {
     public static final int MIN_SERVING_SIZE = 1;
     public static final int MAX_SERVING_SIZE = 1000;
     public static final int MAX_LENGTH_NAME = 25;
@@ -26,11 +26,6 @@ public class Food implements Comparable<Food>{
         calculateCalories();
     }
 
-    private void calculateCalories()
-    {
-        calories = (int) ((9 * getTotalFat()) + (4 * getProtein()) + (4 * getCarbs()));
-    }
-
     public double getProtein()
     {
         return protein;
@@ -45,8 +40,6 @@ public class Food implements Comparable<Food>{
     {
         return totalFat;
     }
-
-    public int getCalories() { return calories; }
 
     public String getName() {
         return name;
@@ -85,5 +78,14 @@ public class Food implements Comparable<Food>{
             return false;
         }
     }
+
+    // Implementação da interface CaloriesMeasurable
+
+    public void calculateCalories()
+    {
+        calories = (int) ((9 * getTotalFat()) + (4 * getProtein()) + (4 * getCarbs()));
+    }
+
+    public int getCalories() { return calories; }
 
 }
