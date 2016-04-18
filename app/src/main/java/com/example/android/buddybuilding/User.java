@@ -94,4 +94,14 @@ public class User extends Person{
     {
         return diet.getAllMeals();
     }
+
+    public boolean hasDietChanged()
+    {
+        return Diet.foodAdded;
+    }
+
+    public int getMealChanged()
+    {
+        return Diet.mealChanged;
+    }
 }

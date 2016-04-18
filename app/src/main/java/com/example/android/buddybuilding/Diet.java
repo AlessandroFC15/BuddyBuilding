@@ -14,6 +14,9 @@ public class Diet {
     private double carbsIntake;
     private double fatIntake;
 
+    public static boolean foodAdded;
+    public static int mealChanged;
+
     private HashMap<Integer, Meal> meals = new HashMap<>();
 
     Diet()
@@ -26,6 +29,7 @@ public class Diet {
         fatIntake = 0;
         addDefaultMeals();
     }
+
 
     public void setDietGoal(int choice)
     {
@@ -55,6 +59,10 @@ public class Diet {
             Meal meal = meals.get(nameOfmeal);
 
             meal.addFood(food);
+
+            foodAdded = true;
+
+            mealChanged = nameOfmeal;
         }
     }
 
