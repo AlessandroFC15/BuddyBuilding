@@ -1,11 +1,11 @@
 package com.example.android.buddybuilding.User;
 
+import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.Diet.Diet;
 import com.example.android.buddybuilding.Diet.DietToGain;
 import com.example.android.buddybuilding.Diet.DietToLose;
 import com.example.android.buddybuilding.Diet.DietToMaintain;
 import com.example.android.buddybuilding.Food;
-import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Meal;
 
 import java.util.HashMap;
@@ -15,47 +15,74 @@ import java.util.HashMap;
  */
 public class User extends Person{
 
-    private static final User userData = new User();
+    private static User userData = null;
     public static User getInstance() {return userData;}
 
-    // Constants
-    public static final int GAIN_250G = 0;
-    public static final int GAIN_500G = 1;
-    public static final int LOSE_250G = 2;
-    public static final int LOSE_500G = 3;
-    public static final int LOSE_750G = 4;
-    public static final int LOSE_1KG = 5;
+    public static void createNewUser(final InputData input)
+    {
+        userData = new User(input);
+    }
 
-    protected int goal;
-    private int weeklyGoal;
+    public static void createNewUser()
+    {
+        userData = new User();
+    }
+
+    private User(final InputData input)
+    {
+        super(input);
+
+        goal = input.goal;
+        weeklyGoal = input.weeklyGoal;
+        diet = getCorrectDiet(goal);
+    }
+
+    public enum WeeklyGoal{
+        GAIN_250G(500), GAIN_500G(750), LOSE_250G(-200),
+        LOSE_500G(-300), LOSE_750G(-400), LOSE_1KG(-500);
+
+        private final int calories;
+
+        WeeklyGoal(int calories)
+        {
+            this.calories = calories;
+        }
+
+        public int getCalories()
+        {
+            return calories;
+        }
+    }
+
+    public enum Goal {
+        LOSE_WEIGHT, MAINTAIN_WEIGHT, GAIN_WEIGHT
+    }
+
+    protected Goal goal;
+    private WeeklyGoal weeklyGoal;
     private Diet diet;
 
     // Construtores
 
     User()
     {
-        weeklyGoal = GAIN_250G;
+        goal = Goal.GAIN_WEIGHT;
+        weeklyGoal = WeeklyGoal.GAIN_250G;
+        diet = getCorrectDiet(goal);
+    }
+
+    User(WeeklyGoal weeklyGoal)
+    {
+        this.weeklyGoal = weeklyGoal;
 
         setCaloriesTarget();
     }
 
-    User(int goal)
-    {
-
-    }
-
-    User(int goal, int weeklyGoal)
-    {
-        this.weeklyGoal = (int) Helper.validateValue(weeklyGoal, GAIN_250G, LOSE_1KG);
-
-        setCaloriesTarget();
-    }
-
-    User(int gender, int age, double height, double weight, int activityLevel, int weeklyGoal)
+    User(Gender gender, int age, double height, double weight, int activityLevel, WeeklyGoal weeklyGoal)
     {
         super(gender, age, height, weight, activityLevel);
 
-        this.weeklyGoal = (int) Helper.validateValue(weeklyGoal, GAIN_250G, LOSE_1KG);
+        this.weeklyGoal = weeklyGoal;
 
         setCaloriesTarget();
     }
@@ -64,8 +91,8 @@ public class User extends Person{
     {
         super(user);
 
+        goal = user.goal;
         weeklyGoal = user.weeklyGoal;
-
         diet = user.diet;
     }
 
@@ -76,7 +103,7 @@ public class User extends Person{
         return diet;
     }
 
-    public void setGoal(int choice)
+    public void setGoal(Goal choice)
     {
         diet = getCorrectDiet(choice);
 
@@ -84,36 +111,40 @@ public class User extends Person{
         setCaloriesTarget();
     }
 
-    private Diet getCorrectDiet(int goal)
+    private Diet getCorrectDiet(Goal goal)
     {
         switch (goal)
         {
-            case (Diet.LOSE_WEIGHT):
-                return new DietToLose();
-            case (Diet.MAINTAIN_WEIGHT):
-                return new DietToMaintain();
-            case (Diet.GAIN_WEIGHT):
-                return new DietToGain();
+            case LOSE_WEIGHT:
+                return new DietToLose(getBMR(), weeklyGoal);
+            case MAINTAIN_WEIGHT:
+                return new DietToMaintain(getBMR());
+            case GAIN_WEIGHT:
+                return new DietToGain(getBMR(), weeklyGoal);
             default:
                 System.out.println("Error in getCorrectDiet | User");
                 return null;
         }
     }
 
-    public void setWeeklyGoal(int choice)
+    public void setWeeklyGoal(WeeklyGoal choice)
     {
-        if ((choice >= GAIN_250G) && (choice <= LOSE_1KG))
-        {
-            weeklyGoal = choice;
+        weeklyGoal = choice;
 
-            // If you change your weekly goal, you must change your calories target.
-            setCaloriesTarget();
-        }
+        // If you change your weekly goal, you must change your calories target.
+        setCaloriesTarget();
     }
 
-    public int getWeeklyGoal()
+
+    public WeeklyGoal getWeeklyGoal()
     {
-        return weeklyGoal;
+        if (goal == Goal.MAINTAIN_WEIGHT)
+        {
+            return null;
+        } else
+        {
+            return weeklyGoal;
+        }
     }
 
     public void addFood(int nameOfMeal, Food food)
@@ -130,7 +161,7 @@ public class User extends Person{
     {
         // If the goal of the user is to maintain weight, then its calories goal is the
         // same as its BMR.
-        if (getGoal() == Diet.MAINTAIN_WEIGHT)
+        if (getGoal() == Goal.MAINTAIN_WEIGHT)
         {
             diet.setCaloriesTarget(getBMR());
         } else
@@ -164,15 +195,13 @@ public class User extends Person{
         return Diet.mealChanged;
     }
 
-    public void setDietGoal(int choice)
+    public void setDietGoal(Goal choice)
     {
-        if ((choice >= Diet.LOSE_WEIGHT) && (choice <= Diet.GAIN_WEIGHT))
-        {
-            goal = choice;
-        }
+        goal = choice;
+
     }
 
-    public int getGoal()
+    public Goal getGoal()
     {
         return goal;
     }

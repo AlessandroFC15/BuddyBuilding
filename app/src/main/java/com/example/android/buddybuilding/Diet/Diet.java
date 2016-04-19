@@ -22,7 +22,6 @@ public abstract class Diet {
     private HashMap<Integer, Meal> meals = new HashMap<>();
 
     public static Food lastFoodAdded = null;
-    // public static boolean foodAdded;
     public static int mealChanged;
 
     public Diet()
@@ -92,27 +91,27 @@ public abstract class Diet {
         return meals.get(nameOfMeal).getCalories();
     }
 
-    public void setCaloriesTarget(int bmr, int weeklyGoal)
+    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal)
     {
         switch (weeklyGoal)
         {
-            case (User.GAIN_250G):
-                totalCaloriesTarget = bmr + 500;
+            case GAIN_250G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
-            case (User.GAIN_500G):
-                totalCaloriesTarget = bmr + 750;
+            case GAIN_500G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
-            case (User.LOSE_250G):
-                totalCaloriesTarget = bmr - 200;
+            case LOSE_250G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
-            case (User.LOSE_500G):
-                totalCaloriesTarget = bmr - 300;
+            case LOSE_500G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
-            case (User.LOSE_750G):
-                totalCaloriesTarget = bmr - 400;
+            case LOSE_750G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
-            case (User.LOSE_1KG):
-                totalCaloriesTarget = bmr - 500;
+            case LOSE_1KG:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
         }
     }
@@ -136,8 +135,6 @@ public abstract class Diet {
     }
 
     // Constants
-    public static final int LOSE_WEIGHT = 0;
-    public static final int MAINTAIN_WEIGHT = 1;
-    public static final int GAIN_WEIGHT = 2;
+
 
 }

@@ -15,7 +15,7 @@ import com.example.android.buddybuilding.User.User;
 
 public class Input3Info extends AppCompatActivity {
 
-    private User userData = User.getInstance();
+    private InputData input = InputData.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +37,13 @@ public class Input3Info extends AppCompatActivity {
         {
             case R.id.male:
                 if (checked) {
-                    userData.setGender(User.MALE);
+                    input.gender = User.Gender.MALE;
                     break;
                 }
             case R.id.female:
                 if (checked)
                 {
-                    userData.setGender(User.FEMALE);
+                    input.gender = User.Gender.FEMALE;
                     break;
                 }
         }
@@ -86,7 +86,7 @@ public class Input3Info extends AppCompatActivity {
             int age = getAge();
 
             if (age != -1) {
-                userData.setAge(age);
+                input.age = age;
 
                 startActivity(new Intent(this, Input4Info.class));
             }

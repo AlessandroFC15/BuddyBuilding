@@ -15,13 +15,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private User userData = User.getInstance();
+    private InputData input = InputData.getInstance();
+
+    private User userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,14 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Creates the new user with the data from the input and sets the shared variable
+        // to the newly created object
+
+        // User.createNewUser(input);
+
+        User.createNewUser();
+        userData = User.getInstance();
 
         updateCaloriesTarget();
 

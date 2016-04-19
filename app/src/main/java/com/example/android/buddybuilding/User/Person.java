@@ -1,5 +1,6 @@
 package com.example.android.buddybuilding.User;
 
+import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.Helper;
 
 /**
@@ -16,10 +17,11 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
     public static final int MIN_AGE = 0;
     public static final int MAX_AGE = 150;
 
-    public static final int MALE = 0;
-    public static final int FEMALE = 1;
+    public enum Gender {
+        MALE, FEMALE
+    };
 
-    protected int gender;
+    protected Gender gender;
     protected int age;
     protected double height;
     protected double weight;
@@ -27,16 +29,16 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     Person()
     {
-        gender = Person.MALE;
+        gender = Gender.MALE;
         age = 20;
         height = 165;
         weight = 60;
         activityLevel = NOT_VERY_ACTIVE;
     }
 
-    Person(int gender, int age, double height, double weight, int activityLevel)
+    Person(Gender gender, int age, double height, double weight, int activityLevel)
     {
-        this.gender = (int) Helper.validateValue(gender, MALE, FEMALE);
+        setGender(gender);
         this.age = (int) Helper.validateValue(age, MIN_AGE, MAX_AGE);
         this.height = Helper.validateValue(height, MIN_HEIGHT, MAX_HEIGHT);
         this.weight = Helper.validateValue(weight, MIN_WEIGHT, MAX_WEIGHT);
@@ -52,11 +54,18 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         activityLevel = oldPerson.activityLevel;
     }
 
-
-
-    public boolean setGender(int choice)
+    Person (final InputData input)
     {
-        if ((choice == MALE) || (choice == FEMALE))
+        gender = input.gender;
+        age = input.age;
+        height = input.height;
+        weight = input.weight;
+        activityLevel = input.activityLevel;
+    }
+
+    public boolean setGender(Gender choice)
+    {
+        if ((choice == Gender.MALE) || (choice == Gender.FEMALE))
         {
             gender = choice;
             return true;
@@ -132,3 +141,4 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         return activityLevel;
     }
 }
+

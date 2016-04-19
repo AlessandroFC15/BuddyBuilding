@@ -12,6 +12,7 @@
             android:name=".Activities.Home"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
+
         </activity>
         <activity android:name=".Activities.InputActivities.Input1Goal" >
             <intent-filter>

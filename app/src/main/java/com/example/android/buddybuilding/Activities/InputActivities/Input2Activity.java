@@ -11,7 +11,7 @@ import com.example.android.buddybuilding.User.User;
 
 public class Input2Activity extends AppCompatActivity {
 
-    private User userData = User.getInstance();
+    private InputData input = InputData.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +29,25 @@ public class Input2Activity extends AppCompatActivity {
         {
             case R.id.notVeryActive:
                 if (checked) {
-                    userData.setActivityLevel(User.NOT_VERY_ACTIVE);
+                    input.activityLevel = User.NOT_VERY_ACTIVE;
                     break;
                 }
             case R.id.lightlyActive:
                 if (checked)
                 {
-                    userData.setActivityLevel(User.LIGHTLY_ACTIVE);
+                    input.activityLevel = User.LIGHTLY_ACTIVE;
                     break;
                 }
             case R.id.active:
                 if (checked)
                 {
-                    userData.setActivityLevel(User.ACTIVE);
+                    input.activityLevel = User.ACTIVE;
                     break;
                 }
             case R.id.veryActive:
                 if (checked)
                 {
-                    userData.setActivityLevel(User.VERY_ACTIVE);
+                    input.activityLevel = User.VERY_ACTIVE;
                     break;
                 }
         }

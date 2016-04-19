@@ -11,7 +11,7 @@ public class Breakfast extends Meal {
     {
         name = BREAKFAST;
 
-        addDefaultFood();
+        // addDefaultFood();
     }
 
     public Breakfast(Food food)

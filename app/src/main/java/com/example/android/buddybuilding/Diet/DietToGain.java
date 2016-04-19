@@ -6,9 +6,9 @@ import com.example.android.buddybuilding.User.User;
  * Created by Alessandro on 19/04/2016.
  */
 public class DietToGain extends Diet{
-    public DietToGain()
+    public DietToGain(int bmr, User.WeeklyGoal weeklyGoal)
     {
-
+        setCaloriesTarget(bmr, weeklyGoal);
     }
 
     public DietToGain(final DietToGain diet)
@@ -16,15 +16,15 @@ public class DietToGain extends Diet{
         super(diet);
     }
 
-    public void setCaloriesTarget(int bmr, int weeklyGoal)
+    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal)
     {
         switch (weeklyGoal)
         {
-            case (User.GAIN_250G):
-                totalCaloriesTarget = bmr + 500;
+            case GAIN_250G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
-            case (User.GAIN_500G):
-                totalCaloriesTarget = bmr + 750;
+            case GAIN_500G:
+                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
             default:
                 System.out.println("Error in setCaloriesTarget | DietToGain");

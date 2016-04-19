@@ -6,7 +6,6 @@ package com.example.android.buddybuilding.Diet;
 public class DietToMaintain extends Diet {
     public DietToMaintain()
     {
-
     }
 
     public DietToMaintain(int bmr)

@@ -265,9 +265,12 @@ public class Diary extends AppCompatActivity
     private void printFood(Food newFood, LinearLayout meal) {
         TextView food = new TextView(this);
 
-        food.setText(newFood.getName());
+        food.setText(newFood.getName() + " ("
+                + Integer.toString(newFood.getServingSize()) + "g)");
 
-        food.setTextColor(getResources().getColor(R.color.colorAccent));
+        int padding = Helper.convertDPToPixel(10);
+
+        food.setPadding(padding, padding, padding, padding);
 
         meal.addView(food, 2);
     }

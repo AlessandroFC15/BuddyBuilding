@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding.Interfaces;
+package com.example.android.buddybuilding;
 
 /**
  * Created by Alessandro on 18/04/2016.

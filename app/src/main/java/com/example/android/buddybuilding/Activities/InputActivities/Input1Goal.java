@@ -6,13 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.example.android.buddybuilding.Diet.Diet;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
 public class Input1Goal extends AppCompatActivity {
 
-    private User userData = User.getInstance();
+    private InputData input = InputData.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +30,19 @@ public class Input1Goal extends AppCompatActivity {
         {
             case R.id.loseWeight:
                 if (checked) {
-                    userData.setGoal(Diet.LOSE_WEIGHT);
+                    input.goal = User.Goal.LOSE_WEIGHT;
                     break;
                 }
             case R.id.maintainWeight:
                 if (checked)
                 {
-                    userData.setGoal(Diet.MAINTAIN_WEIGHT);
+                    input.goal = User.Goal.MAINTAIN_WEIGHT;
                     break;
                 }
             case R.id.gainWeight:
                 if (checked)
                 {
-                    userData.setGoal(Diet.GAIN_WEIGHT);
+                    input.goal = User.Goal.GAIN_WEIGHT;
                     break;
                 }
         }

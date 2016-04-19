@@ -10,14 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.android.buddybuilding.Activities.Home;
-import com.example.android.buddybuilding.Diet.DietToMaintain;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
 public class Input4Info extends AppCompatActivity {
 
-    private User userData = User.getInstance();
+    private InputData input = InputData.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +97,12 @@ public class Input4Info extends AppCompatActivity {
 
             if (weight != -1)
             {
-                userData.setHeight(height);
-                userData.setWeight(weight);
+                input.height = height;
+                input.weight = weight;
 
-                if (userData.getDiet() instanceof DietToMaintain)
+                if (input.goal == User.Goal.MAINTAIN_WEIGHT)
                 {
+                    input.weeklyGoal = null;
                     startActivity(new Intent(this, Home.class));
                 } else
                 {

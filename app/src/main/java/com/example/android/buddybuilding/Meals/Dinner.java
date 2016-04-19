@@ -10,7 +10,7 @@ public class Dinner extends Meal {
     {
         name = DINNER;
 
-        addDefaultFood();
+        // addDefaultFood();
     }
 
     public Dinner(Food food)

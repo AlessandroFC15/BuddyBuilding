@@ -10,15 +10,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.android.buddybuilding.Activities.Home;
-import com.example.android.buddybuilding.Diet.DietToGain;
-import com.example.android.buddybuilding.Diet.DietToLose;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
 public class Input5Goals extends AppCompatActivity {
 
-    private User userData = User.getInstance();
+    private InputData input = InputData.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +30,11 @@ public class Input5Goals extends AppCompatActivity {
 
     private void configureRadioGroup()
     {
-        if (userData.getDiet() instanceof DietToLose)
+        if (input.goal == User.Goal.LOSE_WEIGHT)
         {
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.weeklyGoalLoss);
             radioGroup.setVisibility(View.VISIBLE);
-        } else if (userData.getDiet() instanceof DietToGain)
+        } else if (input.goal == User.Goal.GAIN_WEIGHT)
         {
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.weeklyGoalGain);
             radioGroup.setVisibility(View.VISIBLE);
@@ -48,17 +46,16 @@ public class Input5Goals extends AppCompatActivity {
 
     public void selectWeeklyGoal(View view)
     {
-        if (userData.getDiet() instanceof DietToLose)
+        if (input.goal == User.Goal.LOSE_WEIGHT)
         {
             selectLossGoal(view);
-        } else if (userData.getDiet() instanceof DietToGain)
+        } else if (input.goal == User.Goal.GAIN_WEIGHT)
         {
             selectGainGoal(view);
         } else
         {
             Helper.makeToast("Error selecting weekly goal", this);
         }
-
     }
 
     private void selectGainGoal(View view)
@@ -71,13 +68,13 @@ public class Input5Goals extends AppCompatActivity {
         {
             case R.id.gain250g:
                 if (checked) {
-                    userData.setWeeklyGoal(User.GAIN_250G);
+                    input.weeklyGoal = User.WeeklyGoal.GAIN_250G;
                     break;
                 }
             case R.id.gain500g:
                 if (checked)
                 {
-                    userData.setWeeklyGoal(User.GAIN_500G);
+                    input.weeklyGoal = User.WeeklyGoal.GAIN_500G;
                     break;
                 }
         }
@@ -93,25 +90,25 @@ public class Input5Goals extends AppCompatActivity {
         {
             case R.id.lose250g:
                 if (checked) {
-                    userData.setWeeklyGoal(User.LOSE_250G);
+                    input.weeklyGoal = User.WeeklyGoal.LOSE_250G;
                     break;
                 }
             case R.id.lose500g:
                 if (checked)
                 {
-                    userData.setWeeklyGoal(User.LOSE_500G);
+                    input.weeklyGoal = User.WeeklyGoal.LOSE_500G;
                     break;
                 }
             case R.id.lose750g:
                 if (checked)
                 {
-                    userData.setWeeklyGoal(User.LOSE_750G);
+                    input.weeklyGoal = User.WeeklyGoal.LOSE_750G;
                     break;
                 }
             case R.id.lose1kg:
                 if (checked)
                 {
-                    userData.setWeeklyGoal(User.LOSE_1KG);
+                    input.weeklyGoal = User.WeeklyGoal.LOSE_1KG;
                     break;
                 }
         }
@@ -143,15 +140,15 @@ public class Input5Goals extends AppCompatActivity {
     private boolean isWeightGoalValid(double number)
     {
         if ((number >= User.MIN_WEIGHT) && (number <= User.MAX_WEIGHT)) {
-            if (userData.getDiet() instanceof DietToGain) {
-                if (number > userData.getWeight()) {
+            if (input.goal == User.Goal.GAIN_WEIGHT) {
+                if (number > input.weight) {
                     return true;
                 } else {
                     Helper.makeToast("O peso desejado deve ser maior que o seu peso atual", this);
                     return false;
                 }
-            } else if (userData.getDiet() instanceof DietToLose) {
-                if (number < userData.getWeight()) {
+            } else if (input.goal == User.Goal.LOSE_WEIGHT) {
+                if (number < input.weight) {
                     return true;
                 } else {
                     Helper.makeToast("O peso desejado deve ser menor que o seu peso atual", this);
