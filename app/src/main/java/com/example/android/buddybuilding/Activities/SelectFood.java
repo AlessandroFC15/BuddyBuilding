@@ -95,8 +95,6 @@ public class SelectFood extends AppCompatActivity {
         layout.addView(separator);
     }
 
-
-
     private String getNameOfMeal(int meal)
     {
         switch (meal)

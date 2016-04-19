@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding.Interfaces;
+package com.example.android.buddybuilding.User;
 
 public interface PhysicallyActive {
 

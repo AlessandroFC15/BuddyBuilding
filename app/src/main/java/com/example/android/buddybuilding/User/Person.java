@@ -1,7 +1,6 @@
 package com.example.android.buddybuilding.User;
 
 import com.example.android.buddybuilding.Helper;
-import com.example.android.buddybuilding.Interfaces.PhysicallyActive;
 
 /**
  * Created by Alessandro on 04/04/2016.
