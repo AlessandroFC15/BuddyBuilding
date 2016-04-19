@@ -1,6 +1,9 @@
 package com.example.android.buddybuilding.User;
 
 import com.example.android.buddybuilding.Diet.Diet;
+import com.example.android.buddybuilding.Diet.DietToGain;
+import com.example.android.buddybuilding.Diet.DietToLose;
+import com.example.android.buddybuilding.Diet.DietToMaintain;
 import com.example.android.buddybuilding.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Meal;
@@ -23,8 +26,9 @@ public class User extends Person{
     public static final int LOSE_750G = 4;
     public static final int LOSE_1KG = 5;
 
+    protected int goal;
     private int weeklyGoal;
-    private Diet diet = new Diet();
+    private Diet diet;
 
     // Construtores
 
@@ -35,7 +39,12 @@ public class User extends Person{
         setCaloriesTarget();
     }
 
-    User(int weeklyGoal)
+    User(int goal)
+    {
+
+    }
+
+    User(int goal, int weeklyGoal)
     {
         this.weeklyGoal = (int) Helper.validateValue(weeklyGoal, GAIN_250G, LOSE_1KG);
 
@@ -62,17 +71,33 @@ public class User extends Person{
 
     // Fim dos Construtores
 
+    public Diet getDiet()
+    {
+        return diet;
+    }
+
     public void setGoal(int choice)
     {
-        diet.setDietGoal(choice);
+        diet = getCorrectDiet(choice);
 
         // If you changed your goal, we must update your calories target
         setCaloriesTarget();
     }
 
-    public int getGoal()
+    private Diet getCorrectDiet(int goal)
     {
-        return diet.getDietGoal();
+        switch (goal)
+        {
+            case (Diet.LOSE_WEIGHT):
+                return new DietToLose();
+            case (Diet.MAINTAIN_WEIGHT):
+                return new DietToMaintain();
+            case (Diet.GAIN_WEIGHT):
+                return new DietToGain();
+            default:
+                System.out.println("Error in getCorrectDiet | User");
+                return null;
+        }
     }
 
     public void setWeeklyGoal(int choice)
@@ -105,7 +130,7 @@ public class User extends Person{
     {
         // If the goal of the user is to maintain weight, then its calories goal is the
         // same as its BMR.
-        if (diet.getDietGoal() == Diet.MAINTAIN_WEIGHT)
+        if (getGoal() == Diet.MAINTAIN_WEIGHT)
         {
             diet.setCaloriesTarget(getBMR());
         } else
@@ -137,5 +162,18 @@ public class User extends Person{
     public int getMealChanged()
     {
         return Diet.mealChanged;
+    }
+
+    public void setDietGoal(int choice)
+    {
+        if ((choice >= Diet.LOSE_WEIGHT) && (choice <= Diet.GAIN_WEIGHT))
+        {
+            goal = choice;
+        }
+    }
+
+    public int getGoal()
+    {
+        return goal;
     }
 }
