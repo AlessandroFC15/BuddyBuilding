@@ -39,6 +39,16 @@ public class Meal implements Comparable<Meal>, CaloriesMeasurable{
         totalFat = 0;
     }
 
+    Meal(final Meal meal)
+    {
+        name = meal.name;
+        totalProtein = meal.totalProtein;
+        totalCarbs = meal.totalCarbs;
+        totalCalories = meal.totalCalories;
+        totalFat = meal.totalFat;
+        foods = meal.foods;
+    }
+
     public void addFood(Food newFood)
     {
         foods.add(newFood);

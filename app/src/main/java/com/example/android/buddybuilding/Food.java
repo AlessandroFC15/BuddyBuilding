@@ -15,6 +15,16 @@ public class Food implements Comparable<Food>, CaloriesMeasurable {
     private int calories;
     private int servingSize;
 
+    Food()
+    {
+        name = "";
+        protein = 0;
+        carbohydrates = 0;
+        totalFat = 0;
+        calories = 0;
+        servingSize = 0;
+    }
+
     Food(String name, int servingSize, double protein, double carbohydrates, double totalFat)
     {
         this.servingSize = servingSize;
@@ -24,6 +34,16 @@ public class Food implements Comparable<Food>, CaloriesMeasurable {
         this.totalFat = totalFat;
 
         calculateCalories();
+    }
+
+    Food(final Food food)
+    {
+        name = food.name;
+        protein = food.protein;
+        carbohydrates = food.carbohydrates;
+        totalFat = food.totalFat;
+        calories = food.calories;
+        servingSize = food.servingSize;
     }
 
     public double getProtein()

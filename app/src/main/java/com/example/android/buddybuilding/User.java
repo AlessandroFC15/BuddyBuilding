@@ -10,13 +10,6 @@ public class User extends Person{
     private static final User userData = new User();
     public static User getInstance() {return userData;}
 
-    User()
-    {
-        weeklyGoal = GAIN_250G;
-
-        setCaloriesTarget();
-    }
-
     // Constants
     public static final int GAIN_250G = 0;
     public static final int GAIN_500G = 1;
@@ -27,6 +20,42 @@ public class User extends Person{
 
     private int weeklyGoal;
     private Diet diet = new Diet();
+
+    // Construtores
+
+    User()
+    {
+        weeklyGoal = GAIN_250G;
+
+        setCaloriesTarget();
+    }
+
+    User(int weeklyGoal)
+    {
+        this.weeklyGoal = (int) Helper.validateValue(weeklyGoal, GAIN_250G, LOSE_1KG);
+
+        setCaloriesTarget();
+    }
+
+    User(int gender, int age, double height, double weight, int activityLevel, int weeklyGoal)
+    {
+        super(gender, age, height, weight, activityLevel);
+
+        this.weeklyGoal = (int) Helper.validateValue(weeklyGoal, GAIN_250G, LOSE_1KG);
+
+        setCaloriesTarget();
+    }
+
+    User(final User user)
+    {
+        super(user);
+
+        weeklyGoal = user.weeklyGoal;
+
+        diet = user.diet;
+    }
+
+    // Fim dos Construtores
 
     public void setGoal(int choice)
     {

@@ -32,17 +32,40 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive{
         activityLevel = NOT_VERY_ACTIVE;
     }
 
-    public void setGender(int choice)
+    Person(int gender, int age, double height, double weight, int activityLevel)
+    {
+        this.gender = (int) Helper.validateValue(gender, MALE, FEMALE);
+        this.age = (int) Helper.validateValue(age, MIN_AGE, MAX_AGE);
+        this.height = Helper.validateValue(height, MIN_HEIGHT, MAX_HEIGHT);
+        this.weight = Helper.validateValue(weight, MIN_WEIGHT, MAX_WEIGHT);
+        this.activityLevel = (int) Helper.validateValue(activityLevel, NOT_VERY_ACTIVE, VERY_ACTIVE);
+    }
+
+    Person (final Person oldPerson)
+    {
+        gender = oldPerson.gender;
+        age = oldPerson.age;
+        height = oldPerson.height;
+        weight = oldPerson.weight;
+        activityLevel = oldPerson.activityLevel;
+    }
+
+
+
+    public boolean setGender(int choice)
     {
         if ((choice == MALE) || (choice == FEMALE))
         {
             gender = choice;
+            return true;
         }
+
+        return false;
     }
 
     public void setAge(int age)
     {
-        if ((age >= MIN_AGE) || (age <= MAX_AGE))
+        if ((age >= MIN_AGE) && (age <= MAX_AGE))
         {
             this.age = age;
         }
@@ -50,7 +73,7 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive{
 
     public void setHeight(double height)
     {
-        if ((height >= MIN_HEIGHT) || (height <= MAX_HEIGHT))
+        if ((height >= MIN_HEIGHT) && (height <= MAX_HEIGHT))
         {
             this.height = height;
         }
@@ -58,7 +81,7 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive{
 
     public void setWeight(double weight)
     {
-        if ((weight >= MIN_WEIGHT) || (weight <= MAX_WEIGHT))
+        if ((weight >= MIN_WEIGHT) && (weight <= MAX_WEIGHT))
         {
             this.weight = weight;
         }

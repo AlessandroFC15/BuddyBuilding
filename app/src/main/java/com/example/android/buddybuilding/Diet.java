@@ -13,13 +13,39 @@ public class Diet {
     private double proteinIntake;
     private double carbsIntake;
     private double fatIntake;
+    private HashMap<Integer, Meal> meals = new HashMap<>();
 
     public static boolean foodAdded;
     public static int mealChanged;
 
-    private HashMap<Integer, Meal> meals = new HashMap<>();
-
     Diet()
+    {
+        setAttributesToDefault();
+
+        addDefaultMeals();
+    }
+
+    Diet(int goal)
+    {
+        setAttributesToDefault();
+
+        this.goal = (int) Helper.validateValue(goal, LOSE_WEIGHT, GAIN_WEIGHT);
+
+        addDefaultMeals();
+    }
+
+    Diet(final Diet diet)
+    {
+        goal = diet.goal;
+        totalCaloriesTarget = diet.totalCaloriesTarget;
+        totalCaloriesIntake = diet.totalCaloriesIntake;
+        proteinIntake = diet.proteinIntake;
+        carbsIntake = diet.carbsIntake;
+        fatIntake = diet.fatIntake;
+        meals = diet.meals;
+    }
+
+    private void setAttributesToDefault()
     {
         goal = GAIN_WEIGHT;
         totalCaloriesTarget = 0;
@@ -27,9 +53,7 @@ public class Diet {
         proteinIntake = 0;
         carbsIntake = 0;
         fatIntake = 0;
-        addDefaultMeals();
     }
-
 
     public void setDietGoal(int choice)
     {
