@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.R;
+import com.example.android.buddybuilding.User.User;
 
 public class Input3Info extends AppCompatActivity {
 

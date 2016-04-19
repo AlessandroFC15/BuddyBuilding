@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@android:color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.buddybuilding.FoodNutritionFacts"
+    tools:context="com.example.android.buddybuilding.Activities.FoodNutritionFacts"
     tools:showIn="@layout/activity_food_nutrition_facts">
 
     <RelativeLayout style="@style/macroContainer">

@@ -1,11 +1,14 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Meals;
+
+import com.example.android.buddybuilding.Interfaces.CaloriesMeasurable;
+import com.example.android.buddybuilding.Food;
 
 import java.util.ArrayList;
 
 /**
  * Created by Alessandro on 06/04/2016.
  */
-public class Meal implements Comparable<Meal>, CaloriesMeasurable{
+public class Meal implements Comparable<Meal>, CaloriesMeasurable {
 
     public final static int BREAKFAST = 0;
     public final static int LUNCH = 1;

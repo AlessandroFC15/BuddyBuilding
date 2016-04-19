@@ -1,10 +1,12 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Databases;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.android.buddybuilding.Food;
 
 /**
  * Created by Alessandro on 09/04/2016.
@@ -108,12 +110,12 @@ public class FoodData extends SQLiteOpenHelper{
 
         Cursor cursor = db.query(
                 TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                          // The sort order
+                projection,  // The columns to return
+                null,        // The columns for the WHERE clause
+                null,        // The values for the WHERE clause
+                null,        // don't group the rows
+                null,        // don't filter by row groups
+                null         // The sort order
         );
 
         try {

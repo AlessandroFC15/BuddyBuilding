@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.android.buddybuilding.Databases.FoodData;
+import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.Meals.Meal;
+import com.example.android.buddybuilding.R;
+import com.example.android.buddybuilding.User.User;
 
 import static android.widget.LinearLayout.*;
 

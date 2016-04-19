@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,6 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.android.buddybuilding.Databases.FoodData;
+import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.R;
 
 public class FoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

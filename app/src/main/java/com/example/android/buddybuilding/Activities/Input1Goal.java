@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,17 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 
-public class Input2Activity extends AppCompatActivity {
+import com.example.android.buddybuilding.Diet.Diet;
+import com.example.android.buddybuilding.R;
+import com.example.android.buddybuilding.User.User;
+
+public class Input1Goal extends AppCompatActivity {
 
     private User userData = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input2);
+        setContentView(R.layout.activity_input1_goal);
+        setTitle("Objetivo");
     }
 
-    public void selectActivityLevel(View view)
+    public void selectGoal(View view)
     {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -24,31 +29,25 @@ public class Input2Activity extends AppCompatActivity {
         // Check which radio button was clicked
         switch (view.getId())
         {
-            case R.id.notVeryActive:
+            case R.id.loseWeight:
                 if (checked) {
-                    userData.setActivityLevel(User.NOT_VERY_ACTIVE);
+                    userData.setGoal(Diet.LOSE_WEIGHT);
                     break;
                 }
-            case R.id.lightlyActive:
+            case R.id.maintainWeight:
                 if (checked)
                 {
-                    userData.setActivityLevel(User.LIGHTLY_ACTIVE);
+                    userData.setGoal(Diet.MAINTAIN_WEIGHT);
                     break;
                 }
-            case R.id.active:
+            case R.id.gainWeight:
                 if (checked)
                 {
-                    userData.setActivityLevel(User.ACTIVE);
-                    break;
-                }
-            case R.id.veryActive:
-                if (checked)
-                {
-                    userData.setActivityLevel(User.VERY_ACTIVE);
+                    userData.setGoal(Diet.GAIN_WEIGHT);
                     break;
                 }
         }
 
-        startActivity(new Intent(this, Input3Info.class));
+        startActivity(new Intent(this, Input2Activity.class));
     }
 }

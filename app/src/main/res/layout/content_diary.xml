@@ -7,7 +7,7 @@
     android:background="#e0e0e0"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.buddybuilding.Diary"
+    tools:context="com.example.android.buddybuilding.Activities.Diary"
     tools:showIn="@layout/app_bar_diary">
 
     <TextView

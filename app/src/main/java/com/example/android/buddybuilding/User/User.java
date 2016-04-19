@@ -1,4 +1,9 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.User;
+
+import com.example.android.buddybuilding.Diet.Diet;
+import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.Meals.Meal;
 
 import java.util.HashMap;
 

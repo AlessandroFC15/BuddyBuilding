@@ -1,5 +1,7 @@
 package com.example.android.buddybuilding;
 
+import com.example.android.buddybuilding.Interfaces.CaloriesMeasurable;
+
 /**
  * Created by Alessandro on 05/04/2016.
  */

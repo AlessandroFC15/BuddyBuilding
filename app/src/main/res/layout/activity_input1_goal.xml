@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.android.buddybuilding.Input1Goal">
+    tools:context="com.example.android.buddybuilding.Activities.Input1Goal">
 
     <TextView
         style="@style/questionTitle"

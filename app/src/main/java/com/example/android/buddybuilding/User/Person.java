@@ -1,9 +1,12 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.User;
+
+import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.Interfaces.PhysicallyActive;
 
 /**
  * Created by Alessandro on 04/04/2016.
  */
-public abstract class Person implements Comparable<Person>, PhysicallyActive{
+public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     public static final double MIN_HEIGHT = 57;
     public static final double MAX_HEIGHT = 260;
