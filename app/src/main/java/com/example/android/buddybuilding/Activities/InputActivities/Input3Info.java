@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding.Activities;
+package com.example.android.buddybuilding.Activities.InputActivities;
 
 import android.content.Intent;
 import android.os.Bundle;

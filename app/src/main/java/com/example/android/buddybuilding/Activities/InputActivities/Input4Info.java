@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding.Activities;
+package com.example.android.buddybuilding.Activities.InputActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.android.buddybuilding.Diet.Diet;
+import com.example.android.buddybuilding.Activities.Home;
+import com.example.android.buddybuilding.Diet.DietToMaintain;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
@@ -100,7 +101,7 @@ public class Input4Info extends AppCompatActivity {
                 userData.setHeight(height);
                 userData.setWeight(weight);
 
-                if (userData.getGoal() == Diet.MAINTAIN_WEIGHT)
+                if (userData.getDiet() instanceof DietToMaintain)
                 {
                     startActivity(new Intent(this, Home.class));
                 } else
