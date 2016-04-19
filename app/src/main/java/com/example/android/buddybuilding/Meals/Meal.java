@@ -22,7 +22,7 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     protected int totalCalories;
     protected double totalFat;
 
-    ArrayList<Food> foods = new ArrayList<>();
+    protected ArrayList<Food> foods = new ArrayList<>();
 
     public Meal()
     {
