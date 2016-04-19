@@ -21,4 +21,14 @@ public class Helper {
         float px = dp * (metrics.densityDpi / 160f);
         return Math.round(px);
     }
+
+    public static double validateValue(double value, double min, double max)
+    {
+        if ((value >= min) && (value <= max))
+        {
+            return value;
+        }
+
+        return -1;
+    }
 }

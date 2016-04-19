@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Alessandro on 06/04/2016.
  */
-public class Meal implements Comparable<Meal>, CaloriesMeasurable {
+public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
 
     public final static int BREAKFAST = 0;
     public final static int LUNCH = 1;
@@ -24,7 +24,7 @@ public class Meal implements Comparable<Meal>, CaloriesMeasurable {
 
     ArrayList<Food> foods = new ArrayList<>();
 
-    Meal()
+    public Meal()
     {
         name = GENERIC_MEAL;
         totalProtein = 0;
@@ -33,16 +33,12 @@ public class Meal implements Comparable<Meal>, CaloriesMeasurable {
         totalFat = 0;
     }
 
-    Meal(int nameOfMeal)
+    public Meal(Food food)
     {
-        name = nameOfMeal;
-        totalProtein = 0;
-        totalCarbs = 0;
-        totalCalories = 0;
-        totalFat = 0;
+        addFood(food);
     }
 
-    Meal(final Meal meal)
+    public Meal(final Meal meal)
     {
         name = meal.name;
         totalProtein = meal.totalProtein;

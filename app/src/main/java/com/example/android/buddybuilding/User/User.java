@@ -131,7 +131,7 @@ public class User extends Person{
 
     public boolean hasDietChanged()
     {
-        return Diet.foodAdded;
+        return Diet.lastFoodAdded != null;
     }
 
     public int getMealChanged()

@@ -46,7 +46,7 @@ public class FoodData extends SQLiteOpenHelper{
     private static final String DELETE_TABLE_FOOD =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    FoodData(Context context) {
+    public FoodData(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

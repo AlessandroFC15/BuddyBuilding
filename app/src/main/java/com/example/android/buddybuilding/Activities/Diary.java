@@ -45,13 +45,14 @@ public class Diary extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        updateAllMeals();
+        printAllMeals();
     }
 
     public void onResume()
     {
         super.onResume();
 
+        // We will only update the meal if some food has been added
         if (userData.hasDietChanged())
         {
             int mealChanged = userData.getMealChanged();
@@ -60,25 +61,49 @@ public class Diary extends AppCompatActivity
         }
     }
 
-    private void updateAllMeals() {
+    private void printAllMeals() {
         for (int nameOfMeal : meals.keySet()) {
             switch (nameOfMeal) {
                 case (Meal.BREAKFAST):
-                    updateMeal(Meal.BREAKFAST);
+                    printMeal(Meal.BREAKFAST);
                     break;
                 case (Meal.LUNCH):
-                    updateMeal(Meal.LUNCH);
+                    printMeal(Meal.LUNCH);
                     break;
                 case (Meal.DINNER):
-                    updateMeal(Meal.DINNER);
+                    printMeal(Meal.DINNER);
                     break;
                 case (Meal.SNACKS):
-                    updateMeal(Meal.SNACKS);
+                    printMeal(Meal.SNACKS);
                     break;
                 default:
-                    Helper.makeToast("Error updateAllMeals", this);
+                    Helper.makeToast("Error printAllMeals", this);
                     break;
             }
+        }
+    }
+
+    private void printMeal(int nameOfMeal)
+    {
+        Meal meal = meals.get(nameOfMeal);
+
+        // 2nd Step = Get the correct ids for the given meal
+
+        int caloriesMealID = getCaloriesMealID(nameOfMeal);
+
+        int mealLayoutID = getMealLayoutID(nameOfMeal);
+
+        // 3rd Step = Find the view and the layout
+
+        TextView mealCalories = (TextView) findViewById(caloriesMealID);
+
+        LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
+
+        mealCalories.setText(Integer.toString(meal.getCalories()));
+
+        for (Food food : meal.getFoodsFromMeal())
+        {
+            printFood(food, layout);
         }
     }
 
@@ -175,13 +200,13 @@ public class Diary extends AppCompatActivity
 
         LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
 
+        // 4th Step = Update the mealCalories and print the last food added.
+
         mealCalories.setText(Integer.toString(meal.getCalories()));
 
-        for (Food food : meal.getFoodsFromMeal()) {
-            printFood(food, layout);
-        }
+        printFood(Diet.lastFoodAdded, layout);
 
-        Diet.foodAdded = false;
+        Diet.lastFoodAdded = null;
     }
 
     private int getCaloriesMealID(int nameOfMeal) {

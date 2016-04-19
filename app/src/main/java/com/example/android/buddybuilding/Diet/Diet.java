@@ -2,7 +2,11 @@ package com.example.android.buddybuilding.Diet;
 
 import com.example.android.buddybuilding.Food;
 import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.Meals.Breakfast;
+import com.example.android.buddybuilding.Meals.Dinner;
+import com.example.android.buddybuilding.Meals.Lunch;
 import com.example.android.buddybuilding.Meals.Meal;
+import com.example.android.buddybuilding.Meals.Snacks;
 import com.example.android.buddybuilding.User.User;
 
 import java.util.HashMap;
@@ -20,17 +24,18 @@ public class Diet {
     private double fatIntake;
     private HashMap<Integer, Meal> meals = new HashMap<>();
 
-    public static boolean foodAdded;
+    public static Food lastFoodAdded = null;
+    // public static boolean foodAdded;
     public static int mealChanged;
 
-    Diet()
+    public Diet()
     {
         setAttributesToDefault();
 
         addDefaultMeals();
     }
 
-    Diet(int goal)
+    public Diet(int goal)
     {
         setAttributesToDefault();
 
@@ -39,7 +44,7 @@ public class Diet {
         addDefaultMeals();
     }
 
-    Diet(final Diet diet)
+    public Diet(final Diet diet)
     {
         goal = diet.goal;
         totalCaloriesTarget = diet.totalCaloriesTarget;
@@ -75,10 +80,10 @@ public class Diet {
 
     private void addDefaultMeals()
     {
-        meals.put(Meal.BREAKFAST, new Meal(Meal.BREAKFAST));
-        meals.put(Meal.LUNCH, new Meal(Meal.LUNCH));
-        meals.put(Meal.DINNER, new Meal(Meal.DINNER));
-        meals.put(Meal.SNACKS, new Meal(Meal.SNACKS));
+        meals.put(Meal.BREAKFAST, new Breakfast());
+        meals.put(Meal.LUNCH, new Lunch());
+        meals.put(Meal.DINNER, new Dinner());
+        meals.put(Meal.SNACKS, new Snacks());
     }
 
     public void addFoodToMeal(int nameOfmeal, Food food)
@@ -89,9 +94,9 @@ public class Diet {
 
             meal.addFood(food);
 
-            foodAdded = true;
-
             mealChanged = nameOfmeal;
+
+            lastFoodAdded = food;
         }
     }
 
