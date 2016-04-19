@@ -1,7 +1,6 @@
 package com.example.android.buddybuilding.Diet;
 
 import com.example.android.buddybuilding.Food;
-import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Breakfast;
 import com.example.android.buddybuilding.Meals.Dinner;
 import com.example.android.buddybuilding.Meals.Lunch;
@@ -14,10 +13,8 @@ import java.util.HashMap;
 /**
  * Created by Alessandro on 06/04/2016.
  */
-public class Diet {
-
-    private int goal;
-    private double totalCaloriesTarget;
+public abstract class Diet {
+    protected double totalCaloriesTarget;
     private double totalCaloriesIntake;
     private double proteinIntake;
     private double carbsIntake;
@@ -35,18 +32,8 @@ public class Diet {
         addDefaultMeals();
     }
 
-    public Diet(int goal)
-    {
-        setAttributesToDefault();
-
-        this.goal = (int) Helper.validateValue(goal, LOSE_WEIGHT, GAIN_WEIGHT);
-
-        addDefaultMeals();
-    }
-
     public Diet(final Diet diet)
     {
-        goal = diet.goal;
         totalCaloriesTarget = diet.totalCaloriesTarget;
         totalCaloriesIntake = diet.totalCaloriesIntake;
         proteinIntake = diet.proteinIntake;
@@ -55,9 +42,8 @@ public class Diet {
         meals = diet.meals;
     }
 
-    private void setAttributesToDefault()
+    protected void setAttributesToDefault()
     {
-        goal = GAIN_WEIGHT;
         totalCaloriesTarget = 0;
         totalCaloriesIntake = 0;
         proteinIntake = 0;
@@ -65,20 +51,7 @@ public class Diet {
         fatIntake = 0;
     }
 
-    public void setDietGoal(int choice)
-    {
-        if ((choice >= LOSE_WEIGHT) && (choice <= GAIN_WEIGHT))
-        {
-            goal = choice;
-        }
-    }
-
-    public int getDietGoal()
-    {
-        return goal;
-    }
-
-    private void addDefaultMeals()
+    protected void addDefaultMeals()
     {
         meals.put(Meal.BREAKFAST, new Breakfast());
         meals.put(Meal.LUNCH, new Lunch());
