@@ -16,6 +16,5 @@ public class DietToMaintain extends Diet {
     public DietToMaintain(final DietToMaintain diet)
     {
         super(diet);
-
     }
 }

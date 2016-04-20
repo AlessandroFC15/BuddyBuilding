@@ -21,7 +21,6 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     protected double totalCarbs;
     protected int totalCalories;
     protected double totalFat;
-
     protected ArrayList<Food> foods = new ArrayList<>();
 
     public Meal()
@@ -35,6 +34,12 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
 
     public Meal(Food food)
     {
+        name = GENERIC_MEAL;
+        totalProtein = 0;
+        totalCarbs = 0;
+        totalCalories = 0;
+        totalFat = 0;
+
         addFood(food);
     }
 
@@ -58,10 +63,12 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
         this.totalFat += newFood.getTotalFat();
     }
 
+
     public int getName()
     {
         return name;
     }
+
 
     public ArrayList<Food> getFoodsFromMeal()
     {

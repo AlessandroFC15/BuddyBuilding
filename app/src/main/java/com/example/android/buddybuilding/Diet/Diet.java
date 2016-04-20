@@ -2,6 +2,7 @@ package com.example.android.buddybuilding.Diet;
 
 import com.example.android.buddybuilding.CaloriesMeasurable;
 import com.example.android.buddybuilding.Food.Food;
+import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Breakfast;
 import com.example.android.buddybuilding.Meals.Dinner;
 import com.example.android.buddybuilding.Meals.Lunch;
@@ -27,6 +28,15 @@ public abstract class Diet implements CaloriesMeasurable {
         setAttributesToDefault();
 
         addDefaultMeals();
+    }
+
+    public Diet(int caloriesTarget)
+    {
+        setAttributesToDefault();
+
+        addDefaultMeals();
+
+        totalCaloriesTarget = (int) Helper.validateValue(caloriesTarget, 0, 5000);
     }
 
     public Diet(final Diet diet)

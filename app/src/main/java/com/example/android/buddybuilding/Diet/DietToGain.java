@@ -6,6 +6,11 @@ import com.example.android.buddybuilding.User.User;
  * Created by Alessandro on 19/04/2016.
  */
 public class DietToGain extends Diet{
+    public DietToGain()
+    {
+        super();
+    }
+
     public DietToGain(int bmr, User.WeeklyGoal weeklyGoal)
     {
         setCaloriesTarget(bmr, weeklyGoal);

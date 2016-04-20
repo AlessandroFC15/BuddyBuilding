@@ -6,25 +6,20 @@ import com.example.android.buddybuilding.User.User;
  * Created by Alessandro on 19/04/2016.
  */
 public abstract class DietToLose extends Diet {
-    public DietToLose()
-    {
-
+    public DietToLose() {
+        super();
     }
 
-    public DietToLose(int bmr, User.WeeklyGoal weeklyGoal)
-    {
+    public DietToLose(int bmr, User.WeeklyGoal weeklyGoal) {
         setCaloriesTarget(bmr, weeklyGoal);
     }
 
-    public DietToLose(final DietToLose diet)
-    {
+    public DietToLose(final DietToLose diet) {
         super(diet);
     }
 
-    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal)
-    {
-        switch (weeklyGoal)
-        {
+    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal) {
+        switch (weeklyGoal) {
             case LOSE_250G:
                 totalCaloriesTarget = bmr + weeklyGoal.getCalories();
                 break;
