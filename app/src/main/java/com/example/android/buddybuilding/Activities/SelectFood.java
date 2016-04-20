@@ -9,15 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.buddybuilding.Databases.FoodData;
 import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
+import com.example.android.buddybuilding.Meals.Breakfast;
 import com.example.android.buddybuilding.Meals.Meal;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
+
+import java.util.ArrayList;
 
 import static android.widget.LinearLayout.*;
 
@@ -27,6 +31,7 @@ public class SelectFood extends AppCompatActivity {
     private Cursor allFoodData;
     private User userData = User.getInstance();
     private int nameOfMeal;
+    private Meal meal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,28 @@ public class SelectFood extends AppCompatActivity {
 
         setTitle(getNameOfMeal(nameOfMeal));
 
+        meal = userData.getAllMeals().get(nameOfMeal);
+
         printAllFoodsRegistered();
+
+        printCommonFoods();
+    }
+
+    private void printCommonFoods()
+    {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.commonFoods);
+
+        ArrayList<Food> commonFoods = new ArrayList<>();
+
+        if (meal instanceof Breakfast)
+        {
+            commonFoods = ((Breakfast) meal).getCommonBreakfastFoods();
+
+            for (Food food : commonFoods)
+            {
+                printFood(food.getName(), food.getServingSize(), food.getCalories(), layout);
+            }
+        }
     }
 
     private void printAllFoodsRegistered() {
@@ -180,5 +206,70 @@ public class SelectFood extends AppCompatActivity {
     private void getAllFoodData()
     {
         allFoodData = foodDatabase.getAllFoodData();
+    }
+
+    public void changeScreen(View view) {
+        int id = view.getId();
+
+        LinearLayout foodsRegisteredLayout = (LinearLayout) findViewById(R.id.foodsRegistered);
+        LinearLayout commonFoodsLayout = (LinearLayout) findViewById(R.id.commonFoods);
+
+        switch (id) {
+            case (R.id.buttonFoodsRegistered):
+                if (foodsRegisteredLayout.getVisibility() != View.VISIBLE) {
+                    commonFoodsLayout.setVisibility(View.GONE);
+                    foodsRegisteredLayout.setVisibility(View.VISIBLE);
+
+                    setIndicatorVisible(R.id.indicatorFoodsRegistered);
+                    changeButtonTextColor(R.id.buttonFoodsRegistered);
+                }
+                break;
+            case (R.id.buttonCommonFoods):
+                if (commonFoodsLayout.getVisibility() != View.VISIBLE) {
+                    foodsRegisteredLayout.setVisibility(View.GONE);
+                    commonFoodsLayout.setVisibility(View.VISIBLE);
+
+                    setIndicatorVisible(R.id.indicatorCommonFoods);
+                    changeButtonTextColor(R.id.buttonCommonFoods);
+                }
+        }
+    }
+
+    private void setIndicatorVisible(int id)
+    {
+        View foodRegisteredIndicator = findViewById(R.id.indicatorFoodsRegistered);
+        View commonFoodsIndicator = findViewById(R.id.indicatorCommonFoods);
+
+        if (id == R.id.indicatorFoodsRegistered)
+        {
+            commonFoodsIndicator.setVisibility(View.INVISIBLE);
+            foodRegisteredIndicator.setVisibility(View.VISIBLE);
+        } else if (id == R.id.indicatorCommonFoods)
+        {
+            commonFoodsIndicator.setVisibility(View.VISIBLE);
+            foodRegisteredIndicator.setVisibility(View.INVISIBLE);
+        } else
+        {
+            Helper.makeToast("Error in setIndicatorVisible", this);
+        }
+    }
+
+    private void changeButtonTextColor(int id)
+    {
+        Button buttonFoodsRegistered = (Button) findViewById(R.id.buttonFoodsRegistered);
+        Button buttonCommonFoods = (Button) findViewById(R.id.buttonCommonFoods);
+
+        switch (id)
+        {
+            case (R.id.buttonFoodsRegistered):
+                buttonFoodsRegistered.setTextColor(getResources().getColor(R.color.colorPrimary));
+                buttonCommonFoods.setTextColor(getResources().getColor(R.color.black));
+                break;
+            case (R.id.buttonCommonFoods):
+                buttonCommonFoods.setTextColor(getResources().getColor(R.color.colorPrimary));
+                buttonFoodsRegistered.setTextColor(getResources().getColor(R.color.black));
+        }
+
+
     }
 }

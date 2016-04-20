@@ -16,6 +16,8 @@ public class Dinner extends Meal {
     public Dinner(Food food)
     {
         super(food);
+
+        name = DINNER;
     }
 
     public Dinner(final Dinner dinner)

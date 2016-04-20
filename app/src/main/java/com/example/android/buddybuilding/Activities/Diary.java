@@ -48,13 +48,11 @@ public class Diary extends AppCompatActivity
         printAllMeals();
     }
 
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
 
         // We will only update the meal if some food has been added
-        if (userData.hasDietChanged())
-        {
+        if (userData.hasDietChanged()) {
             int mealChanged = userData.getMealChanged();
 
             updateMeal(mealChanged);
@@ -62,29 +60,12 @@ public class Diary extends AppCompatActivity
     }
 
     private void printAllMeals() {
-        for (int nameOfMeal : meals.keySet()) {
-            switch (nameOfMeal) {
-                case (Meal.BREAKFAST):
-                    printMeal(Meal.BREAKFAST);
-                    break;
-                case (Meal.LUNCH):
-                    printMeal(Meal.LUNCH);
-                    break;
-                case (Meal.DINNER):
-                    printMeal(Meal.DINNER);
-                    break;
-                case (Meal.SNACKS):
-                    printMeal(Meal.SNACKS);
-                    break;
-                default:
-                    Helper.makeToast("Error printAllMeals", this);
-                    break;
-            }
+        for (int nameOfmeal : meals.keySet()) {
+            printMeal(meals.get(nameOfmeal).getName());
         }
     }
 
-    private void printMeal(int nameOfMeal)
-    {
+    private void printMeal(int nameOfMeal) {
         Meal meal = meals.get(nameOfMeal);
 
         // 2nd Step = Get the correct ids for the given meal
@@ -101,8 +82,7 @@ public class Diary extends AppCompatActivity
 
         mealCalories.setText(Integer.toString(meal.getCalories()));
 
-        for (Food food : meal.getFoodsFromMeal())
-        {
+        for (Food food : meal.getFoodsFromMeal()) {
             printFood(food, layout);
         }
     }
@@ -225,8 +205,7 @@ public class Diary extends AppCompatActivity
         }
     }
 
-    private int getMealLayoutID(int nameOfMeal)
-    {
+    private int getMealLayoutID(int nameOfMeal) {
         switch (nameOfMeal) {
             case Meal.BREAKFAST:
                 return R.id.mealBreakfast;

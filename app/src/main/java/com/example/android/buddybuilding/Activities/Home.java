@@ -3,9 +3,8 @@ package com.example.android.buddybuilding.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,10 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.buddybuilding.Activities.InputActivities.InputData;
-import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
@@ -65,8 +64,6 @@ public class Home extends AppCompatActivity
         updateFoodCalories();
 
         updateCaloriesRemaining();
-
-        Helper.makeToast(userData.toString(), this);
     }
 
     public void onResume()

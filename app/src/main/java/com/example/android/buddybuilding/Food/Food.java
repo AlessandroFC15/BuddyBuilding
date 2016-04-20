@@ -38,6 +38,16 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         calculateCalories();
     }
 
+    public Food(String name)
+    {
+        this.name = name;
+        protein = 0;
+        carbohydrates = 0;
+        totalFat = 0;
+        calories = 0;
+        servingSize = 0;
+    }
+
     public Food(final Food food)
     {
         name = food.name;
@@ -46,6 +56,14 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         totalFat = food.totalFat;
         calories = food.calories;
         servingSize = food.servingSize;
+    }
+
+    public void setServingSize(int servingSize)
+    {
+        if ((servingSize >= MIN_SERVING_SIZE) && (servingSize <= MAX_SERVING_SIZE))
+        {
+            this.servingSize = servingSize;
+        }
     }
 
     public double getProtein()

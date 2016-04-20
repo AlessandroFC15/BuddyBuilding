@@ -28,10 +28,41 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/buttonShowFoods"
+                android:id="@+id/buttonFoodsRegistered"
                 style="@style/changeScreenButton"
+                android:onClick="changeScreen"
                 android:text="Foods Registered" />
+
+            <View
+                android:id="@+id/indicatorFoodsRegistered"
+                style="@style/separatorLine"
+                android:layout_height="3dp"
+                android:background="@color/colorPrimary"
+                android:visibility="invisible" />
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonCommonFoods"
+                style="@style/changeScreenButton"
+                android:onClick="changeScreen"
+                android:text="Common Foods" />
+
+            <View
+                android:id="@+id/indicatorCommonFoods"
+                style="@style/separatorLine"
+                android:layout_height="3dp"
+                android:background="@color/colorPrimary"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <View
@@ -42,16 +73,40 @@
         android:layout_height="wrap_content"
         android:fillViewport="true">
         <LinearLayout
-            android:id="@+id/foodsRegistered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <View
-                style="@style/separatorLine"></View>
+            <LinearLayout
+                android:id="@+id/foodsRegistered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    style="@style/separatorLine"></View>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/commonFoods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    style="@style/separatorLine"></View>
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
+
+
 
     </ScrollView>
 

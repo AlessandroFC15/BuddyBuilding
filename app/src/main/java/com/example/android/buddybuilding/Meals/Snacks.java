@@ -14,6 +14,8 @@ public class Snacks extends Meal {
     public Snacks(Food food)
     {
         super(food);
+
+        name = SNACKS;
     }
 
     public Snacks(final Snacks snacks)
