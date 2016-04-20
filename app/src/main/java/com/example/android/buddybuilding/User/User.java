@@ -2,6 +2,9 @@ package com.example.android.buddybuilding.User;
 
 import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.Diet.Diet;
+import com.example.android.buddybuilding.Diet.DietLowCalorie;
+import com.example.android.buddybuilding.Diet.DietLowCarbs;
+import com.example.android.buddybuilding.Diet.DietLowFat;
 import com.example.android.buddybuilding.Diet.DietToGain;
 import com.example.android.buddybuilding.Diet.DietToLose;
 import com.example.android.buddybuilding.Diet.DietToMaintain;
@@ -10,53 +13,10 @@ import com.example.android.buddybuilding.Meals.Meal;
 
 import java.util.HashMap;
 
-/**
- * Created by Alessandro on 03/04/2016.
- */
 public class User extends Person{
 
     private static User userData = null;
     public static User getInstance() {return userData;}
-
-    public static void createNewUser(final InputData input)
-    {
-        userData = new User(input);
-    }
-
-    public static void createNewUser()
-    {
-        userData = new User();
-    }
-
-    private User(final InputData input)
-    {
-        super(input);
-
-        goal = input.goal;
-        weeklyGoal = input.weeklyGoal;
-        diet = getCorrectDiet(goal);
-    }
-
-    public enum WeeklyGoal{
-        GAIN_250G(500), GAIN_500G(750), LOSE_250G(-200),
-        LOSE_500G(-300), LOSE_750G(-400), LOSE_1KG(-500);
-
-        private final int calories;
-
-        WeeklyGoal(int calories)
-        {
-            this.calories = calories;
-        }
-
-        public int getCalories()
-        {
-            return calories;
-        }
-    }
-
-    public enum Goal {
-        LOSE_WEIGHT, MAINTAIN_WEIGHT, GAIN_WEIGHT
-    }
 
     protected Goal goal;
     private WeeklyGoal weeklyGoal;
@@ -71,14 +31,7 @@ public class User extends Person{
         diet = getCorrectDiet(goal);
     }
 
-    User(WeeklyGoal weeklyGoal)
-    {
-        this.weeklyGoal = weeklyGoal;
-
-        setCaloriesTarget();
-    }
-
-    User(Gender gender, int age, double height, double weight, int activityLevel, WeeklyGoal weeklyGoal)
+    User(Gender gender, int age, double height, double weight, ActivityLevel activityLevel, WeeklyGoal weeklyGoal)
     {
         super(gender, age, height, weight, activityLevel);
 
@@ -94,6 +47,15 @@ public class User extends Person{
         goal = user.goal;
         weeklyGoal = user.weeklyGoal;
         diet = user.diet;
+    }
+
+    User(final InputData input)
+    {
+        super(input);
+
+        goal = input.goal;
+        weeklyGoal = input.weeklyGoal;
+        diet = getCorrectDiet(goal);
     }
 
     // Fim dos Construtores
@@ -116,13 +78,30 @@ public class User extends Person{
         switch (goal)
         {
             case LOSE_WEIGHT:
-                return new DietToLose(getBMR(), weeklyGoal);
+                return correctDietToLose(getBMR(), weeklyGoal);
             case MAINTAIN_WEIGHT:
                 return new DietToMaintain(getBMR());
             case GAIN_WEIGHT:
                 return new DietToGain(getBMR(), weeklyGoal);
             default:
                 System.out.println("Error in getCorrectDiet | User");
+                return null;
+        }
+    }
+
+    private DietToLose correctDietToLose(int bmr, WeeklyGoal weeklyGoal)
+    {
+        switch (weeklyGoal)
+        {
+            case LOSE_250G:
+                return new DietLowFat(bmr, weeklyGoal);
+            case LOSE_500G:
+                return new DietLowCarbs(bmr, weeklyGoal);
+            case LOSE_750G:
+                return new DietLowCarbs(bmr, weeklyGoal);
+            case LOSE_1KG:
+                return new DietLowCalorie(bmr, weeklyGoal);
+            default:
                 return null;
         }
     }
@@ -205,4 +184,41 @@ public class User extends Person{
     {
         return goal;
     }
+
+    public static void createNewUser(final InputData input)
+    {
+        userData = new User(input);
+    }
+
+    public static void createNewUser()
+    {
+        userData = new User();
+    }
+
+    public enum WeeklyGoal{
+        GAIN_250G(500), GAIN_500G(750), LOSE_250G(-200),
+        LOSE_500G(-300), LOSE_750G(-400), LOSE_1KG(-500);
+
+        private final int calories;
+
+        WeeklyGoal(int calories)
+        {
+            this.calories = calories;
+        }
+
+        public int getCalories()
+        {
+            return calories;
+        }
+    }
+
+    public enum Goal {
+        LOSE_WEIGHT, MAINTAIN_WEIGHT, GAIN_WEIGHT
+    }
+
+    public String toString()
+    {
+        return super.toString();
+    }
+
 }

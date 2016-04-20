@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.android.buddybuilding.Activities.InputActivities.InputData;
+import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
@@ -64,6 +65,8 @@ public class Home extends AppCompatActivity
         updateFoodCalories();
 
         updateCaloriesRemaining();
+
+        Helper.makeToast(userData.toString(), this);
     }
 
     public void onResume()
