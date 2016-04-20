@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.buddybuilding.Diet.Diet;
-import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Meal;
 import com.example.android.buddybuilding.R;

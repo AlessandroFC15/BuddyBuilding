@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Food.Food;
 
 /**
  * Created by Alessandro on 09/04/2016.

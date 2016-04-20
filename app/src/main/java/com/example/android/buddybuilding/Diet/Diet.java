@@ -1,6 +1,7 @@
 package com.example.android.buddybuilding.Diet;
 
-import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.CaloriesMeasurable;
+import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Meals.Breakfast;
 import com.example.android.buddybuilding.Meals.Dinner;
 import com.example.android.buddybuilding.Meals.Lunch;
@@ -10,12 +11,9 @@ import com.example.android.buddybuilding.User.User;
 
 import java.util.HashMap;
 
-/**
- * Created by Alessandro on 06/04/2016.
- */
-public abstract class Diet {
-    protected double totalCaloriesTarget;
-    private double totalCaloriesIntake;
+public abstract class Diet implements CaloriesMeasurable {
+    protected int totalCaloriesTarget;
+    private int totalCaloriesIntake;
     private double proteinIntake;
     private double carbsIntake;
     private double fatIntake;
@@ -56,6 +54,8 @@ public abstract class Diet {
         meals.put(Meal.LUNCH, new Lunch());
         meals.put(Meal.DINNER, new Dinner());
         meals.put(Meal.SNACKS, new Snacks());
+
+        calculateCalories();
     }
 
     public void addFoodToMeal(int nameOfmeal, Food food)
@@ -66,27 +66,15 @@ public abstract class Diet {
 
             meal.addFood(food);
 
+            totalCaloriesIntake += meal.getCalories();
+
             mealChanged = nameOfmeal;
 
             lastFoodAdded = food;
         }
     }
 
-    public double getDietCaloriesIntake()
-    {
-        double calories = 0;
-
-        for (int nameOfMeal : meals.keySet())
-        {
-            Meal meal = meals.get(nameOfMeal);
-
-            calories += meal.getCalories();
-        }
-
-        return calories;
-    }
-
-    public double getCaloriesFromMeal(int nameOfMeal)
+    public int getCaloriesFromMeal(int nameOfMeal)
     {
         return meals.get(nameOfMeal).getCalories();
     }
@@ -116,7 +104,7 @@ public abstract class Diet {
         }
     }
 
-    public void setCaloriesTarget(double target)
+    public void setCaloriesTarget(int target)
     {
         if (target > 0)
         {
@@ -124,7 +112,7 @@ public abstract class Diet {
         }
     }
 
-    public double getCaloriesTarget()
+    public int getCaloriesTarget()
     {
         return totalCaloriesTarget;
     }
@@ -134,7 +122,17 @@ public abstract class Diet {
         return meals;
     }
 
-    // Constants
+    // Implementação da interface CaloriesMeasurable
 
+    public void calculateCalories()
+    {
+        totalCaloriesIntake = 0;
 
+        for (int nameOfMeal : meals.keySet())
+        {
+            totalCaloriesIntake += meals.get(nameOfMeal).getCalories();
+        }
+    }
+
+    public int getCalories() { return totalCaloriesIntake;}
 }

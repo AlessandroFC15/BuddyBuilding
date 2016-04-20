@@ -5,7 +5,7 @@ import com.example.android.buddybuilding.Diet.Diet;
 import com.example.android.buddybuilding.Diet.DietToGain;
 import com.example.android.buddybuilding.Diet.DietToLose;
 import com.example.android.buddybuilding.Diet.DietToMaintain;
-import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Meals.Meal;
 
 import java.util.HashMap;
@@ -177,7 +177,7 @@ public class User extends Person{
 
     public double getCaloriesIntake()
     {
-        return diet.getDietCaloriesIntake();
+        return diet.getCalories();
     }
 
     public HashMap<Integer, Meal> getAllMeals()

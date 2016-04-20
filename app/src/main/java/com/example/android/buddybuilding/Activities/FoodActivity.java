@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.buddybuilding.Databases.FoodData;
-import com.example.android.buddybuilding.Food;
+import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 

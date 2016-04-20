@@ -1,9 +1,11 @@
-package com.example.android.buddybuilding;
+package com.example.android.buddybuilding.Food;
+
+import com.example.android.buddybuilding.CaloriesMeasurable;
 
 /**
  * Created by Alessandro on 05/04/2016.
  */
-public class Food implements Comparable<Food>, CaloriesMeasurable {
+public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
     public static final int MIN_SERVING_SIZE = 1;
     public static final int MAX_SERVING_SIZE = 1000;
     public static final int MAX_LENGTH_NAME = 25;
@@ -107,5 +109,47 @@ public class Food implements Comparable<Food>, CaloriesMeasurable {
     }
 
     public int getCalories() { return calories; }
+
+    // Implementação da interface Adjustable
+
+    public void changeProtein(double newValue)
+    {
+        if ((newValue >= 0) && (newValue <= servingSize))
+        {
+            protein = newValue;
+        }
+    }
+
+    public void changeCarbs(double newValue)
+    {
+        if ((newValue >= 0) && (newValue <= servingSize))
+        {
+            carbohydrates = newValue;
+        }
+    }
+
+    public void changeFat(double newValue)
+    {
+        if ((newValue >= 0) && (newValue <= servingSize))
+        {
+            totalFat = newValue;
+        }
+    }
+
+    public void changeServingSize(int newValue)
+    {
+        if ((newValue >= MIN_SERVING_SIZE) && (newValue <= MAX_SERVING_SIZE))
+        {
+            servingSize = newValue;
+        }
+    }
+
+    public void changeName(final String newValue)
+    {
+        if ((newValue.length() > 0) && (newValue.length() <= MAX_LENGTH_NAME))
+        {
+            name = newValue;
+        }
+    }
 
 }
