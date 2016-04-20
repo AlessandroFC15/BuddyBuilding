@@ -152,4 +152,14 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         }
     }
 
+    public String toString()
+    {
+        return ".: " + name + " :. " +
+                "\n>> Protein: " + protein + "g" +
+                "\n>> Carbs: " + carbohydrates + "g" +
+                "\n>> Fat: " + totalFat + "g" +
+                "\n>> Calories: " + calories + "kcal" +
+                "\n>> Serving Size: " + protein +  "g";
+    }
+
 }

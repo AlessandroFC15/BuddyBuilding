@@ -20,4 +20,9 @@ public class Snacks extends Meal {
     {
         super(snacks);
     }
+
+    public String toString()
+    {
+        return ".: SNACKS :." + super.toString();
+    }
 }

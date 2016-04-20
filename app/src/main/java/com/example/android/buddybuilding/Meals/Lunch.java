@@ -32,4 +32,9 @@ public class Lunch extends Meal {
         addFood(frango);
         addFood(macarrao);
     }
+
+    public String toString()
+    {
+        return ".: LUNCH :." + super.toString();
+    }
 }

@@ -37,4 +37,9 @@ public abstract class DietToLose extends Diet {
                 break;
         }
     }
+
+    public String toString()
+    {
+        return super.toString();
+    }
 }

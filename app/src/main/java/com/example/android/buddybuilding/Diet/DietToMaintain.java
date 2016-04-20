@@ -17,4 +17,9 @@ public class DietToMaintain extends Diet {
     {
         super(diet);
     }
+
+    public String toString()
+    {
+        return ".: DietToMaintain :." + super.toString();
+    }
 }

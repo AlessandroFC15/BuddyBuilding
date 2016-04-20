@@ -18,4 +18,9 @@ public class DietLowCarbs extends DietToLose {
         super(diet);
     }
 
+    public String toString()
+    {
+        return ".: DietLowCarbs :." + super.toString();
+    }
+
 }

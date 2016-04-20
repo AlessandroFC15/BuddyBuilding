@@ -30,4 +30,9 @@ public class Breakfast extends Meal {
 
         addFood(food);
     }
+
+    public String toString()
+    {
+        return ".: BREAKFAST :." + super.toString();
+    }
 }

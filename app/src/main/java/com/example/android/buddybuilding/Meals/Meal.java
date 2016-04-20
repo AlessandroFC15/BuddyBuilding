@@ -113,4 +113,13 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     }
 
     public int getCalories() { return totalCalories;}
+
+    public String toString()
+    {
+        return "\n>> Protein: " + totalProtein +
+                "\n>> Carbs: " + totalCarbs +
+                "\n>> Fat: " + totalFat +
+                "\n>> Calories: " + totalCalories +
+                "\n>> Number of Foods: " + foods.size();
+    }
 }

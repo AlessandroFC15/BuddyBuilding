@@ -196,29 +196,54 @@ public class User extends Person{
     }
 
     public enum WeeklyGoal{
-        GAIN_250G(500), GAIN_500G(750), LOSE_250G(-200),
-        LOSE_500G(-300), LOSE_750G(-400), LOSE_1KG(-500);
+        GAIN_250G(500, "Gain 250G"), GAIN_500G(750, "Gain 500G"),
+        LOSE_250G(-200, "Lose 250G"), LOSE_500G(-300, "Lose 500G"),
+        LOSE_750G(-400, "Lose 750G"), LOSE_1KG(-500, "Lose 1KG");
 
         private final int calories;
+        private final String description;
 
-        WeeklyGoal(int calories)
+        WeeklyGoal(int calories, String description)
         {
             this.calories = calories;
+            this.description = description;
         }
 
         public int getCalories()
         {
             return calories;
         }
+
+        public String toString()
+        {
+            return description;
+        }
     }
 
     public enum Goal {
-        LOSE_WEIGHT, MAINTAIN_WEIGHT, GAIN_WEIGHT
+        LOSE_WEIGHT("Lose Weight"),
+        MAINTAIN_WEIGHT ("Maintain Weight"),
+        GAIN_WEIGHT("Gain Weight");
+
+        private final String description;
+
+        Goal(String description)
+        {
+            this.description = description;
+        }
+
+        public String toString()
+        {
+            return description;
+        }
     }
 
-    public String toString()
-    {
-        return super.toString();
-    }
+public String toString()
+{
+    return super.toString() +
+            "\nWeekly Goal: " + weeklyGoal.toString() +
+            "\nGoal: " + goal.toString() +
+            "\nDiet (Calories Target): " + diet.getCaloriesTarget() + " kcal";
+}
 
 }

@@ -20,4 +20,9 @@ public class DietLowFat extends DietToLose {
     {
         super(diet);
     }
+
+    public String toString()
+    {
+        return ".: DietLowFat :." + super.toString();
+    }
 }

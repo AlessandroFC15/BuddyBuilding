@@ -38,4 +38,9 @@ public class DietToGain extends Diet{
         }
     }
 
+    public String toString()
+    {
+        return ".: DietToGain :." + super.toString();
+    }
+
 }

@@ -145,4 +145,18 @@ public abstract class Diet implements CaloriesMeasurable {
     }
 
     public int getCalories() { return totalCaloriesIntake;}
+
+    public String toString()
+    {
+        String output;
+
+        output = "\n>> Calories Target: " + totalCaloriesTarget +
+                "\n>> Calories Intake: " + totalCaloriesIntake +
+                "\n>> Protein Intake: " + proteinIntake +
+                "\n>> Carbs Intake: " + carbsIntake +
+                "\n>> Fat Intake: " + fatIntake +
+                "\n>> Number of Meals: " + meals.size();
+
+        return output;
+    }
 }
