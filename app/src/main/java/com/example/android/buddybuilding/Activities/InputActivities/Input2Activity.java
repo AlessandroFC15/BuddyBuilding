@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.example.android.buddybuilding.R;
+import com.example.android.buddybuilding.User.Person;
 import com.example.android.buddybuilding.User.User;
 
 public class Input2Activity extends AppCompatActivity {
@@ -29,25 +30,25 @@ public class Input2Activity extends AppCompatActivity {
         {
             case R.id.notVeryActive:
                 if (checked) {
-                    input.activityLevel = User.NOT_VERY_ACTIVE;
+                    input.activityLevel = Person.ActivityLevel.NOT_VERY_ACTIVE;
                     break;
                 }
             case R.id.lightlyActive:
                 if (checked)
                 {
-                    input.activityLevel = User.LIGHTLY_ACTIVE;
+                    input.activityLevel = Person.ActivityLevel.LIGHTLY_ACTIVE;
                     break;
                 }
             case R.id.active:
                 if (checked)
                 {
-                    input.activityLevel = User.ACTIVE;
+                    input.activityLevel = Person.ActivityLevel.ACTIVE;
                     break;
                 }
             case R.id.veryActive:
                 if (checked)
                 {
-                    input.activityLevel = User.VERY_ACTIVE;
+                    input.activityLevel = Person.ActivityLevel.VERY_ACTIVE;
                     break;
                 }
         }

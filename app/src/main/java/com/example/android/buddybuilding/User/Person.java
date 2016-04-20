@@ -19,13 +19,32 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     public enum Gender {
         MALE, FEMALE
-    };
+    }
+
+    public enum ActivityLevel{
+        NOT_VERY_ACTIVE("Not Very Active"),
+        LIGHTLY_ACTIVE("Lightly Active"),
+        ACTIVE("Active"),
+        VERY_ACTIVE("Very Active");
+
+        String description;
+
+        ActivityLevel(String description)
+        {
+            this.description = description;
+        }
+
+        public String toString()
+        {
+            return description;
+        }
+    }
 
     protected Gender gender;
     protected int age;
     protected double height;
     protected double weight;
-    protected int activityLevel;
+    protected ActivityLevel activityLevel;
 
     Person()
     {
@@ -33,16 +52,16 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         age = 20;
         height = 165;
         weight = 60;
-        activityLevel = NOT_VERY_ACTIVE;
+        activityLevel = ActivityLevel.NOT_VERY_ACTIVE;
     }
 
-    Person(Gender gender, int age, double height, double weight, int activityLevel)
+    Person(Gender gender, int age, double height, double weight, ActivityLevel activityLevel)
     {
         setGender(gender);
         this.age = (int) Helper.validateValue(age, MIN_AGE, MAX_AGE);
         this.height = Helper.validateValue(height, MIN_HEIGHT, MAX_HEIGHT);
         this.weight = Helper.validateValue(weight, MIN_WEIGHT, MAX_WEIGHT);
-        this.activityLevel = (int) Helper.validateValue(activityLevel, NOT_VERY_ACTIVE, VERY_ACTIVE);
+        this.activityLevel = activityLevel;
     }
 
     Person (final Person oldPerson)
@@ -56,11 +75,11 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     Person (final InputData input)
     {
-        gender = input.gender;
-        age = input.age;
-        height = input.height;
-        weight = input.weight;
-        activityLevel = input.activityLevel;
+        setGender(input.gender);
+        age = (int) Helper.validateValue(input.age, MIN_AGE, MAX_AGE);
+        height = Helper.validateValue(input.height, MIN_HEIGHT, MAX_HEIGHT);
+        weight = Helper.validateValue(input.weight, MIN_WEIGHT, MAX_WEIGHT);
+        this.activityLevel = input.activityLevel;
     }
 
     public boolean setGender(Gender choice)
@@ -129,16 +148,27 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     // Implementação da interface PhysicallyActive
 
-    public void setActivityLevel(int choice)
+    public void setActivityLevel(ActivityLevel choice)
     {
-        if ((choice >= NOT_VERY_ACTIVE) && (choice <= VERY_ACTIVE))
-        {
-            activityLevel = choice;
-        }
+        activityLevel = choice;
     }
 
-    public int getActivityLevel(){
+    public ActivityLevel getActivityLevel(){
         return activityLevel;
+    }
+
+    public String toString()
+    {
+        String output;
+
+        output = ".: PERSON :." +
+                "\n>> Gender: " + gender +
+                "\n>> Age: " + age + " years" +
+                "\n>> Height: " + height + " cm" +
+                "\n>> Weight: " + weight + " kg" +
+                "\n>> ActivityLevel: " + activityLevel.toString();
+
+        return output;
     }
 }
 

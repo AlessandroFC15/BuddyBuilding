@@ -15,7 +15,7 @@ public class InputData {
 
     public User.Goal goal;
     public User.WeeklyGoal weeklyGoal;
-    public int activityLevel;
+    public Person.ActivityLevel activityLevel;
     public Person.Gender gender;
     public int age;
     public double height;
