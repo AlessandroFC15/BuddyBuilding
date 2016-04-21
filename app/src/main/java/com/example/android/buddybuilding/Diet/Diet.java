@@ -20,8 +20,10 @@ public abstract class Diet implements CaloriesMeasurable {
     private double fatIntake;
     private HashMap<Integer, Meal> meals = new HashMap<>();
 
-    public static Food lastFoodAdded = null;
-    public static int mealChanged;
+    private static final int maxCaloriesTarget = 5000;
+
+    private Food lastFoodAdded = null;
+    private int mealChanged;
 
     public Diet()
     {
@@ -36,7 +38,7 @@ public abstract class Diet implements CaloriesMeasurable {
 
         addDefaultMeals();
 
-        totalCaloriesTarget = (int) Helper.validateValue(caloriesTarget, 0, 5000);
+        totalCaloriesTarget = (int) Helper.validateValue(caloriesTarget, 0, maxCaloriesTarget);
     }
 
     public Diet(final Diet diet)
@@ -79,7 +81,6 @@ public abstract class Diet implements CaloriesMeasurable {
             totalCaloriesIntake += meal.getCalories();
 
             mealChanged = nameOfmeal;
-
             lastFoodAdded = food;
         }
     }
@@ -158,5 +159,19 @@ public abstract class Diet implements CaloriesMeasurable {
                 "\n>> Number of Meals: " + meals.size();
 
         return output;
+    }
+
+    public Food getLastFoodAdded() {
+        return lastFoodAdded;
+    }
+
+    public void resetLastFoodAdded()
+    {
+        lastFoodAdded = null;
+    }
+
+    public int getMealChanged()
+    {
+        return mealChanged;
     }
 }

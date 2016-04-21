@@ -13,10 +13,13 @@ import com.example.android.buddybuilding.Meals.Meal;
 
 import java.util.HashMap;
 
-public class User extends Person{
+public class User extends Person {
 
     private static User userData = null;
-    public static User getInstance() {return userData;}
+
+    public static User getInstance() {
+        return userData;
+    }
 
     protected Goal goal;
     private WeeklyGoal weeklyGoal;
@@ -24,15 +27,13 @@ public class User extends Person{
 
     // Construtores
 
-    User()
-    {
+    User() {
         goal = Goal.GAIN_WEIGHT;
         weeklyGoal = WeeklyGoal.GAIN_250G;
         diet = getCorrectDiet(goal);
     }
 
-    User(Gender gender, int age, double height, double weight, ActivityLevel activityLevel, WeeklyGoal weeklyGoal)
-    {
+    User(Gender gender, int age, double height, double weight, ActivityLevel activityLevel, WeeklyGoal weeklyGoal) {
         super(gender, age, height, weight, activityLevel);
 
         this.weeklyGoal = weeklyGoal;
@@ -40,8 +41,7 @@ public class User extends Person{
         setCaloriesTarget();
     }
 
-    User(final User user)
-    {
+    User(final User user) {
         super(user);
 
         goal = user.goal;
@@ -49,8 +49,7 @@ public class User extends Person{
         diet = user.diet;
     }
 
-    User(final InputData input)
-    {
+    User(final InputData input) {
         super(input);
 
         goal = input.goal;
@@ -60,23 +59,19 @@ public class User extends Person{
 
     // Fim dos Construtores
 
-    public Diet getDiet()
-    {
+    public Diet getDiet() {
         return diet;
     }
 
-    public void setGoal(Goal choice)
-    {
+    public void setGoal(Goal choice) {
         diet = getCorrectDiet(choice);
 
         // If you changed your goal, we must update your calories target
         setCaloriesTarget();
     }
 
-    private Diet getCorrectDiet(Goal goal)
-    {
-        switch (goal)
-        {
+    private Diet getCorrectDiet(Goal goal) {
+        switch (goal) {
             case LOSE_WEIGHT:
                 return correctDietToLose(getBMR(), weeklyGoal);
             case MAINTAIN_WEIGHT:
@@ -89,10 +84,8 @@ public class User extends Person{
         }
     }
 
-    private DietToLose correctDietToLose(int bmr, WeeklyGoal weeklyGoal)
-    {
-        switch (weeklyGoal)
-        {
+    private DietToLose correctDietToLose(int bmr, WeeklyGoal weeklyGoal) {
+        switch (weeklyGoal) {
             case LOSE_250G:
                 return new DietLowFat(bmr, weeklyGoal);
             case LOSE_500G:
@@ -106,8 +99,7 @@ public class User extends Person{
         }
     }
 
-    public void setWeeklyGoal(WeeklyGoal choice)
-    {
+    public void setWeeklyGoal(WeeklyGoal choice) {
         weeklyGoal = choice;
 
         // If you change your weekly goal, you must change your calories target.
@@ -115,87 +107,70 @@ public class User extends Person{
     }
 
 
-    public WeeklyGoal getWeeklyGoal()
-    {
-        if (goal == Goal.MAINTAIN_WEIGHT)
-        {
+    public WeeklyGoal getWeeklyGoal() {
+        if (goal == Goal.MAINTAIN_WEIGHT) {
             return null;
-        } else
-        {
+        } else {
             return weeklyGoal;
         }
     }
 
-    public void addFood(int nameOfMeal, Food food)
-    {
+    public void addFood(int nameOfMeal, Food food) {
         diet.addFoodToMeal(nameOfMeal, food);
     }
 
-    public double getCaloriesFromMeal(int nameOfMeal)
-    {
+    public double getCaloriesFromMeal(int nameOfMeal) {
         return diet.getCaloriesFromMeal(nameOfMeal);
     }
 
-    public void setCaloriesTarget()
-    {
+    public void setCaloriesTarget() {
         // If the goal of the user is to maintain weight, then its calories goal is the
         // same as its BMR.
-        if (getGoal() == Goal.MAINTAIN_WEIGHT)
-        {
+        if (getGoal() == Goal.MAINTAIN_WEIGHT) {
             diet.setCaloriesTarget(getBMR());
-        } else
-        {
+        } else {
             diet.setCaloriesTarget(getBMR(), getWeeklyGoal());
         }
     }
 
-    public double getCaloriesTarget()
-    {
+    public double getCaloriesTarget() {
         return diet.getCaloriesTarget();
     }
 
-    public double getCaloriesIntake()
-    {
+    public double getCaloriesIntake() {
         return diet.getCalories();
     }
 
-    public HashMap<Integer, Meal> getAllMeals()
-    {
+    public HashMap<Integer, Meal> getAllMeals() {
         return diet.getAllMeals();
     }
 
-    public boolean hasDietChanged()
-    {
-        return Diet.lastFoodAdded != null;
+    public boolean hasDietChanged() {
+        return diet.getLastFoodAdded() != null;
     }
 
-    public int getMealChanged()
-    {
-        return Diet.mealChanged;
+    public int getMealChanged() {
+        return diet.getMealChanged();
     }
 
-    public void setDietGoal(Goal choice)
-    {
+    public void setDietGoal(Goal choice) {
         goal = choice;
 
     }
 
-    public Goal getGoal()
-    {
+    public Goal getGoal() {
         return goal;
     }
 
-    public static void createNewUser(final InputData input)
-    {
+    public static void createNewUser(final InputData input) {
         userData = new User(input);
     }
 
-    public static void createNewUser()
-    {
+    public static void createNewUser() {
         userData = new User();
     }
 
-    public enum WeeklyGoal{
+    public enum WeeklyGoal {
         GAIN_250G(500, "Gain 250G"), GAIN_500G(750, "Gain 500G"),
         LOSE_250G(-200, "Lose 250G"), LOSE_500G(-300, "Lose 500G"),
         LOSE_750G(-400, "Lose 750G"), LOSE_1KG(-500, "Lose 1KG");
@@ -203,47 +178,51 @@ public class User extends Person{
         private final int calories;
         private final String description;
 
-        WeeklyGoal(int calories, String description)
-        {
+        WeeklyGoal(int calories, String description) {
             this.calories = calories;
             this.description = description;
         }
 
-        public int getCalories()
-        {
+        public int getCalories() {
             return calories;
         }
 
-        public String toString()
-        {
+        public String toString() {
             return description;
         }
     }
 
     public enum Goal {
         LOSE_WEIGHT("Lose Weight"),
-        MAINTAIN_WEIGHT ("Maintain Weight"),
+        MAINTAIN_WEIGHT("Maintain Weight"),
         GAIN_WEIGHT("Gain Weight");
 
         private final String description;
 
-        Goal(String description)
-        {
+        Goal(String description) {
             this.description = description;
         }
 
-        public String toString()
-        {
+        public String toString() {
             return description;
         }
     }
 
-public String toString()
-{
-    return super.toString() +
-            "\nWeekly Goal: " + weeklyGoal.toString() +
-            "\nGoal: " + goal.toString() +
-            "\nDiet (Calories Target): " + diet.getCaloriesTarget() + " kcal";
-}
+    public String toString() {
+        return super.toString() +
+                "\nWeekly Goal: " + weeklyGoal.toString() +
+                "\nGoal: " + goal.toString() +
+                "\nDiet (Calories Target): " + diet.getCaloriesTarget() + " kcal";
+    }
+
+    public Food getLastFoodAdded()
+    {
+        return diet.getLastFoodAdded();
+    }
+
+    public void resetLastFoodAdded()
+    {
+        diet.resetLastFoodAdded();
+    }
 
 }
