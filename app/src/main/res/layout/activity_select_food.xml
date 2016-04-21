@@ -99,8 +99,6 @@
 
                 <View
                     style="@style/separatorLine"></View>
-
-
             </LinearLayout>
 
 

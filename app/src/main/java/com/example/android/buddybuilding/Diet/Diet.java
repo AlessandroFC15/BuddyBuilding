@@ -20,10 +20,10 @@ public abstract class Diet implements CaloriesMeasurable {
     private double fatIntake;
     private HashMap<Integer, Meal> meals = new HashMap<>();
 
-    private static final int maxCaloriesTarget = 5000;
-
     private Food lastFoodAdded = null;
     private int mealChanged;
+
+    private static final int maxCaloriesTarget = 5000;
 
     public Diet()
     {
