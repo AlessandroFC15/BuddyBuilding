@@ -25,11 +25,15 @@ public class Breakfast extends Meal {
         super(food);
 
         name = BREAKFAST;
+
+        addCommonBreakfastFoods();
     }
 
     public Breakfast(final Breakfast breakfast)
     {
         super(breakfast);
+
+        addCommonBreakfastFoods();
     }
 
     private void addDefaultFood()
@@ -37,6 +41,8 @@ public class Breakfast extends Meal {
         Food food = new Food("Pão", 50, 2, 35, 5);
 
         addFood(food);
+
+        addCommonBreakfastFoods();
     }
 
     public String toString()
@@ -74,7 +80,7 @@ public class Breakfast extends Meal {
         commonBreakfastFoods.add(food);
     }
 
-    public ArrayList<Food> getCommonBreakfastFoods()
+    public static ArrayList<Food> getCommonBreakfastFoods()
     {
         return commonBreakfastFoods;
     }
