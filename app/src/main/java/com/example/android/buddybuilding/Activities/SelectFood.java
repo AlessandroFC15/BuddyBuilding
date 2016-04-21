@@ -17,12 +17,14 @@ import com.example.android.buddybuilding.Databases.FoodData;
 import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Breakfast;
+import com.example.android.buddybuilding.Meals.Dinner;
 import com.example.android.buddybuilding.Meals.Lunch;
 import com.example.android.buddybuilding.Meals.Meal;
+import com.example.android.buddybuilding.Meals.Snacks;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import static android.widget.LinearLayout.OnClickListener;
 import static android.widget.LinearLayout.VERTICAL;
@@ -57,7 +59,7 @@ public class SelectFood extends AppCompatActivity {
     {
         LinearLayout layout = (LinearLayout) findViewById(R.id.commonFoods);
 
-        ArrayList<Food> commonFoods = new ArrayList<>();
+        HashMap<String, Food> commonFoods = new HashMap<>();
 
         if (meal instanceof Breakfast)
         {
@@ -65,11 +67,68 @@ public class SelectFood extends AppCompatActivity {
         } else if (meal instanceof Lunch)
         {
             commonFoods = ((Lunch) meal).getCommonLunchFoods();
+        } else if (meal instanceof Dinner)
+        {
+            commonFoods = ((Dinner) meal).getCommonDinnerFoods();
+        } else if (meal instanceof Snacks)
+        {
+            commonFoods = ((Snacks) meal).getCommonSnacksFoods();
         }
 
-        for (Food food : commonFoods)
+        OnClickListener onClick = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFoodFromCommonFoods(v);
+            }
+        };
+
+        for (String nameOfFood : commonFoods.keySet())
         {
-            printFood(food.getName(), food.getServingSize(), food.getCalories(), layout);
+            Food food = commonFoods.get(nameOfFood);
+
+            printFood(nameOfFood, food.getServingSize(), food.getCalories(), layout,
+                    onClick);
+        }
+    }
+
+    private void addFoodFromCommonFoods(View view)
+    {
+        // 1st Step | Get the name of the food clicked
+
+        String nameOfFood = getNameOfFood(view);
+
+        // 2nd Step | Make a Food object with that name
+
+        Food food = getFoodFromCommonFoods(nameOfFood);
+
+        if (food != null)
+        {
+            // 3rd Step | Add food to the user diary
+            userData.addFood(nameOfMeal, food);
+
+            Helper.makeToast(nameOfFood + " successfully added to " + getNameOfMeal(nameOfMeal), this);
+
+            finish();
+        }
+    }
+
+    private Food getFoodFromCommonFoods(String nameOfFood)
+    {
+        if (meal instanceof Breakfast)
+        {
+            return Breakfast.getCommonBreakfastFoods().get(nameOfFood);
+        } else if (meal instanceof Lunch)
+        {
+            return Lunch.getCommonLunchFoods().get(nameOfFood);
+        } else if (meal instanceof Dinner)
+        {
+            return Dinner.getCommonDinnerFoods().get(nameOfFood);
+        } else if (meal instanceof Snacks)
+        {
+            return Snacks.getCommonSnacksFoods().get(nameOfFood);
+        } else {
+            Helper.makeToast("Sorry", this);
+            return null;
         }
     }
 
@@ -85,11 +144,19 @@ public class SelectFood extends AppCompatActivity {
 
             int calories = allFoodData.getInt(allFoodData.getColumnIndex(FoodData.COLUMN_CALORIES));
 
-            printFood(name, servingSize, calories, layout);
+            OnClickListener onClick = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addFoodFromDatabase(v);
+                }
+            };
+
+            printFood(name, servingSize, calories, layout, onClick);
         }
     }
 
-    private void printFood(String name, int servingSize, int calories, LinearLayout layout)
+    private void printFood(String name, int servingSize, int calories, LinearLayout layout,
+                           OnClickListener onClickListener)
     {
         TextView nameOfFood = new TextView(this);
         nameOfFood.setText(name);
@@ -111,12 +178,8 @@ public class SelectFood extends AppCompatActivity {
 
         // Create the LinearLayout container to hold all these views
         final LinearLayout container = new LinearLayout(this);
-        container.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectServingSize(v);
-            }
-        });
+        container.setOnClickListener(onClickListener);
+
         container.setOrientation(VERTICAL);
 
         container.addView(nameOfFood);
@@ -157,7 +220,7 @@ public class SelectFood extends AppCompatActivity {
         return view;
     }
 
-    public void selectServingSize(View view)
+    public void addFoodFromDatabase(View view)
     {
         // 1st Step | Get the name of the food clicked
 
@@ -165,7 +228,7 @@ public class SelectFood extends AppCompatActivity {
 
         // 2nd Step | Make a Food object with that name
 
-        Food food = getFood(nameOfFood);
+        Food food = getFoodFromDatabase(nameOfFood);
 
         // 3rd Step | Add food to the user diary
         userData.addFood(nameOfMeal, food);
@@ -175,7 +238,7 @@ public class SelectFood extends AppCompatActivity {
         finish();
     }
 
-    private Food getFood(String nameOfFood)
+    private Food getFoodFromDatabase(String nameOfFood)
     {
         allFoodData.moveToPosition(-1);
 
