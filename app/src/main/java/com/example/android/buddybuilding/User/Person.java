@@ -17,8 +17,6 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
     public static final int MIN_AGE = 0;
     public static final int MAX_AGE = 150;
 
-    private static int numberOfPeople = 0;
-
     public enum Gender {
         MALE, FEMALE
     }
@@ -55,8 +53,6 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         height = 165;
         weight = 60;
         activityLevel = ActivityLevel.NOT_VERY_ACTIVE;
-
-        numberOfPeople++;
     }
 
     Person(Gender gender, int age, double height, double weight, ActivityLevel activityLevel)
@@ -66,8 +62,6 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         this.height = Helper.validateValue(height, MIN_HEIGHT, MAX_HEIGHT);
         this.weight = Helper.validateValue(weight, MIN_WEIGHT, MAX_WEIGHT);
         this.activityLevel = activityLevel;
-
-        numberOfPeople++;
     }
 
     Person (final Person oldPerson)
@@ -77,8 +71,6 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         height = oldPerson.height;
         weight = oldPerson.weight;
         activityLevel = oldPerson.activityLevel;
-
-        numberOfPeople++;
     }
 
     Person (final InputData input)
@@ -89,13 +81,9 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         weight = Helper.validateValue(input.weight, MIN_WEIGHT, MAX_WEIGHT);
         this.activityLevel = input.activityLevel;
 
-        numberOfPeople++;
     }
 
-    public int getNumberOfPeople()
-    {
-        return numberOfPeople;
-    }
+
 
     public boolean setGender(Gender choice)
     {

@@ -25,20 +25,28 @@ public class User extends Person {
     private WeeklyGoal weeklyGoal;
     private Diet diet;
 
+    private static int numberOfUsers = 0;
+
     // Construtores
 
     User() {
         goal = Goal.GAIN_WEIGHT;
         weeklyGoal = WeeklyGoal.GAIN_250G;
         diet = getCorrectDiet(goal);
+
+        numberOfUsers++;
     }
 
-    User(Gender gender, int age, double height, double weight, ActivityLevel activityLevel, WeeklyGoal weeklyGoal) {
+    User(Gender gender, int age, double height, double weight, ActivityLevel activityLevel,
+         WeeklyGoal weeklyGoal, Goal goal) {
         super(gender, age, height, weight, activityLevel);
 
         this.weeklyGoal = weeklyGoal;
+        this.goal = goal;
 
-        setCaloriesTarget();
+        diet = getCorrectDiet(goal);
+
+        numberOfUsers++;
     }
 
     User(final User user) {
@@ -47,6 +55,8 @@ public class User extends Person {
         goal = user.goal;
         weeklyGoal = user.weeklyGoal;
         diet = user.diet;
+
+        numberOfUsers++;
     }
 
     User(final InputData input) {
@@ -55,6 +65,8 @@ public class User extends Person {
         goal = input.goal;
         weeklyGoal = input.weeklyGoal;
         diet = getCorrectDiet(goal);
+
+        numberOfUsers++;
     }
 
     // Fim dos Construtores
@@ -223,6 +235,11 @@ public class User extends Person {
     public void resetLastFoodAdded()
     {
         diet.resetLastFoodAdded();
+    }
+
+    public int getNumberOfUsers()
+    {
+        return numberOfUsers;
     }
 
 }
