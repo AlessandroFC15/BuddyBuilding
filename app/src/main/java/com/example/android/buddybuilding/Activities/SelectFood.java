@@ -17,13 +17,15 @@ import com.example.android.buddybuilding.Databases.FoodData;
 import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Breakfast;
+import com.example.android.buddybuilding.Meals.Lunch;
 import com.example.android.buddybuilding.Meals.Meal;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
 import java.util.ArrayList;
 
-import static android.widget.LinearLayout.*;
+import static android.widget.LinearLayout.OnClickListener;
+import static android.widget.LinearLayout.VERTICAL;
 
 public class SelectFood extends AppCompatActivity {
 
@@ -60,11 +62,14 @@ public class SelectFood extends AppCompatActivity {
         if (meal instanceof Breakfast)
         {
             commonFoods = ((Breakfast) meal).getCommonBreakfastFoods();
+        } else if (meal instanceof Lunch)
+        {
+            commonFoods = ((Lunch) meal).getCommonLunchFoods();
+        }
 
-            for (Food food : commonFoods)
-            {
-                printFood(food.getName(), food.getServingSize(), food.getCalories(), layout);
-            }
+        for (Food food : commonFoods)
+        {
+            printFood(food.getName(), food.getServingSize(), food.getCalories(), layout);
         }
     }
 

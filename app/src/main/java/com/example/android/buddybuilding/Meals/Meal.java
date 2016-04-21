@@ -1,13 +1,12 @@
 package com.example.android.buddybuilding.Meals;
 
+import android.support.annotation.NonNull;
+
 import com.example.android.buddybuilding.CaloriesMeasurable;
 import com.example.android.buddybuilding.Food.Food;
 
 import java.util.ArrayList;
 
-/**
- * Created by Alessandro on 06/04/2016.
- */
 public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
 
     public final static int BREAKFAST = 0;
@@ -75,7 +74,7 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
         return foods;
     }
 
-    public int compareTo(Meal meal)
+    public int compareTo(@NonNull Meal meal)
     {
         if (totalCalories > meal.totalCalories)
         {
@@ -89,15 +88,8 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
         }
     }
 
-    public boolean equals(Object object)
-    {
-        if (object instanceof Meal)
-        {
-            return (totalCalories == ((Meal) object).totalCalories);
-        } else
-        {
-            return false;
-        }
+    public boolean equals(Object object) {
+        return object instanceof Meal && (totalCalories == ((Meal) object).totalCalories);
     }
 
     // Implementação da interface CaloriesMeasurable

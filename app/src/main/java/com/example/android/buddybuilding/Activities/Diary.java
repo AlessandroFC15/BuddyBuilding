@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.android.buddybuilding.Diet.Diet;
 import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Meal;
@@ -184,9 +183,9 @@ public class Diary extends AppCompatActivity
 
         mealCalories.setText(Integer.toString(meal.getCalories()));
 
-        printFood(Diet.lastFoodAdded, layout);
+        printFood(userData.getLastFoodAdded(), layout);
 
-        Diet.lastFoodAdded = null;
+        userData.resetLastFoodAdded();
     }
 
     private int getCaloriesMealID(int nameOfMeal) {
