@@ -50,6 +50,15 @@ public class SelectFood extends AppCompatActivity {
 
         meal = userData.getAllMeals().get(nameOfMeal);
 
+        if (userData.isDietToLose())
+        {
+            // setScreenToDietToLose();
+            // Helper.makeToast("Not surprised motherfuckers!", this);
+        } else
+        {
+            // Helper.makeToast("EIREEE!", this);
+        }
+
         printAllFoodsRegistered();
 
         printCommonFoods();
