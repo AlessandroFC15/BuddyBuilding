@@ -17,6 +17,8 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
     private int calories;
     private int servingSize;
 
+    private static int foodsCreated = 0;
+
     public Food()
     {
         name = "";
@@ -25,6 +27,8 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         totalFat = 0;
         calories = 0;
         servingSize = 0;
+
+        foodsCreated++;
     }
 
     public Food(String name, int servingSize, double protein, double carbohydrates, double totalFat)
@@ -36,6 +40,8 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         this.totalFat = totalFat;
 
         calculateCalories();
+
+        foodsCreated++;
     }
 
     public Food(String name)
@@ -46,6 +52,8 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         totalFat = 0;
         calories = 0;
         servingSize = 0;
+
+        foodsCreated++;
     }
 
     public Food(final Food food)
@@ -56,6 +64,8 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         totalFat = food.totalFat;
         calories = food.calories;
         servingSize = food.servingSize;
+
+        foodsCreated++;
     }
 
     public void setServingSize(int servingSize)
@@ -178,6 +188,15 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
                 "\n>> Fat: " + totalFat + "g" +
                 "\n>> Calories: " + calories + "kcal" +
                 "\n>> Serving Size: " + protein +  "g";
+    }
+
+    public static int getNumberOfFoodsCreated()
+    {
+        return foodsCreated;
+    }
+
+    public static void resetNumberOfFoods() {
+        foodsCreated = 0;
     }
 
 }

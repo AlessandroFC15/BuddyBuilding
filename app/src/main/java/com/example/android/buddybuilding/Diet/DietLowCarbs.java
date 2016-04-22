@@ -34,4 +34,26 @@ public class DietLowCarbs extends DietToLose {
         return ".: DietLowCarbs :." + super.toString();
     }
 
+    public static HashMap<String, Food> getLowCarbsFoods()
+    {
+        return lowCarbsFoods;
+    }
+
+    public static void addFoodToLowCarbsFoods(Food food)
+    {
+        if (! lowCarbsFoods.containsValue(food))
+        {
+            lowCarbsFoods.put(food.getName(), food);
+        }
+    }
+
+    public static void removeFoodFromLowCarbsFoods(String nameOfFood)
+    {
+        if (! lowCarbsFoods.containsKey(nameOfFood))
+        {
+            lowCarbsFoods.remove(nameOfFood);
+        }
+    }
+
+
 }

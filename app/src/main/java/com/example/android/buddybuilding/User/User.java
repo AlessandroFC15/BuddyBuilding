@@ -161,8 +161,8 @@ public class User extends Person {
         return diet.getLastFoodAdded() != null;
     }
 
-    public int getMealChanged() {
-        return diet.getMealChanged();
+    public int getLastMealChanged() {
+        return diet.getLastMealChanged();
     }
 
     public void setDietGoal(Goal choice) {
@@ -227,23 +227,23 @@ public class User extends Person {
                 "\nDiet (Calories Target): " + diet.getCaloriesTarget() + " kcal";
     }
 
-    public Food getLastFoodAdded()
-    {
+    public Food getLastFoodAdded() {
         return diet.getLastFoodAdded();
     }
 
-    public void resetLastFoodAdded()
-    {
+    public void resetLastFoodAdded() {
         diet.resetLastFoodAdded();
     }
 
-    public int getNumberOfUsers()
-    {
+    public static int getNumberOfUsers() {
         return numberOfUsers;
     }
 
-    public boolean isDietToLose()
-    {
+    public static void resetNumberOfUsers() {
+        numberOfUsers = 0;
+    }
+
+    public boolean isDietToLose() {
         return (diet instanceof DietToLose);
     }
 

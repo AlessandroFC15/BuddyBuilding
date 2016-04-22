@@ -53,4 +53,20 @@ public class Breakfast extends Meal {
     {
         return commonBreakfastFoods;
     }
+
+    public static void addFoodToCommonBreakfastFoods(Food food)
+    {
+        if (! commonBreakfastFoods.containsValue(food))
+        {
+            commonBreakfastFoods.put(food.getName(), food);
+        }
+    }
+
+    public static void removeFoodFromCommonBreakfastFoods(String nameOfFood)
+    {
+        if (! commonBreakfastFoods.containsKey(nameOfFood))
+        {
+            commonBreakfastFoods.remove(nameOfFood);
+        }
+    }
 }

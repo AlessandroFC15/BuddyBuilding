@@ -52,9 +52,9 @@ public class Diary extends AppCompatActivity
 
         // We will only update the meal if some food has been added
         if (userData.hasDietChanged()) {
-            int mealChanged = userData.getMealChanged();
+            int lastMealChanged = userData.getLastMealChanged();
 
-            updateMeal(mealChanged);
+            updateMeal(lastMealChanged);
         }
     }
 

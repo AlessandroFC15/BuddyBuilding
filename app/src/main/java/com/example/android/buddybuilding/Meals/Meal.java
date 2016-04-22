@@ -22,6 +22,8 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     protected double totalFat;
     protected ArrayList<Food> foods = new ArrayList<>();
 
+    private static final int maxAmountOfFoods = 10;
+
     public Meal()
     {
         name = GENERIC_MEAL;
@@ -54,12 +56,15 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
 
     public void addFood(Food newFood)
     {
-        foods.add(newFood);
+        if (foods.size() < maxAmountOfFoods)
+        {
+            foods.add(newFood);
 
-        this.totalProtein += newFood.getProtein();
-        this.totalCarbs += newFood.getCarbs();
-        this.totalCalories += newFood.getCalories();
-        this.totalFat += newFood.getTotalFat();
+            this.totalProtein += newFood.getProtein();
+            this.totalCarbs += newFood.getCarbs();
+            this.totalCalories += newFood.getCalories();
+            this.totalFat += newFood.getTotalFat();
+        }
     }
 
 
