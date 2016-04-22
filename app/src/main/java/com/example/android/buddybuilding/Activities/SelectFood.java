@@ -64,54 +64,46 @@ public class SelectFood extends AppCompatActivity {
         printCommonFoods();
     }
 
-    private void printCommonFoods()
-    {
-        LinearLayout layout = (LinearLayout) findViewById(R.id.commonFoods);
+private void printCommonFoods() {
+    LinearLayout layout = (LinearLayout) findViewById(R.id.commonFoods);
 
-        HashMap<String, Food> commonFoods = new HashMap<>();
+    HashMap<String, Food> commonFoods = new HashMap<>();
 
-        if (meal instanceof Breakfast)
-        {
-            commonFoods = ((Breakfast) meal).getCommonBreakfastFoods();
-        } else if (meal instanceof Lunch)
-        {
-            commonFoods = ((Lunch) meal).getCommonLunchFoods();
-        } else if (meal instanceof Dinner)
-        {
-            commonFoods = ((Dinner) meal).getCommonDinnerFoods();
-        } else if (meal instanceof Snacks)
-        {
-            commonFoods = ((Snacks) meal).getCommonSnacksFoods();
-        }
-
-        OnClickListener onClick = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addFoodFromCommonFoods(v);
-            }
-        };
-
-        for (String nameOfFood : commonFoods.keySet())
-        {
-            Food food = commonFoods.get(nameOfFood);
-
-            printFood(nameOfFood, food.getServingSize(), food.getCalories(), layout,
-                    onClick);
-        }
+    if (meal instanceof Breakfast) {
+        commonFoods = Breakfast.getCommonBreakfastFoods();
+    } else if (meal instanceof Lunch) {
+        commonFoods = Lunch.getCommonLunchFoods();
+    } else if (meal instanceof Dinner) {
+        commonFoods = Dinner.getCommonDinnerFoods();
+    } else if (meal instanceof Snacks) {
+        commonFoods = Snacks.getCommonSnacksFoods();
     }
 
-    private void addFoodFromCommonFoods(View view)
-    {
+    OnClickListener onClick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            addFoodFromCommonFoods(v);
+        }
+    };
+
+    for (String nameOfFood : commonFoods.keySet()) {
+        Food food = commonFoods.get(nameOfFood);
+
+        printFood(nameOfFood, food.getServingSize(), food.getCalories(), layout,
+                onClick);
+    }
+}
+
+    private void addFoodFromCommonFoods(View view) {
         // 1st Step | Get the name of the food clicked
 
         String nameOfFood = getNameOfFood(view);
 
         // 2nd Step | Make a Food object with that name
 
-        Food food = getFoodFromCommonFoods(nameOfFood);
+        Food food = getFoodFromCommonFoods(nameOfFood, meal);
 
-        if (food != null)
-        {
+        if (food != null) {
             // 3rd Step | Add food to the user diary
             userData.addFood(nameOfMeal, food);
 
@@ -121,19 +113,14 @@ public class SelectFood extends AppCompatActivity {
         }
     }
 
-    private Food getFoodFromCommonFoods(String nameOfFood)
-    {
-        if (meal instanceof Breakfast)
-        {
+    private Food getFoodFromCommonFoods(String nameOfFood, Meal meal) {
+        if (meal instanceof Breakfast) {
             return Breakfast.getCommonBreakfastFoods().get(nameOfFood);
-        } else if (meal instanceof Lunch)
-        {
+        } else if (meal instanceof Lunch) {
             return Lunch.getCommonLunchFoods().get(nameOfFood);
-        } else if (meal instanceof Dinner)
-        {
+        } else if (meal instanceof Dinner) {
             return Dinner.getCommonDinnerFoods().get(nameOfFood);
-        } else if (meal instanceof Snacks)
-        {
+        } else if (meal instanceof Snacks) {
             return Snacks.getCommonSnacksFoods().get(nameOfFood);
         } else {
             Helper.makeToast("Sorry", this);
@@ -165,8 +152,7 @@ public class SelectFood extends AppCompatActivity {
     }
 
     private void printFood(String name, int servingSize, int calories, LinearLayout layout,
-                           OnClickListener onClickListener)
-    {
+                           OnClickListener onClickListener) {
         TextView nameOfFood = new TextView(this);
         nameOfFood.setText(name);
         nameOfFood.setTextColor(Color.BLACK);
@@ -198,10 +184,8 @@ public class SelectFood extends AppCompatActivity {
         layout.addView(separator);
     }
 
-    private String getNameOfMeal(int meal)
-    {
-        switch (meal)
-        {
+    private String getNameOfMeal(int meal) {
+        switch (meal) {
             case Meal.BREAKFAST:
                 return "Breakfast";
             case Meal.LUNCH:
@@ -215,8 +199,7 @@ public class SelectFood extends AppCompatActivity {
         }
     }
 
-    private View getSeparatorView()
-    {
+    private View getSeparatorView() {
         View view = new View(this);
 
         LinearLayout.LayoutParams params =
@@ -229,8 +212,7 @@ public class SelectFood extends AppCompatActivity {
         return view;
     }
 
-    public void addFoodFromDatabase(View view)
-    {
+    public void addFoodFromDatabase(View view) {
         // 1st Step | Get the name of the food clicked
 
         String nameOfFood = getNameOfFood(view);
@@ -247,15 +229,13 @@ public class SelectFood extends AppCompatActivity {
         finish();
     }
 
-    private Food getFoodFromDatabase(String nameOfFood)
-    {
+    private Food getFoodFromDatabase(String nameOfFood) {
         allFoodData.moveToPosition(-1);
 
         while (allFoodData.moveToNext()) {
             String name = allFoodData.getString(allFoodData.getColumnIndex(FoodData.COLUMN_NAME));
 
-            if (name.equals(nameOfFood))
-            {
+            if (name.equals(nameOfFood)) {
                 int servingSize = allFoodData.getInt(allFoodData.getColumnIndex(FoodData.COLUMN_SERVING_SIZE));
 
                 double protein = allFoodData.getDouble(allFoodData.getColumnIndex(FoodData.COLUMN_PROTEIN));
@@ -273,15 +253,13 @@ public class SelectFood extends AppCompatActivity {
 
     }
 
-    private String getNameOfFood(View view)
-    {
+    private String getNameOfFood(View view) {
         View name = ((LinearLayout) view).getChildAt(0);
 
         return ((TextView) name).getText().toString();
     }
 
-    private void getAllFoodData()
-    {
+    private void getAllFoodData() {
         allFoodData = foodDatabase.getAllFoodData();
     }
 
@@ -312,32 +290,26 @@ public class SelectFood extends AppCompatActivity {
         }
     }
 
-    private void setIndicatorVisible(int id)
-    {
+    private void setIndicatorVisible(int id) {
         View foodRegisteredIndicator = findViewById(R.id.indicatorFoodsRegistered);
         View commonFoodsIndicator = findViewById(R.id.indicatorCommonFoods);
 
-        if (id == R.id.indicatorFoodsRegistered)
-        {
+        if (id == R.id.indicatorFoodsRegistered) {
             commonFoodsIndicator.setVisibility(View.INVISIBLE);
             foodRegisteredIndicator.setVisibility(View.VISIBLE);
-        } else if (id == R.id.indicatorCommonFoods)
-        {
+        } else if (id == R.id.indicatorCommonFoods) {
             commonFoodsIndicator.setVisibility(View.VISIBLE);
             foodRegisteredIndicator.setVisibility(View.INVISIBLE);
-        } else
-        {
+        } else {
             Helper.makeToast("Error in setIndicatorVisible", this);
         }
     }
 
-    private void changeButtonTextColor(int id)
-    {
+    private void changeButtonTextColor(int id) {
         Button buttonFoodsRegistered = (Button) findViewById(R.id.buttonFoodsRegistered);
         Button buttonCommonFoods = (Button) findViewById(R.id.buttonCommonFoods);
 
-        switch (id)
-        {
+        switch (id) {
             case (R.id.buttonFoodsRegistered):
                 buttonFoodsRegistered.setTextColor(getResources().getColor(R.color.colorPrimary));
                 buttonCommonFoods.setTextColor(getResources().getColor(R.color.black));
