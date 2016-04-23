@@ -9,12 +9,11 @@ import java.util.HashMap;
  * Created by Alessandro on 19/04/2016.
  */
 public class DietLowCalorie extends DietToLose{
-    private static HashMap<String, Food> lowCalorieFoods;
     static {
-        lowCalorieFoods = new HashMap<>();
-        lowCalorieFoods.put("Fuck It", new Food("Fuck It"));
-        lowCalorieFoods.put("Stockton", new Food("Stockton"));
-        lowCalorieFoods.put("209", new Food("209"));
+        recommendedFoods = new HashMap<>();
+        recommendedFoods.put("Fuck It", new Food("Fuck It"));
+        recommendedFoods.put("Stockton", new Food("Stockton"));
+        recommendedFoods.put("209", new Food("209"));
     }
 
     public DietLowCalorie()

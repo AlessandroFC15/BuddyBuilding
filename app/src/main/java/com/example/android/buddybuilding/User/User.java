@@ -31,7 +31,7 @@ public class User extends Person {
 
     User() {
         goal = Goal.LOSE_WEIGHT;
-        weeklyGoal = WeeklyGoal.LOSE_250G;
+        weeklyGoal = WeeklyGoal.LOSE_500G;
         diet = getCorrectDiet(goal);
 
         numberOfUsers++;
@@ -193,6 +193,11 @@ public class User extends Person {
         WeeklyGoal(int calories, String description) {
             this.calories = calories;
             this.description = description;
+        }
+
+        public boolean isGoalToLose()
+        {
+            return this == LOSE_250G || this == LOSE_500G || this == LOSE_750G || this == LOSE_1KG;
         }
 
         public int getCalories() {

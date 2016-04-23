@@ -19,27 +19,14 @@ public abstract class DietToLose extends Diet {
     }
 
     public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal) {
-        switch (weeklyGoal) {
-            case LOSE_250G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_500G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_750G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_1KG:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-            default:
-                System.out.println("Error in setCaloriesTarget | DietToLose");
-                totalCaloriesTarget = -1;
-                break;
+        if (weeklyGoal.isGoalToLose()) {
+            totalCaloriesTarget = bmr + weeklyGoal.getCalories();
+        } else {
+            totalCaloriesTarget = -1;
         }
     }
 
-    public String toString()
-    {
+    public String toString() {
         return super.toString();
     }
 }

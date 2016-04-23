@@ -6,12 +6,11 @@ import com.example.android.buddybuilding.User.User;
 import java.util.HashMap;
 
 public class DietLowCarbs extends DietToLose {
-    private static HashMap<String, Food> lowCarbsFoods;
     static {
-        lowCarbsFoods = new HashMap<>();
-        lowCarbsFoods.put("Fuck It", new Food("Fuck It"));
-        lowCarbsFoods.put("Stockton", new Food("Stockton"));
-        lowCarbsFoods.put("209", new Food("209"));
+        recommendedFoods = new HashMap<>();
+        recommendedFoods.put("Fuck It", new Food("Fuck It"));
+        recommendedFoods.put("Stockton", new Food("Stockton"));
+        recommendedFoods.put("209", new Food("209"));
     }
 
     public DietLowCarbs()
@@ -34,24 +33,19 @@ public class DietLowCarbs extends DietToLose {
         return ".: DietLowCarbs :." + super.toString();
     }
 
-    public static HashMap<String, Food> getLowCarbsFoods()
-    {
-        return lowCarbsFoods;
-    }
-
     public static void addFoodToLowCarbsFoods(Food food)
     {
-        if (! lowCarbsFoods.containsValue(food))
+        if (! recommendedFoods.containsValue(food))
         {
-            lowCarbsFoods.put(food.getName(), food);
+            recommendedFoods.put(food.getName(), food);
         }
     }
 
     public static void removeFoodFromLowCarbsFoods(String nameOfFood)
     {
-        if (! lowCarbsFoods.containsKey(nameOfFood))
+        if (! recommendedFoods.containsKey(nameOfFood))
         {
-            lowCarbsFoods.remove(nameOfFood);
+            recommendedFoods.remove(nameOfFood);
         }
     }
 
