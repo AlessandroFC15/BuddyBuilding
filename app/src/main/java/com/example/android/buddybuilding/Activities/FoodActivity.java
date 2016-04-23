@@ -48,10 +48,24 @@ public class FoodActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        checkFoodsInMenu();
 
         changeScreenToShowFood();
 
         printFoodsOnDatabase();
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+
+        checkFoodsInMenu();
+    }
+
+    private void checkFoodsInMenu()
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_foods);
     }
 
     // Functions related to changing the content of the screen
@@ -111,8 +125,6 @@ public class FoodActivity extends AppCompatActivity
                 buttonAddFood.setTextColor(getResources().getColor(R.color.colorPrimary));
                 buttonShowFoods.setTextColor(getResources().getColor(R.color.black));
         }
-
-
     }
 
     private void setIndicatorVisible(int id)
@@ -338,7 +350,6 @@ public class FoodActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -377,18 +388,10 @@ public class FoodActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(this, Home.class));
+        } else if (id == R.id.nav_diary) {
+            startActivity(new Intent(this, Diary.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

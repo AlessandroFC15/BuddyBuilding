@@ -11,7 +11,8 @@
         <activity
             android:name=".Activities.Home"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +23,7 @@
         </activity>
         <activity
             android:name=".Activities.InputActivities.Input2Activity"
-            android:label="Nível de Atividade" >
+            android:label="Nível de Atividade">
         </activity>
         <activity
             android:name=".Activities.InputActivities.Input3Info"
@@ -42,12 +43,14 @@
         <activity
             android:name=".Activities.Diary"
             android:label="@string/title_activity_diary"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".Activities.FoodActivity"
             android:label="@string/title_activity_food"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".Activities.FoodNutritionFacts"

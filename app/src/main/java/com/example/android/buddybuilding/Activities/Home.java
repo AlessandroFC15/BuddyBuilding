@@ -50,6 +50,7 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        checkHomeInMenu();
 
         // Creates the new user with the data from the input and sets the shared variable
         // to the newly created object
@@ -75,8 +76,15 @@ public class Home extends AppCompatActivity
         updateFoodCalories();
 
         updateCaloriesRemaining();
+
+        checkHomeInMenu();
     }
 
+    private void checkHomeInMenu()
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_home);
+    }
     /*
     Calculo da Taxa Metabólica Basal
     Assumiu-se a formula 32 * kg
