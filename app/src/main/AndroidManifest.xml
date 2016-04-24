@@ -11,8 +11,8 @@
         <activity
             android:name=".Activities.Home"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".Activities.InputActivities.Input2Activity"
-            android:label="Nível de Atividade">
+            android:label="Nível de Atividade" >
         </activity>
         <activity
             android:name=".Activities.InputActivities.Input3Info"
@@ -41,23 +41,28 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Activities.Diary"
+            android:name=".Activities.Diary.Diary"
             android:label="@string/title_activity_diary"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".Activities.FoodActivity"
             android:label="@string/title_activity_food"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".Activities.FoodNutritionFacts"
             android:label="@string/title_activity_food_nutrition_facts"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Activities.SelectFood" >
+        <activity android:name=".Activities.Diary.SelectFood" >
+        </activity>
+        <activity
+            android:name=".Activities.Diary.AddFood"
+            android:label="@string/title_activity_add_food"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

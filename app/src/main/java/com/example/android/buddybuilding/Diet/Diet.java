@@ -23,8 +23,11 @@ public abstract class Diet implements CaloriesMeasurable {
     private Food lastFoodAdded = null;
     private int lastMealChanged;
 
+    private Food foodToBeAdded = null;
+
     private static final int maxCaloriesTarget = 5000;
     protected static HashMap<String, Food> recommendedFoods;
+
 
     public Diet()
     {
@@ -177,4 +180,14 @@ public abstract class Diet implements CaloriesMeasurable {
     }
 
     public static HashMap<String, Food> getRecommendedFoods() {return recommendedFoods; }
+
+    public void setFoodToBeAdded(Food food)
+    {
+        foodToBeAdded = food;
+    }
+
+    public Food getFoodToBeAdded()
+    {
+        return foodToBeAdded;
+    }
 }
