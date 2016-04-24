@@ -11,4 +11,6 @@
     <string name="title_activity_diary">Diary</string>
     <string name="title_activity_food">FoodActivity</string>
     <string name="title_activity_food_nutrition_facts">FoodNutritionFacts</string>
+    <string name="title_activity_add_food">AddFood</string>
+    <string name="title_activity_asdasdas">asdasdas</string>
 </resources>

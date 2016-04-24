@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.android.buddybuilding.Activities.Diary.Diary;
 import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;

@@ -1,4 +1,4 @@
-package com.example.android.buddybuilding.Activities;
+package com.example.android.buddybuilding.Activities.Diary;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -36,6 +36,8 @@ public class SelectFood extends AppCompatActivity {
     private User userData = User.getInstance();
     private int nameOfMeal;
     private Meal meal;
+
+    public static final String EXTRA_NAME_MEAL = "NameOfMeal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +105,19 @@ public class SelectFood extends AppCompatActivity {
 
         if (food != null) {
             // 3rd Step | Add food to the user diary
-            userData.addFood(nameOfMeal, food);
-
-            Helper.makeToast(nameOfFood + " successfully added to " + getNameOfMeal(nameOfMeal), this);
-
-            finish();
+            changeActivity(nameOfMeal, food);
         }
+    }
+
+    private void changeActivity(int nameOfMeal, Food food)
+    {
+        Intent intent = new Intent(this, AddFood.class);
+
+        intent.putExtra(EXTRA_NAME_MEAL, nameOfMeal);
+
+        userData.getDiet().setFoodToBeAdded(food);
+
+        startActivity(intent);
     }
 
     private Food getFoodFromSuggestedFoods(String nameOfFood) {
@@ -157,11 +166,7 @@ public class SelectFood extends AppCompatActivity {
 
         if (food != null) {
             // 3rd Step | Add food to the user diary
-            userData.addFood(nameOfMeal, food);
-
-            Helper.makeToast(nameOfFood + " successfully added to " + getNameOfMeal(nameOfMeal), this);
-
-            finish();
+            changeActivity(nameOfMeal, food);
         }
     }
 
@@ -236,7 +241,7 @@ public class SelectFood extends AppCompatActivity {
         layout.addView(separator);
     }
 
-    private String getNameOfMeal(int meal) {
+    public static String getNameOfMeal(int meal) {
         switch (meal) {
             case Meal.BREAKFAST:
                 return "Breakfast";
@@ -273,12 +278,7 @@ public class SelectFood extends AppCompatActivity {
 
         Food food = getFoodFromDatabase(nameOfFood);
 
-        // 3rd Step | Add food to the user diary
-        userData.addFood(nameOfMeal, food);
-
-        Helper.makeToast(nameOfFood + " successfully added to " + getNameOfMeal(nameOfMeal), this);
-
-        finish();
+        changeActivity(nameOfMeal, food);
     }
 
     private Food getFoodFromDatabase(String nameOfFood) {

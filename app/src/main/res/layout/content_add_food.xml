@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.buddybuilding.Activities.Diary.AddFood"
+    tools:showIn="@layout/activity_add_food">
+
+    <TextView
+        android:id="@+id/nameOfFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="30dp"
+        android:text="Name of Food"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <View style="@style/separatorLine"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Number of Servings"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="16dp"
+            android:text="1"
+            android:textColor="@color/colorPrimary" />
+
+    </RelativeLayout>
+
+    <View style="@style/separatorLine"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Serving Size"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/gm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingRight="16dp"
+            android:text="gm"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/addFood_servingSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/gm"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingRight="2dp"
+            android:text="80"
+            android:textColor="@color/colorPrimary" />
+
+    </RelativeLayout>
+
+    <View style="@style/separatorLine"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e5e5e5"
+        android:orientation="horizontal">
+
+        <LinearLayout style="@style/addFood_macroContainer">
+
+            <TextView
+                android:id="@+id/addFood_carbs"
+                style="@style/addFood_macroValue"
+                android:text="2.2" />
+
+            <TextView
+                style="@style/addFood_macroName"
+                android:text="Carbs (g)" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/addFood_macroContainer">
+
+            <TextView
+                android:id="@+id/addFood_fat"
+                style="@style/addFood_macroValue"
+                android:text="2.2" />
+
+            <TextView
+                style="@style/addFood_macroName"
+                android:text="Fat (g)" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/addFood_macroContainer">
+
+            <TextView
+                android:id="@+id/addFood_protein"
+                style="@style/addFood_macroValue"
+                android:text="2.2" />
+
+            <TextView
+                style="@style/addFood_macroName"
+                android:text="Protein (g)" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/addFood_macroContainer">
+
+            <TextView
+                android:id="@+id/addFood_calories"
+                style="@style/addFood_macroValue"
+                android:text="165" />
+
+            <TextView
+                style="@style/addFood_macroName"
+                android:text="Calories" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/separatorLine"></View>
+
+</LinearLayout>
