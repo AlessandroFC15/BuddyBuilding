@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="horizontal"
+    tools:context="com.example.android.buddybuilding.Activities.Diary.ServingSize">
+
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:id="@+id/fragment_numberOfServings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:inputType="numberDecimal"
+        android:padding="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Serving(s) of" />
+
+    <EditText
+        android:id="@+id/fragment_servingSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="150"
+        android:inputType="number"
+        android:padding="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:text="gm" />
+
+</LinearLayout>

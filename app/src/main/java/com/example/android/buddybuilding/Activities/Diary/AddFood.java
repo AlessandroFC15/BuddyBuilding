@@ -2,10 +2,12 @@ package com.example.android.buddybuilding.Activities.Diary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.buddybuilding.Food.Food;
@@ -13,7 +15,7 @@ import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
 import com.example.android.buddybuilding.User.User;
 
-public class AddFood extends AppCompatActivity {
+public class AddFood extends AppCompatActivity implements ServingSize.NoticeDialogListener {
 
     private User userData = User.getInstance();
     private Food foodToBeAdded = userData.getDiet().getFoodToBeAdded();
@@ -74,6 +76,13 @@ public class AddFood extends AppCompatActivity {
         calories.setText(String.format("%d", foodToBeAdded.getCalories()));
     }
 
+    public void selectServingSize(View view)
+    {
+        DialogFragment newFragment = new ServingSize();
+        newFragment.show(getSupportFragmentManager(), "Missiles");
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -94,5 +103,90 @@ public class AddFood extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        float numberOfServings = getNumberOfServings();
+
+        if (numberOfServings != 0 && numberOfServings != 1)
+        {
+            updateNumberOfServings(numberOfServings);
+        }
+
+        int servingSize = getServingSize();
+
+        if (servingSize != -1 && servingSize != foodToBeAdded.getServingSize())
+        {
+            updateServingSize(servingSize);
+        }
+
+        if (numberOfServings > 0 && servingSize >= 1)
+        {
+            if (foodToBeAdded.changeServingSize((int) (numberOfServings * servingSize)))
+            {
+                updateMacros();
+            }
+        }
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    private void updateNumberOfServings(float numberOfServings)
+    {
+        TextView servings = (TextView) findViewById(R.id.addFood_numberOfServings);
+
+        servings.setText(Float.toString(numberOfServings));
+    }
+
+    private void updateServingSize(int servingSize)
+    {
+        TextView text = (TextView) findViewById(R.id.addFood_servingSize);
+
+        text.setText(Integer.toString(servingSize));
+    }
+
+    private float getNumberOfServings()
+    {
+        String input = ServingSize.numberOfServingsInput.getText().toString();
+
+        try {
+            float value = Float.parseFloat(input);
+            if (value > 0)
+            {
+                return value;
+            }
+
+            return 0;
+        } catch (NumberFormatException e)
+        {
+            return 0;
+        }
+    }
+
+    private int getServingSize()
+    {
+        String input = ServingSize.servingSizeInput.getText().toString();
+
+        try {
+            int value = Integer.parseInt(input);
+            if (value >= Food.MIN_SERVING_SIZE && value <= Food.MAX_SERVING_SIZE)
+            {
+                return value;
+            }
+
+            Helper.makeToast("Invalid serving size value", this);
+            return 0;
+
+        } catch (NumberFormatException e)
+        {
+            return foodToBeAdded.getServingSize();
+        }
     }
 }

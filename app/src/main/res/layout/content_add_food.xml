@@ -24,7 +24,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="selectServingSize">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,6 +36,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/addFood_numberOfServings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -47,7 +50,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="selectServingSize">
 
         <TextView
             android:layout_width="wrap_content"

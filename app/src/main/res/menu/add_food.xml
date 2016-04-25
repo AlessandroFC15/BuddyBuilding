@@ -6,5 +6,6 @@
     <item
         android:id="@+id/finished"
         app:showAsAction="always"
-        android:title="Finished" />
+        android:title="Finished"
+        android:icon="@android:drawable/ic_input_add"/>
 </menu>
