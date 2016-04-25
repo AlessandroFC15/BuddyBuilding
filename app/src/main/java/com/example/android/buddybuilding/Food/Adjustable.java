@@ -11,7 +11,7 @@ public interface Adjustable {
 
     public void changeFat(double newValue);
 
-    public void changeServingSize(int newValue);
+    public boolean changeServingSize(int newValue);
 
     public void changeName(final String newValue);
 
