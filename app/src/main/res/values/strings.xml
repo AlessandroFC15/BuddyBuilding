@@ -13,4 +13,7 @@
     <string name="title_activity_food_nutrition_facts">FoodNutritionFacts</string>
     <string name="title_activity_add_food">AddFood</string>
     <string name="title_activity_asdasdas">asdasdas</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
