@@ -183,7 +183,7 @@ public abstract class Diet implements CaloriesMeasurable {
 
     public void setFoodToBeAdded(Food food)
     {
-        foodToBeAdded = food;
+        foodToBeAdded = new Food(food);
     }
 
     public Food getFoodToBeAdded()
