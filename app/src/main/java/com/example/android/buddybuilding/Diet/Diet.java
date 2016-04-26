@@ -28,7 +28,6 @@ public abstract class Diet implements CaloriesMeasurable {
     private static final int maxCaloriesTarget = 5000;
     protected static HashMap<String, Food> recommendedFoods;
 
-
     public Diet()
     {
         setAttributesToDefault();
@@ -94,31 +93,9 @@ public abstract class Diet implements CaloriesMeasurable {
         return meals.get(nameOfMeal).getCalories();
     }
 
-    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal)
-    {
-        switch (weeklyGoal)
-        {
-            case GAIN_250G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case GAIN_500G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_250G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_500G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_750G:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-            case LOSE_1KG:
-                totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-                break;
-        }
-    }
+    public abstract void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal);
 
+    /*
     public void setCaloriesTarget(int target)
     {
         if (target > 0)
@@ -126,6 +103,7 @@ public abstract class Diet implements CaloriesMeasurable {
             totalCaloriesTarget = target;
         }
     }
+    */
 
     public int getCaloriesTarget()
     {
