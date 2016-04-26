@@ -136,13 +136,7 @@ public class User extends Person {
     }
 
     public void setCaloriesTarget() {
-        // If the goal of the user is to maintain weight, then its calories goal is the
-        // same as its BMR.
-        if (getGoal() == Goal.MAINTAIN_WEIGHT) {
-            diet.setCaloriesTarget(getBMR());
-        } else {
-            diet.setCaloriesTarget(getBMR(), getWeeklyGoal());
-        }
+        diet.setCaloriesTarget(getBMR(), getWeeklyGoal());
     }
 
     public double getCaloriesTarget() {
@@ -185,7 +179,8 @@ public class User extends Person {
     public enum WeeklyGoal {
         GAIN_250G(500, "Gain 250G"), GAIN_500G(750, "Gain 500G"),
         LOSE_250G(-200, "Lose 250G"), LOSE_500G(-300, "Lose 500G"),
-        LOSE_750G(-400, "Lose 750G"), LOSE_1KG(-500, "Lose 1KG");
+        LOSE_750G(-400, "Lose 750G"), LOSE_1KG(-500, "Lose 1KG"),
+        MAINTAIN(0, "Maintain Weight");
 
         private final int calories;
         private final String description;
@@ -250,6 +245,15 @@ public class User extends Person {
 
     public boolean isDietToLose() {
         return (diet instanceof DietToLose);
+    }
+
+    /*
+    Calculo da Taxa Metabólica Basal
+    Assumiu-se a formula 32 * kg
+     */
+
+    public int getBMR() {
+        return 32 * (int) getWeight();
     }
 
 }
