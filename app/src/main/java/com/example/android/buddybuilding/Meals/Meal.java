@@ -67,12 +67,10 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
         }
     }
 
-
     public int getName()
     {
         return name;
     }
-
 
     public ArrayList<Food> getFoodsFromMeal()
     {
@@ -119,4 +117,6 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
                 "\n>> Calories: " + totalCalories +
                 "\n>> Number of Foods: " + foods.size();
     }
+
+    protected abstract void addDefaultFood();
 }

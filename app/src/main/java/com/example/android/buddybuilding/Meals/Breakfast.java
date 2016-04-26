@@ -37,7 +37,7 @@ public class Breakfast extends Meal {
         super(breakfast);
     }
 
-    private void addDefaultFood()
+    protected void addDefaultFood()
     {
         Food food = new Food("Pão", 50, 2, 35, 5);
 

@@ -37,7 +37,7 @@ public class Dinner extends Meal {
         super(dinner);
     }
 
-    private void addDefaultFood()
+    protected void addDefaultFood()
     {
         Food frango = new Food("Frango", 150, 35, 0, 5);
         Food macarrao = new Food("Macarrão", 150, 0, 50, 5);
