@@ -3,11 +3,7 @@ package com.example.android.buddybuilding.User;
 import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.Helper;
 
-/**
- * Created by Alessandro on 04/04/2016.
- */
 public abstract class Person implements Comparable<Person>, PhysicallyActive {
-
     public static final double MIN_HEIGHT = 57;
     public static final double MAX_HEIGHT = 260;
 
@@ -16,27 +12,6 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     public static final int MIN_AGE = 0;
     public static final int MAX_AGE = 150;
-
-    public enum Gender {
-        MALE, FEMALE
-    }
-
-    public enum ActivityLevel {
-        NOT_VERY_ACTIVE("Not Very Active"),
-        LIGHTLY_ACTIVE("Lightly Active"),
-        ACTIVE("Active"),
-        VERY_ACTIVE("Very Active");
-
-        String description;
-
-        ActivityLevel(String description) {
-            this.description = description;
-        }
-
-        public String toString() {
-            return description;
-        }
-    }
 
     protected Gender gender;
     protected int age;
@@ -77,7 +52,6 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
 
     }
 
-
     public boolean setGender(Gender choice) {
         if ((choice == Gender.MALE) || (choice == Gender.FEMALE)) {
             gender = choice;
@@ -109,14 +83,7 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         return weight;
     }
 
-    /*
-    Calculo da Taxa Metabólica Basal
-    Assumiu-se a formula 32 * kg
-     */
-
-    public int getBMR() {
-        return 32 * (int) getWeight();
-    }
+    public abstract int getBMR();
 
     public int compareTo(Person person) {
         if (weight > person.weight) {
@@ -145,6 +112,27 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
                 "\n>> Height: " + height + " cm" +
                 "\n>> Weight: " + weight + " kg" +
                 "\n>> ActivityLevel: " + activityLevel.toString();
+    }
+
+    public enum Gender {
+        MALE, FEMALE
+    }
+
+    public enum ActivityLevel {
+        NOT_VERY_ACTIVE("Not Very Active"),
+        LIGHTLY_ACTIVE("Lightly Active"),
+        ACTIVE("Active"),
+        VERY_ACTIVE("Very Active");
+
+        String description;
+
+        ActivityLevel(String description) {
+            this.description = description;
+        }
+
+        public String toString() {
+            return description;
+        }
     }
 }
 
