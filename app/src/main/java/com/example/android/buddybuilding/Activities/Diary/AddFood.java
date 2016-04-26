@@ -17,9 +17,13 @@ import com.example.android.buddybuilding.User.User;
 
 public class AddFood extends AppCompatActivity implements ServingSize.NoticeDialogListener {
 
+
+
     private User userData = User.getInstance();
     private Food foodToBeAdded = userData.getDiet().getFoodToBeAdded();
     private int nameOfMeal;
+    public float numberOfServings = 1;
+    public int servingSize = foodToBeAdded.getServingSize();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +44,7 @@ public class AddFood extends AppCompatActivity implements ServingSize.NoticeDial
         updateMacros();
     }
 
-    private void addFoodToMeal()
-    {
+    private void addFoodToMeal() {
         userData.addFood(nameOfMeal, foodToBeAdded);
 
         Helper.makeToast(foodToBeAdded.getName() + " successfully added to " + SelectFood.getNameOfMeal(nameOfMeal), this);
@@ -49,22 +52,19 @@ public class AddFood extends AppCompatActivity implements ServingSize.NoticeDial
         startActivity(new Intent(this, Diary.class));
     }
 
-    private void updateNameOfFood()
-    {
+    private void updateNameOfFood() {
         TextView name = (TextView) findViewById(R.id.nameOfFood);
 
         name.setText(foodToBeAdded.getName());
     }
 
-    private void updateServingSize()
-    {
+    private void updateServingSize() {
         TextView servingSize = (TextView) findViewById(R.id.addFood_servingSize);
 
         servingSize.setText(String.format("%d", foodToBeAdded.getServingSize()));
     }
 
-    private void updateMacros()
-    {
+    private void updateMacros() {
         TextView carbs = (TextView) findViewById(R.id.addFood_carbs);
         TextView protein = (TextView) findViewById(R.id.addFood_protein);
         TextView fat = (TextView) findViewById(R.id.addFood_fat);
@@ -76,9 +76,9 @@ public class AddFood extends AppCompatActivity implements ServingSize.NoticeDial
         calories.setText(String.format("%d", foodToBeAdded.getCalories()));
     }
 
-    public void selectServingSize(View view)
-    {
-        DialogFragment newFragment = new ServingSize();
+    public void selectServingSize(View view) {
+        DialogFragment newFragment = ServingSize.newInstance(servingSize, numberOfServings);
+
         newFragment.show(getSupportFragmentManager(), "Missiles");
     }
 
@@ -99,7 +99,15 @@ public class AddFood extends AppCompatActivity implements ServingSize.NoticeDial
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.finished) {
-            addFoodToMeal();
+            if (numberOfServings > 0) {
+                if (servingSize >= Food.MIN_SERVING_SIZE && servingSize <= Food.MAX_SERVING_SIZE) {
+                    addFoodToMeal();
+                } else {
+                    Helper.makeToast("Invalid serving size!", this);
+                }
+            } else {
+                Helper.makeToast("Invalid number of servings!", this);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -110,24 +118,14 @@ public class AddFood extends AppCompatActivity implements ServingSize.NoticeDial
     // defined by the NoticeDialogFragment.NoticeDialogListener interface
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        float numberOfServings = getNumberOfServings();
+        numberOfServings = getNumberOfServings();
+        updateNumberOfServings(numberOfServings);
 
-        if (numberOfServings != 0 && numberOfServings != 1)
-        {
-            updateNumberOfServings(numberOfServings);
-        }
+        servingSize = getServingSize();
+        updateServingSize(servingSize);
 
-        int servingSize = getServingSize();
-
-        if (servingSize != -1 && servingSize != foodToBeAdded.getServingSize())
-        {
-            updateServingSize(servingSize);
-        }
-
-        if (numberOfServings > 0 && servingSize >= 1)
-        {
-            if (foodToBeAdded.changeServingSize((int) (numberOfServings * servingSize)))
-            {
+        if (numberOfServings > 0 && servingSize >= 1) {
+            if (foodToBeAdded.changeServingSize((int) (numberOfServings * servingSize))) {
                 updateMacros();
             }
         }
@@ -138,55 +136,35 @@ public class AddFood extends AppCompatActivity implements ServingSize.NoticeDial
 
     }
 
-    private void updateNumberOfServings(float numberOfServings)
-    {
+    private void updateNumberOfServings(float numberOfServings) {
         TextView servings = (TextView) findViewById(R.id.addFood_numberOfServings);
 
         servings.setText(Float.toString(numberOfServings));
     }
 
-    private void updateServingSize(int servingSize)
-    {
+    private void updateServingSize(int servingSize) {
         TextView text = (TextView) findViewById(R.id.addFood_servingSize);
 
         text.setText(Integer.toString(servingSize));
     }
 
-    private float getNumberOfServings()
-    {
+    private float getNumberOfServings() {
         String input = ServingSize.numberOfServingsInput.getText().toString();
 
         try {
-            float value = Float.parseFloat(input);
-            if (value > 0)
-            {
-                return value;
-            }
-
-            return 0;
-        } catch (NumberFormatException e)
-        {
+            return Float.parseFloat(input);
+        } catch (NumberFormatException e) {
             return 0;
         }
     }
 
-    private int getServingSize()
-    {
+    private int getServingSize() {
         String input = ServingSize.servingSizeInput.getText().toString();
 
         try {
-            int value = Integer.parseInt(input);
-            if (value >= Food.MIN_SERVING_SIZE && value <= Food.MAX_SERVING_SIZE)
-            {
-                return value;
-            }
-
-            Helper.makeToast("Invalid serving size value", this);
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
             return 0;
-
-        } catch (NumberFormatException e)
-        {
-            return foodToBeAdded.getServingSize();
         }
     }
 }

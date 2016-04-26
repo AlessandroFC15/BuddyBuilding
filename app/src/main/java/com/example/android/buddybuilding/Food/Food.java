@@ -164,19 +164,18 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         }
     }
 
-
     public boolean changeServingSize(int newValue)
     {
         if ((newValue >= MIN_SERVING_SIZE) && (newValue <= MAX_SERVING_SIZE))
         {
             float ratio = (float) newValue / (float) servingSize;
 
+            servingSize = newValue;
+
             changeProtein(protein * ratio);
             changeFat(totalFat * ratio);
             changeCarbs(carbohydrates * ratio);
             calculateCalories();
-
-            servingSize = newValue;
 
             return true;
         }

@@ -16,6 +16,20 @@ import com.example.android.buddybuilding.User.User;
 
 public class ServingSize extends DialogFragment {
 
+    public static final String SERVING_SIZE = "ServingSize";
+    public static final String NUMBER_OF_SERVINGS = "NumberOfServings";
+
+    public static ServingSize newInstance(int servingSize, float numberOfServings) {
+        ServingSize f = new ServingSize();
+
+        Bundle args = new Bundle();
+        args.putFloat(NUMBER_OF_SERVINGS, numberOfServings);
+        args.putInt(SERVING_SIZE, servingSize);
+        f.setArguments(args);
+
+        return f;
+    }
+
     private User userData = User.getInstance();
     private Food foodToBeAdded = userData.getDiet().getFoodToBeAdded();
     public static EditText numberOfServingsInput;
@@ -44,13 +58,24 @@ public class ServingSize extends DialogFragment {
         numberOfServingsInput = (EditText) view.findViewById(R.id.fragment_numberOfServings);
         servingSizeInput = (EditText) view.findViewById(R.id.fragment_servingSize);
 
-        servingSizeInput.setText(String.format("%d", foodToBeAdded.getServingSize()));
+        setNumberOfServings(getArguments().getFloat(NUMBER_OF_SERVINGS));
+        setServingSize(getArguments().getInt(SERVING_SIZE));
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(view);
 
         return builder.create();
+    }
+
+    public void setNumberOfServings(float numberOfServings)
+    {
+        numberOfServingsInput.setText(String.format("%.1f", numberOfServings));
+    }
+
+    public void setServingSize(int servingSize)
+    {
+        servingSizeInput.setText(String.format("%d", servingSize));
     }
 
     /* The activity that creates an instance of this dialog fragment must
