@@ -64,6 +64,12 @@
             android:label="@string/title_activity_add_food"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".Activities.Nutrition"
+            android:label="@string/title_activity_nutrition"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
