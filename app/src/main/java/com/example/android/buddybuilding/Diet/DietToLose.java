@@ -29,4 +29,6 @@ public abstract class DietToLose extends Diet {
     public String toString() {
         return super.toString();
     }
+
+    public abstract void setMacroDistribution();
 }

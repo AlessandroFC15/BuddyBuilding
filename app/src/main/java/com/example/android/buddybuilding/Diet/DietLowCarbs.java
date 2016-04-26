@@ -49,5 +49,8 @@ public class DietLowCarbs extends DietToLose {
         }
     }
 
+    public void setMacroDistribution()
+    {
 
+    }
 }

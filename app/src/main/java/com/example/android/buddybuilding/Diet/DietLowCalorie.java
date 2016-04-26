@@ -35,4 +35,9 @@ public class DietLowCalorie extends DietToLose{
     {
         return ".: DietLowCalorie :." + super.toString();
     }
+
+    public void setMacroDistribution()
+    {
+
+    }
 }
