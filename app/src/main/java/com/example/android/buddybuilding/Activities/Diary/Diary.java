@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.android.buddybuilding.Activities.FoodActivity;
 import com.example.android.buddybuilding.Activities.Home;
+import com.example.android.buddybuilding.Activities.Nutrition;
 import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.Meals.Meal;
@@ -260,6 +261,8 @@ public class Diary extends AppCompatActivity
             startActivity(new Intent(this, Home.class));
         } else if (id == R.id.nav_foods) {
             startActivity(new Intent(this, FoodActivity.class));
+        } else if (id == R.id.nav_nutrition) {
+            startActivity(new Intent(this, Nutrition.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

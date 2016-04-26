@@ -68,8 +68,7 @@ public class Home extends AppCompatActivity
         updateCaloriesRemaining();
     }
 
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
 
         updateCaloriesTarget();
@@ -81,8 +80,7 @@ public class Home extends AppCompatActivity
         checkHomeInMenu();
     }
 
-    private void checkHomeInMenu()
-    {
+    private void checkHomeInMenu() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_home);
     }
@@ -91,22 +89,19 @@ public class Home extends AppCompatActivity
     Assumiu-se a formula 32 * kg
      */
 
-    private void updateCaloriesTarget()
-    {
+    private void updateCaloriesTarget() {
         TextView caloriesGoal = (TextView) findViewById(R.id.caloriesGoal);
 
         caloriesGoal.setText(Integer.toString((int) userData.getCaloriesTarget()));
     }
 
-    private void updateFoodCalories()
-    {
+    private void updateFoodCalories() {
         TextView foodCalories = (TextView) findViewById(R.id.foodIntake);
 
         foodCalories.setText(Integer.toString((int) userData.getCaloriesIntake()));
     }
 
-    private void updateCaloriesRemaining()
-    {
+    private void updateCaloriesRemaining() {
         TextView textCaloriesGoal = (TextView) findViewById(R.id.caloriesGoal);
         TextView textFoodIntake = (TextView) findViewById(R.id.foodIntake);
         TextView textRemainingCalories = (TextView) findViewById(R.id.remainingCalories);
@@ -158,6 +153,8 @@ public class Home extends AppCompatActivity
             startActivity(new Intent(this, Diary.class));
         } else if (id == R.id.nav_foods) {
             startActivity(new Intent(this, FoodActivity.class));
+        } else if (id == R.id.nav_nutrition) {
+            startActivity(new Intent(this, Nutrition.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

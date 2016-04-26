@@ -95,6 +95,8 @@ public class FoodActivity extends AppCompatActivity
                     setIndicatorVisible(R.id.indicatorAddFood);
                     changeButtonTextColor(R.id.buttonAddFood);
                 }
+
+                break;
         }
     }
 
@@ -393,6 +395,8 @@ public class FoodActivity extends AppCompatActivity
             startActivity(new Intent(this, Home.class));
         } else if (id == R.id.nav_diary) {
             startActivity(new Intent(this, Diary.class));
+        } else if (id == R.id.nav_nutrition) {
+            startActivity(new Intent(this, Nutrition.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
