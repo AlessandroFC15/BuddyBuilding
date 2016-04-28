@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.buddybuilding.Activities.Nutrition"
@@ -18,7 +19,7 @@
         <Button
             android:id="@+id/buttonCalories"
             style="@style/nutrition_changeScreenButton"
-            android:text="Calories"/>
+            android:text="Calories" />
 
         <Button
             android:id="@+id/buttonNutrients"
@@ -32,45 +33,170 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/caloriesScreen"
-        android:visibility="gone">
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calories"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/nutrientsScreen"
-        android:visibility="gone">
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Day View"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nutrients"/>
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="Today (28/04) "
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/macrosScreen"
-        android:visibility="gone">
+        android:fillViewport="true">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Macros"/>
+            android:background="@color/light_gray"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/caloriesScreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/caloriesPieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PieChart"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <View style="@style/separatorLine" />
+
+                <RelativeLayout style="@style/macroContainer">
+
+                    <TextView
+                        style="@style/macroName"
+                        android:text="Total Calories" />
+
+                    <TextView
+                        style="@style/macroInput"
+                        android:gravity="end"
+                        android:text="0"
+                        android:textAlignment="textEnd" />
+
+                </RelativeLayout>
+
+                <View style="@style/separatorLine" />
+
+                <RelativeLayout style="@style/macroContainer">
+
+                    <TextView
+                        style="@style/macroName"
+                        android:text="Calories Left" />
+
+                    <TextView
+                        style="@style/macroInput"
+                        android:gravity="end"
+                        android:text="0"
+                        android:textAlignment="textEnd" />
+
+                </RelativeLayout>
+
+                <View style="@style/separatorLine" />
+
+                <RelativeLayout style="@style/macroContainer">
+
+                    <TextView
+                        style="@style/macroName"
+                        android:text="Goal" />
+
+                    <TextView
+                        style="@style/macroInput"
+                        android:gravity="end"
+                        android:text="0"
+                        android:textAlignment="textEnd"
+                        android:textColor="@android:color/holo_blue_light" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:textColor="@android:color/black"
+                    android:background="@android:color/white"
+                    android:text="Foods Highest in Calories"
+                    android:textSize="16sp"/>
+
+                <View style="@style/separatorLine" />
+
+                <LinearLayout
+                    android:id="@+id/foodsHighestCalories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nutrientsScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nutrients" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/macrosScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Macros" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

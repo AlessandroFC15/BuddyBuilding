@@ -40,6 +40,7 @@ public class Nutrition extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         checkNutritionInMenu();
+
     }
 
     public void onResume() {
@@ -99,8 +100,7 @@ public class Nutrition extends AppCompatActivity
         return true;
     }
 
-    private void checkNutritionInMenu()
-    {
+    private void checkNutritionInMenu() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_nutrition);
     }
@@ -116,11 +116,9 @@ public class Nutrition extends AppCompatActivity
         setAllLayoutsToGone();
         LinearLayout layoutToShow = getLayoutOfButton(id);
 
-        if (layoutToShow != null)
-        {
+        if (layoutToShow != null) {
             layoutToShow.setVisibility(View.VISIBLE);
-        } else
-        {
+        } else {
             Helper.makeToast("Error in changing screen", this);
         }
     }
@@ -129,10 +127,8 @@ public class Nutrition extends AppCompatActivity
      Method to get the corresponding layout to each button in the activity
      */
 
-    private LinearLayout getLayoutOfButton(int id)
-    {
-        switch (id)
-        {
+    private LinearLayout getLayoutOfButton(int id) {
+        switch (id) {
             case (R.id.buttonCalories):
                 return (LinearLayout) findViewById(R.id.caloriesScreen);
             case (R.id.buttonNutrients):
@@ -144,8 +140,7 @@ public class Nutrition extends AppCompatActivity
         }
     }
 
-    private void setAllLayoutsToGone()
-    {
+    private void setAllLayoutsToGone() {
         LinearLayout caloriesLayout = (LinearLayout) findViewById(R.id.caloriesScreen);
         LinearLayout nutrientsLayout = (LinearLayout) findViewById(R.id.nutrientsScreen);
         LinearLayout macrosLayout = (LinearLayout) findViewById(R.id.macrosScreen);
@@ -155,8 +150,7 @@ public class Nutrition extends AppCompatActivity
         macrosLayout.setVisibility(View.GONE);
     }
 
-    private void setAllButtonsToDefault()
-    {
+    private void setAllButtonsToDefault() {
         Button caloriesButton = (Button) findViewById(R.id.buttonCalories);
         Button nutrientsButton = (Button) findViewById(R.id.buttonNutrients);
         Button macrosButton = (Button) findViewById(R.id.buttonMacros);
@@ -170,9 +164,11 @@ public class Nutrition extends AppCompatActivity
         macrosButton.setTypeface(null, Typeface.NORMAL);
     }
 
-    private void setButtonToChosen(Button button)
-    {
-       button.setTypeface(null, Typeface.BOLD);
-       button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    private void setButtonToChosen(Button button) {
+        button.setTypeface(null, Typeface.BOLD);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     }
+
+
 }
+
