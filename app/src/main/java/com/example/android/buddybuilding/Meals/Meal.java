@@ -58,13 +58,47 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     {
         if (foods.size() < maxAmountOfFoods)
         {
-            foods.add(newFood);
+            if (hasFood(newFood))
+            {
+                Food food = getFood(newFood.getName());
+
+                food.changeServingSize(food.getServingSize() + newFood.getServingSize());
+            } else
+            {
+                foods.add(newFood);
+            }
 
             this.totalProtein += newFood.getProtein();
             this.totalCarbs += newFood.getCarbs();
             this.totalCalories += newFood.getCalories();
             this.totalFat += newFood.getTotalFat();
         }
+    }
+
+    private Food getFood(String nameOfFood)
+    {
+        for (Food food : foods)
+        {
+            if (food.getName().equals(nameOfFood))
+            {
+                return food;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean hasFood(Food newFood)
+    {
+        for (Food food : foods)
+        {
+            if (food.getName().equals(newFood.getName()))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public int getName()

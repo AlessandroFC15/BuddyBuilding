@@ -58,9 +58,7 @@ public class Diary extends AppCompatActivity
 
         // We will only update the meal if some food has been added
         if (userData.hasDietChanged()) {
-            int lastMealChanged = userData.getLastMealChanged();
-
-            updateMeal(lastMealChanged);
+            updateMeal(userData.getLastMealChanged());
         }
     }
 
@@ -90,6 +88,7 @@ public class Diary extends AppCompatActivity
         TextView mealCalories = (TextView) findViewById(caloriesMealID);
 
         LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
+        layout.removeAllViews();
 
         mealCalories.setText(Integer.toString(meal.getCalories()));
 
@@ -118,29 +117,11 @@ public class Diary extends AppCompatActivity
     }
 
     private void updateMeal(int nameOfMeal) {
-        // 1st Step = Get the object meal
+        printMeal(nameOfMeal);
 
-        Meal meal = meals.get(nameOfMeal);
 
-        // 2nd Step = Get the correct ids for the given meal
 
-        int caloriesMealID = getCaloriesMealID(nameOfMeal);
-
-        int mealLayoutID = getMealLayoutID(nameOfMeal);
-
-        // 3rd Step = Find the view and the layout
-
-        TextView mealCalories = (TextView) findViewById(caloriesMealID);
-
-        LinearLayout layout = (LinearLayout) findViewById(mealLayoutID);
-
-        // 4th Step = Update the mealCalories and print the last food added.
-
-        mealCalories.setText(Integer.toString(meal.getCalories()));
-
-        printFood(userData.getLastFoodAdded(), layout);
-
-        userData.resetLastFoodAdded();
+        userData.getDiet().setDietChanged(false);
     }
 
     private int getCaloriesMealID(int nameOfMeal) {
@@ -176,18 +157,16 @@ public class Diary extends AppCompatActivity
     }
 
     private int getCorrectMeal(View view) {
-        LinearLayout meal = (LinearLayout) view.getParent().getParent();
-
-        int id = meal.getId();
+        int id = view.getId();
 
         switch (id) {
-            case R.id.mealBreakfast:
+            case R.id.buttonBreakfast:
                 return Meal.BREAKFAST;
-            case R.id.mealLunch:
+            case R.id.buttonLunch:
                 return Meal.LUNCH;
-            case R.id.mealDinner:
+            case R.id.buttonDinner:
                 return Meal.DINNER;
-            case R.id.mealSnacks:
+            case R.id.buttonSnacks:
                 return Meal.SNACKS;
             default:
                 Helper.makeToast("Error in getting correct meal", this);
@@ -205,7 +184,7 @@ public class Diary extends AppCompatActivity
 
         food.setPadding(padding, padding, padding, padding);
 
-        meal.addView(food, 2);
+        meal.addView(food);
     }
 
     private void updateMealCalories(int nameOfMeal) {
