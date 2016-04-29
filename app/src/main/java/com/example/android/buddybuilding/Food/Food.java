@@ -103,7 +103,7 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
 
     public int compareTo(Food food)
     {
-        if (calories >= food.calories)
+        if (calories > food.calories)
         {
             return 1;
         } else if (calories == food.calories)
@@ -119,10 +119,7 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
     {
         if (object instanceof Food)
         {
-            return ((protein == ((Food) object).protein) &&
-                    (carbohydrates == ((Food) object).carbohydrates) &&
-                    (totalFat == ((Food) object).totalFat) &&
-                    (servingSize == ((Food) object).servingSize));
+            return name.equals(((Food) object).name);
         } else
         {
             return false;
