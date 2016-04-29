@@ -1,6 +1,7 @@
 package com.example.android.buddybuilding.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -102,13 +103,16 @@ public class Home extends AppCompatActivity
     }
 
     private void updateCaloriesRemaining() {
-        TextView textCaloriesGoal = (TextView) findViewById(R.id.caloriesGoal);
-        TextView textFoodIntake = (TextView) findViewById(R.id.foodIntake);
         TextView textRemainingCalories = (TextView) findViewById(R.id.remainingCalories);
 
         int remainingCalories = (int) userData.getCaloriesTarget() - (int) userData.getCaloriesIntake();
 
         textRemainingCalories.setText(Integer.toString(remainingCalories));
+
+        if (remainingCalories < 0)
+        {
+            textRemainingCalories.setTextColor(Color.RED);
+        }
     }
 
     @Override
