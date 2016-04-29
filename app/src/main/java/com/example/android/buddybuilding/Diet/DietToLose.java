@@ -11,7 +11,10 @@ public abstract class DietToLose extends Diet {
     }
 
     public DietToLose(int bmr, User.WeeklyGoal weeklyGoal) {
+
         setCaloriesTarget(bmr, weeklyGoal);
+
+        setMacrosTarget();
     }
 
     public DietToLose(final DietToLose diet) {
@@ -30,5 +33,4 @@ public abstract class DietToLose extends Diet {
         return super.toString();
     }
 
-    public abstract void setMacroDistribution();
 }

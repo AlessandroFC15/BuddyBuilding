@@ -11,4 +11,34 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="tableLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">end</item>
+        <item name="android:layout_weight">0.2</item>
+    </style>
+
+    <style name="tableMacro">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.4</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="progressBarContainer">
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/light_gray</item>
+        <item name="android:weightSum">1</item>
+    </style>
+
+    <style name="separatorLine.progressBar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 </resources>

@@ -153,4 +153,19 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     }
 
     protected abstract void addDefaultFood();
+
+    public double getProtein()
+    {
+        return totalProtein;
+    }
+
+    public double getCarbs()
+    {
+        return totalCarbs;
+    }
+
+    public double getFat()
+    {
+        return totalFat;
+    }
 }

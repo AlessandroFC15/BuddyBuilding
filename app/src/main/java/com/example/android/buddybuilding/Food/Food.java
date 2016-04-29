@@ -208,4 +208,9 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         foodsCreated = 0;
     }
 
+    public double getFat()
+    {
+        return totalFat;
+    }
+
 }

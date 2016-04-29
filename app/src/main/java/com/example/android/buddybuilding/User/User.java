@@ -30,8 +30,8 @@ public class User extends Person {
     // Construtores
 
     User() {
-        goal = Goal.LOSE_WEIGHT;
-        weeklyGoal = WeeklyGoal.LOSE_500G;
+        goal = Goal.GAIN_WEIGHT;
+        weeklyGoal = WeeklyGoal.GAIN_250G;
         diet = getCorrectDiet(goal);
 
         numberOfUsers++;

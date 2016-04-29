@@ -14,6 +14,8 @@ public class DietToGain extends Diet{
     public DietToGain(int bmr, User.WeeklyGoal weeklyGoal)
     {
         setCaloriesTarget(bmr, weeklyGoal);
+
+        setMacrosTarget();
     }
 
     public DietToGain(final DietToGain diet)
@@ -41,6 +43,24 @@ public class DietToGain extends Diet{
     public String toString()
     {
         return ".: DietToGain :." + super.toString();
+    }
+
+    /*
+     Em DietToGain, a divisão dos macros será feita da seguinte maneira.
+     50% | Carbs
+     30% | Protein
+     20% | Fat
+     */
+
+    protected void setMacrosTarget()
+    {
+        double carbsCalories = (totalCaloriesTarget * 50.0) / 100.0;
+        double proteinCalories = (totalCaloriesTarget * 30.0) / 100.0;
+        double fatCalories = (totalCaloriesTarget * 20.0) / 100.0;
+
+        carbsTarget = carbsCalories / 4;
+        proteinTarget = proteinCalories / 4;
+        fatTarget = fatCalories / 9;
     }
 
 }

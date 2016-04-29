@@ -54,6 +54,8 @@ public class Nutrition extends AppCompatActivity
 
         updateCaloriesScreen();
 
+        updateNutrientsScreen();
+
         changeScreen(findViewById(R.id.buttonCalories));
     }
 
@@ -64,6 +66,7 @@ public class Nutrition extends AppCompatActivity
 
         updateCaloriesScreen();
 
+        updateNutrientsScreen();
     }
 
     @Override
@@ -186,6 +189,10 @@ public class Nutrition extends AppCompatActivity
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     }
 
+    /*
+     FUNCTIONS RELATED TO THE CALORIES OPTION
+     */
+
     private void updateCaloriesScreen()
     {
         int totalCalories = userData.getDiet().getCalories();
@@ -266,5 +273,101 @@ public class Nutrition extends AppCompatActivity
         layout.addView(container);
     }
 
+    /*
+     END OF FUNCTIONS RELATED TO THE CALORIES OPTION
+     */
+
+    /*
+     END OF FUNCTIONS RELATED TO THE NUTRIENTS OPTION
+     */
+
+    private void updateNutrientsScreen()
+    {
+        updateProteinValues();
+        updateCarbsValues();
+        updateFatValues();
+    }
+
+    private void updateProteinValues()
+    {
+        TextView proteinTotal = (TextView) findViewById(R.id.proteinTotal);
+        TextView proteinGoal = (TextView) findViewById(R.id.proteinGoal);
+
+        int proteinIntake = (int) userData.getDiet().getProteinIntake();
+        int proteinTarget = (int) userData.getDiet().getProteinTarget();
+
+        proteinTotal.setText(String.format("%d", proteinIntake));
+        proteinGoal.setText(String.format("%d", proteinTarget));
+
+        updateLeftValue(proteinTarget - proteinIntake, R.id.proteinLeft);
+
+        float progress = (float) proteinIntake / proteinTarget;
+
+        updateProgressBar(progress, R.id.proteinProgress);
+
+    }
+
+    private void updateCarbsValues()
+    {
+        TextView carbsTotal = (TextView) findViewById(R.id.carbsTotal);
+        TextView carbsGoal = (TextView) findViewById(R.id.carbsGoal);
+
+        int carbsIntake = (int) userData.getDiet().getCarbsIntake();
+        int carbsTarget = (int) userData.getDiet().getCarbsTarget();
+
+        carbsTotal.setText(String.format("%d", carbsIntake));
+        carbsGoal.setText(String.format("%d", carbsTarget));
+
+        updateLeftValue(carbsTarget - carbsIntake, R.id.carbsLeft);
+
+        float progress = (float) carbsIntake / carbsTarget;
+
+        updateProgressBar(progress, R.id.carbsProgress);
+    }
+
+    private void updateFatValues()
+    {
+        TextView fatTotal = (TextView) findViewById(R.id.fatTotal);
+        TextView fatGoal = (TextView) findViewById(R.id.fatGoal);
+
+        int fatIntake = (int) userData.getDiet().getFatIntake();
+        int fatTarget = (int) userData.getDiet().getFatTarget();
+
+        fatTotal.setText(String.format("%d", fatIntake));
+        fatGoal.setText(String.format("%d", fatTarget));
+
+        updateLeftValue(fatTarget - fatIntake, R.id.fatLeft);
+
+        float progress = (float) fatIntake / fatTarget;
+
+        updateProgressBar(progress, R.id.fatProgress);
+    }
+
+    private void updateLeftValue(int value, int id)
+    {
+        TextView text = (TextView) findViewById(id);
+
+        text.setText(String.format("%d", value));
+
+        if (value < 0)
+        {
+            text.setTextColor(Color.rgb(255, 165, 0));
+        }
+    }
+
+    private void updateProgressBar(float progress, int id)
+    {
+        View progressBar = findViewById(id);
+
+        if (progress >= 1)
+        {
+            progress = 1;
+            progressBar.setBackgroundColor(Color.GREEN);
+        }
+
+        progressBar.setLayoutParams(
+                new LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.MATCH_PARENT, progress));
+    }
 }
 

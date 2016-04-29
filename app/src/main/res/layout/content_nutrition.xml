@@ -73,8 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <RelativeLayout style="@style/macroContainer">
 
@@ -83,8 +83,8 @@
                         android:text="Total Calories" />
 
                     <TextView
-                        style="@style/macroInput"
                         android:id="@+id/totalCalories"
+                        style="@style/macroInput"
                         android:gravity="end"
                         android:text="0"
                         android:textAlignment="textEnd" />
@@ -100,9 +100,9 @@
                         android:text="Calories Left" />
 
                     <TextView
+                        android:id="@+id/caloriesLeft"
                         style="@style/macroInput"
                         android:gravity="end"
-                        android:id="@+id/caloriesLeft"
                         android:text="0"
                         android:textAlignment="textEnd" />
 
@@ -117,9 +117,9 @@
                         android:text="Goal" />
 
                     <TextView
+                        android:id="@+id/caloriesGoal"
                         style="@style/macroInput"
                         android:gravity="end"
-                        android:id="@+id/caloriesGoal"
                         android:text="0"
                         android:textAlignment="textEnd"
                         android:textColor="@android:color/holo_blue_light" />
@@ -128,14 +128,14 @@
 
 
                 <TextView
-                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:textColor="@android:color/black"
+                    android:layout_marginTop="20dp"
                     android:background="@android:color/white"
+                    android:padding="15dp"
                     android:text="Foods Highest in Calories"
-                    android:textSize="16sp"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <View style="@style/separatorLine" />
 
@@ -150,20 +150,176 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/nutrientsScreen"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nutrients" />
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        style="@style/tableMacro"
+                        ></TextView>
+
+                    <TextView
+                        style="@style/tableLabel"
+                        android:text="Total" />
+
+                    <TextView
+                        style="@style/tableLabel"
+                        android:text="Goal" />
+
+                    <TextView
+                        style="@style/tableLabel"
+                        android:text="Left" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/tableMacro"
+                            android:text="Protein" />
+
+                        <TextView
+                            android:id="@+id/proteinTotal"
+                            style="@style/tableLabel"
+                            android:text="0" />
+
+                        <TextView
+                            android:id="@+id/proteinGoal"
+                            style="@style/tableLabel"
+                            android:text="0" />
+
+                        <TextView
+                            android:id="@+id/proteinLeft"
+                            style="@style/tableLabel"
+                            android:text="0g"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/progressBarContainer">
+
+                        <View
+                            android:id="@+id/proteinProgress"
+                            style="@style/separatorLine.progressBar"></View>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/separatorLine"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/tableMacro"
+                            android:text="Carbohydrates" />
+
+                        <TextView
+                            android:id="@+id/carbsTotal"
+                            style="@style/tableLabel"
+                            android:text="0" />
+
+                        <TextView
+                            android:id="@+id/carbsGoal"
+                            style="@style/tableLabel"
+                            android:text="0" />
+
+                        <TextView
+                            android:id="@+id/carbsLeft"
+                            style="@style/tableLabel"
+                            android:text="0g"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/progressBarContainer">
+
+                        <View
+                            android:id="@+id/carbsProgress"
+                            style="@style/separatorLine.progressBar"></View>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/separatorLine"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/tableMacro"
+                            android:text="Fat" />
+
+                        <TextView
+                            android:id="@+id/fatTotal"
+                            style="@style/tableLabel"
+                            android:text="0" />
+
+                        <TextView
+                            android:id="@+id/fatGoal"
+                            style="@style/tableLabel"
+                            android:text="0" />
+
+                        <TextView
+                            android:id="@+id/fatLeft"
+                            style="@style/tableLabel"
+                            android:text="0g"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/progressBarContainer">
+
+                        <View
+                            android:id="@+id/fatProgress"
+                            style="@style/separatorLine.progressBar"></View>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    style="@style/separatorLine"></View>
 
             </LinearLayout>
 

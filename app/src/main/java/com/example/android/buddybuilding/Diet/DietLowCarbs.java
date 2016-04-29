@@ -49,8 +49,21 @@ public class DietLowCarbs extends DietToLose {
         }
     }
 
-    public void setMacroDistribution()
-    {
+    /*
+     Em DietLowCarbs, a divisão dos macros será feita da seguinte maneira.
+     30% | Carbs
+     40% | Protein
+     30% | Fat
+     */
 
+    protected void setMacrosTarget()
+    {
+        double carbsCalories = totalCaloriesTarget / 30.0;
+        double proteinCalories = totalCaloriesTarget / 40.0;
+        double fatCalories = totalCaloriesTarget / 30.0;
+
+        carbsTarget = carbsCalories / 4;
+        proteinTarget = proteinCalories / 4;
+        fatTarget = fatCalories / 9;
     }
 }

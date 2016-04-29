@@ -15,12 +15,18 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public abstract class Diet implements CaloriesMeasurable {
-    protected int totalCaloriesTarget;
+
     private int totalCaloriesIntake;
     private double proteinIntake;
     private double carbsIntake;
     private double fatIntake;
     private HashMap<Integer, Meal> meals = new HashMap<>();
+
+    /* Targets */
+    protected int totalCaloriesTarget;
+    protected double proteinTarget;
+    protected double carbsTarget;
+    protected double fatTarget;
 
     private ArrayList<Food> allFoodsAdded = new ArrayList<>();
     private int lastMealChanged;
@@ -84,10 +90,12 @@ public abstract class Diet implements CaloriesMeasurable {
 
             meal.addFood(food);
 
-            totalCaloriesIntake += meal.getCalories();
+            totalCaloriesIntake += food.getCalories();
+            proteinIntake += food.getProtein();
+            carbsIntake += food.getCarbs();
+            fatIntake += food.getFat();
 
             lastMealChanged = nameOfmeal;
-
             hasDietChanged = true;
 
             if (! allFoodsAdded.contains(food))
@@ -197,5 +205,37 @@ public abstract class Diet implements CaloriesMeasurable {
     public void setDietChanged(boolean value)
     {
         hasDietChanged = value;
+    }
+
+    protected abstract void setMacrosTarget();
+
+    public double getProteinIntake()
+    {
+        return proteinIntake;
+    }
+
+    public double getProteinTarget()
+    {
+        return proteinTarget;
+    }
+
+    public double getCarbsIntake()
+    {
+        return carbsIntake;
+    }
+
+    public double getCarbsTarget()
+    {
+        return carbsTarget;
+    }
+
+    public double getFatIntake()
+    {
+        return fatIntake;
+    }
+
+    public double getFatTarget()
+    {
+        return fatTarget;
     }
 }
