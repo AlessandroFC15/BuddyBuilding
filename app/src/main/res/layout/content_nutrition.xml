@@ -73,25 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/caloriesPieChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/white">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PieChart"
-                        android:layout_gravity="center_horizontal"/>
-
-                </LinearLayout>
-
-                <View style="@style/separatorLine" />
 
                 <RelativeLayout style="@style/macroContainer">
 
@@ -101,6 +84,7 @@
 
                     <TextView
                         style="@style/macroInput"
+                        android:id="@+id/totalCalories"
                         android:gravity="end"
                         android:text="0"
                         android:textAlignment="textEnd" />
@@ -118,6 +102,7 @@
                     <TextView
                         style="@style/macroInput"
                         android:gravity="end"
+                        android:id="@+id/caloriesLeft"
                         android:text="0"
                         android:textAlignment="textEnd" />
 
@@ -134,6 +119,7 @@
                     <TextView
                         style="@style/macroInput"
                         android:gravity="end"
+                        android:id="@+id/caloriesGoal"
                         android:text="0"
                         android:textAlignment="textEnd"
                         android:textColor="@android:color/holo_blue_light" />
@@ -157,6 +143,7 @@
                     android:id="@+id/foodsHighestCalories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:color/white"
                     android:orientation="vertical">
 
 

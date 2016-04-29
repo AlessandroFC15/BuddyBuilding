@@ -1,6 +1,7 @@
 package com.example.android.buddybuilding.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,18 +11,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.android.buddybuilding.Activities.Diary.Diary;
+import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
 import com.example.android.buddybuilding.R;
+import com.example.android.buddybuilding.User.User;
+
+import java.util.ArrayList;
 
 public class Nutrition extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private User userData = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +49,21 @@ public class Nutrition extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         checkNutritionInMenu();
 
+        updateCaloriesScreen();
+
+        changeScreen(findViewById(R.id.buttonCalories));
     }
 
     public void onResume() {
         super.onResume();
 
         checkNutritionInMenu();
+
+        updateCaloriesScreen();
+
     }
 
     @Override
@@ -169,6 +186,85 @@ public class Nutrition extends AppCompatActivity
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     }
 
+    private void updateCaloriesScreen()
+    {
+        int totalCalories = userData.getDiet().getCalories();
+        int caloriesGoal = userData.getDiet().getCaloriesTarget();
+        int caloriesLeft = caloriesGoal - totalCalories;
+
+        updateValue(R.id.totalCalories, totalCalories);
+        updateValue(R.id.caloriesGoal, caloriesGoal);
+        updateValue(R.id.caloriesLeft, caloriesLeft);
+
+        if (caloriesLeft < 0)
+        {
+            TextView text = (TextView) findViewById(R.id.caloriesLeft);
+            text.setTextColor(Color.RED);
+        }
+
+        printFoodsHighestInCalories();
+    }
+
+    private void updateValue(int id, int value)
+    {
+        TextView text = (TextView) findViewById(id);
+        text.setText(String.format("%d", value));
+    }
+
+    private void printFoodsHighestInCalories()
+    {
+        ArrayList<Food> highestFoodCalories = userData.getDiet().getHighestFoodCalories();
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.foodsHighestCalories);
+
+        layout.removeAllViews();
+
+        if (highestFoodCalories.isEmpty())
+        {
+            TextView warning = new TextView(this);
+
+            warning.setText("No foods have been added yet!");
+
+            int padding = Helper.convertDPToPixel(15);
+
+            warning.setPadding(padding, padding, padding, padding);
+
+            warning.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            layout.addView(warning, 0);
+        } else
+        {
+            for (int i = 0; i < highestFoodCalories.size(); i++)
+            {
+                printFood(i + 1, highestFoodCalories.get(i), layout);
+            }
+        }
+    }
+
+
+    private void printFood(int position, Food newFood, LinearLayout layout) {
+        RelativeLayout container = new RelativeLayout(this);
+
+        TextView food = new TextView(this);
+        food.setText(String.format("%d. %s", position, newFood.getName()));
+        int padding = Helper.convertDPToPixel(15);
+        food.setPadding(padding, padding, padding, padding);
+        food.setTextColor(Color.BLACK);
+
+        TextView calories = new TextView(this);
+        calories.setText(String.format("%d kcal", newFood.getCalories()));
+        calories.setPadding(padding, padding, padding, padding);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+        calories.setLayoutParams(params);
+
+        container.addView(food);
+        container.addView(calories);
+
+        layout.addView(container);
+    }
 
 }
 
