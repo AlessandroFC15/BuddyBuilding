@@ -10,6 +10,8 @@ import com.example.android.buddybuilding.Meals.Meal;
 import com.example.android.buddybuilding.Meals.Snacks;
 import com.example.android.buddybuilding.User.User;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public abstract class Diet implements CaloriesMeasurable {
@@ -20,8 +22,9 @@ public abstract class Diet implements CaloriesMeasurable {
     private double fatIntake;
     private HashMap<Integer, Meal> meals = new HashMap<>();
 
-    private Food lastFoodAdded = null;
+    private ArrayList<Food> allFoodsAdded = new ArrayList<>();
     private int lastMealChanged;
+    private boolean hasDietChanged;
 
     private Food foodToBeAdded = null;
 
@@ -84,7 +87,13 @@ public abstract class Diet implements CaloriesMeasurable {
             totalCaloriesIntake += meal.getCalories();
 
             lastMealChanged = nameOfmeal;
-            lastFoodAdded = food;
+
+            hasDietChanged = true;
+
+            if (! allFoodsAdded.contains(food))
+            {
+                allFoodsAdded.add(food);
+            }
         }
     }
 
@@ -143,15 +152,6 @@ public abstract class Diet implements CaloriesMeasurable {
         return output;
     }
 
-    public Food getLastFoodAdded() {
-        return lastFoodAdded;
-    }
-
-    public void resetLastFoodAdded()
-    {
-        lastFoodAdded = null;
-    }
-
     public int getLastMealChanged()
     {
         return lastMealChanged;
@@ -167,5 +167,35 @@ public abstract class Diet implements CaloriesMeasurable {
     public Food getFoodToBeAdded()
     {
         return foodToBeAdded;
+    }
+
+    public ArrayList<Food> getHighestFoodCalories()
+    {
+        Collections.sort(allFoodsAdded, Collections.reverseOrder());
+
+        if (allFoodsAdded.size() >= 0 && allFoodsAdded.size() <= 3)
+        {
+            return allFoodsAdded;
+        } else
+        {
+            ArrayList<Food> highest = new ArrayList<>();
+
+            Food first = allFoodsAdded.get(0);
+            Food second = allFoodsAdded.get(1);
+            Food third = allFoodsAdded.get(2);
+
+            highest.add(first);
+            highest.add(second);
+            highest.add(third);
+
+            return highest;
+        }
+    }
+
+    public boolean hasDietChanged () {return hasDietChanged; }
+
+    public void setDietChanged(boolean value)
+    {
+        hasDietChanged = value;
     }
 }

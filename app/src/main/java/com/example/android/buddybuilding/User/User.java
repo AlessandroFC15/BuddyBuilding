@@ -152,7 +152,7 @@ public class User extends Person {
     }
 
     public boolean hasDietChanged() {
-        return diet.getLastFoodAdded() != null;
+        return diet.hasDietChanged();
     }
 
     public int getLastMealChanged() {
@@ -225,14 +225,6 @@ public class User extends Person {
                 "\nWeekly Goal: " + weeklyGoal.toString() +
                 "\nGoal: " + goal.toString() +
                 "\nDiet (Calories Target): " + diet.getCaloriesTarget() + " kcal";
-    }
-
-    public Food getLastFoodAdded() {
-        return diet.getLastFoodAdded();
-    }
-
-    public void resetLastFoodAdded() {
-        diet.resetLastFoodAdded();
     }
 
     public static int getNumberOfUsers() {

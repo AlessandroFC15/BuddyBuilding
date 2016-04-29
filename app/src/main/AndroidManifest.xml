@@ -67,7 +67,7 @@
         <activity
             android:name=".Activities.Nutrition"
             android:label="@string/title_activity_nutrition"
-            android:launchMode="singleTask"
+
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
