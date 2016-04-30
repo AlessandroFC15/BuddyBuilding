@@ -2,6 +2,8 @@ package com.example.android.buddybuilding.Food;
 
 import com.example.android.buddybuilding.CaloriesMeasurable;
 
+import java.util.Comparator;
+
 /**
  * Created by Alessandro on 05/04/2016.
  */
@@ -208,9 +210,52 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
         foodsCreated = 0;
     }
 
-    public double getFat()
-    {
-        return totalFat;
+    public static class ProteinComparator implements Comparator<Food> {
+
+        public int compare(Food o1, Food o2) {
+            if (o1.getProtein() > o2.getProtein())
+            {
+                return 1;
+            } else if (o1.getProtein() == o2.getProtein())
+            {
+                return 0;
+            } else
+            {
+                return -1;
+            }
+        }
+    }
+
+    public static class CarbsComparator implements Comparator<Food> {
+
+        public int compare(Food o1, Food o2) {
+            if (o1.getCarbs() > o2.getCarbs())
+            {
+                return 1;
+            } else if (o1.getCarbs() == o2.getCarbs())
+            {
+                return 0;
+            } else
+            {
+                return -1;
+            }
+        }
+    }
+
+    public static class FatComparator implements Comparator<Food> {
+
+        public int compare(Food o1, Food o2) {
+            if (o1.getTotalFat() > o2.getTotalFat())
+            {
+                return 1;
+            } else if (o1.getTotalFat() == o2.getTotalFat())
+            {
+                return 0;
+            } else
+            {
+                return -1;
+            }
+        }
     }
 
 }
