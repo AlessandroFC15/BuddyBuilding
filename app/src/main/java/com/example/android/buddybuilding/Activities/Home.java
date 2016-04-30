@@ -109,8 +109,7 @@ public class Home extends AppCompatActivity
 
         textRemainingCalories.setText(Integer.toString(remainingCalories));
 
-        if (remainingCalories < 0)
-        {
+        if (remainingCalories < 0) {
             textRemainingCalories.setTextColor(Color.RED);
         }
     }
@@ -159,6 +158,8 @@ public class Home extends AppCompatActivity
             startActivity(new Intent(this, FoodActivity.class));
         } else if (id == R.id.nav_nutrition) {
             startActivity(new Intent(this, Nutrition.class));
+        } else if (id == R.id.nav_goals) {
+            startActivity(new Intent(this, Goals.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

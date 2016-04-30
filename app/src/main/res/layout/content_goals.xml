@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.buddybuilding.Activities.Goals"
+    tools:showIn="@layout/app_bar_goals"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/light_gray">
+
+        <RelativeLayout
+           style="@style/goals_container">
+
+            <TextView
+                style="@style/goals_label"
+                android:text="Starting Weight" />
+
+            <TextView
+                android:id="@+id/startingWeight"
+                style="@style/goals_info"
+                android:text="61kg on Mar 28, 2016" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeCurrentWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:text="Current Weight" />
+
+            <TextView
+                android:id="@+id/currentWeight"
+                style="@style/goals_info"
+                android:text="0 kg" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:text="Goal Weight" />
+
+            <TextView
+                android:id="@+id/goals_goalWeight"
+                style="@style/goals_info"
+                android:text="65 kg" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:text="Weekly Goal" />
+
+            <TextView
+                android:id="@+id/goals_weeklyGoal"
+                style="@style/goals_info"
+                android:text="I'm not surprised!" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:text="Activity Level" />
+
+            <TextView
+                android:id="@+id/goals_activityLevel"
+                style="@style/goals_info"
+                android:text="Fuck it" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Nutrition Goals"
+            android:layout_marginTop="15dp"
+            android:padding="15dp"/>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:text="Calories" />
+
+            <TextView
+                android:id="@+id/goals_calories"
+                style="@style/goals_info"
+                android:text="Fuck it" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:id="@+id/macroLabel"
+                android:text="Carbohydrates" />
+
+            <TextView
+                android:id="@+id/goals_carbsValue"
+                style="@style/goals_macroValue"
+                android:text="0g" />
+
+            <TextView
+                android:id="@+id/goals_carbsPercentage"
+                style="@style/goals_info"
+                android:text="Fuck it" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:id="@id/macroLabel"
+                android:text="Protein" />
+
+            <TextView
+                android:id="@+id/goals_proteinValue"
+                style="@style/goals_macroValue"
+                android:text="0g" />
+
+            <TextView
+                android:id="@+id/goals_proteinPercentage"
+                style="@style/goals_info"
+                android:text="Fuck it" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+        <RelativeLayout
+            style="@style/goals_container"
+            android:onClick="changeStartingWeight">
+
+            <TextView
+                style="@style/goals_label"
+                android:id="@id/macroLabel"
+                android:text="Fat" />
+
+            <TextView
+                android:id="@+id/goals_fatValue"
+                style="@style/goals_macroValue"
+                android:text="0g" />
+
+            <TextView
+                android:id="@+id/goals_fatPercentage"
+                style="@style/goals_info"
+                android:text="Fuck it" />
+        </RelativeLayout>
+
+        <View
+            style="@style/separatorLine"></View>
+
+    </LinearLayout>
+</ScrollView>

@@ -18,5 +18,10 @@
             android:id="@+id/nav_nutrition"
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="Nutrition" />
+
+        <item
+            android:id="@+id/nav_goals"
+            android:icon="@android:drawable/ic_menu_week"
+            android:title="Goals" />
     </group>
 </menu>

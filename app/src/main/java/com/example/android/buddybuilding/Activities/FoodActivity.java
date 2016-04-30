@@ -397,6 +397,8 @@ public class FoodActivity extends AppCompatActivity
             startActivity(new Intent(this, Diary.class));
         } else if (id == R.id.nav_nutrition) {
             startActivity(new Intent(this, Nutrition.class));
+        } else if (id == R.id.nav_goals) {
+            startActivity(new Intent(this, Goals.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

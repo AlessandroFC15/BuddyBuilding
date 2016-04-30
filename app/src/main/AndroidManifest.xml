@@ -67,7 +67,11 @@
         <activity
             android:name=".Activities.Nutrition"
             android:label="@string/title_activity_nutrition"
-
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Activities.Goals"
+            android:label="@string/title_activity_goals"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
