@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     tools:context="com.example.android.buddybuilding.Activities.Diary.ServingSize">
 
-    <!-- TODO: Update blank fragment layout -->
     <EditText
         android:id="@+id/fragment_numberOfServings"
         android:layout_width="wrap_content"

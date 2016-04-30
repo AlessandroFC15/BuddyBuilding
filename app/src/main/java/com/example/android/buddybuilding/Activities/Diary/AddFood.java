@@ -17,8 +17,6 @@ import com.example.android.buddybuilding.User.User;
 
 public class AddFood extends AppCompatActivity implements ServingSize.NoticeDialogListener {
 
-
-
     private User userData = User.getInstance();
     private Food foodToBeAdded = userData.getDiet().getFoodToBeAdded();
     private int nameOfMeal;

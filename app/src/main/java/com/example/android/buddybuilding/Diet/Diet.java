@@ -277,7 +277,7 @@ public abstract class Diet implements CaloriesMeasurable {
         return fatPercentage;
     }
 
-    protected void setMacrosTarget()
+    public void setMacrosTarget()
     {
         double carbsCalories = (totalCaloriesTarget * carbsPercentage) / 100.0;
         double proteinCalories = (totalCaloriesTarget * proteinPercentage) / 100.0;
