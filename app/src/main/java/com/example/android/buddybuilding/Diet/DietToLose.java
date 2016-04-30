@@ -21,14 +21,6 @@ public abstract class DietToLose extends Diet {
         super(diet);
     }
 
-    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal) {
-        if (weeklyGoal.isGoalToLose()) {
-            totalCaloriesTarget = bmr + weeklyGoal.getCalories();
-        } else {
-            totalCaloriesTarget = -1;
-        }
-    }
-
     public String toString() {
         return super.toString();
     }

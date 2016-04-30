@@ -16,11 +16,23 @@ public class DietLowCarbs extends DietToLose {
     public DietLowCarbs()
     {
         super();
+
+        carbsPercentage = 30;
+        proteinPercentage = 40;
+        fatPercentage = 30;
+
+        setMacrosTarget();
     }
 
     public DietLowCarbs(int bmr, User.WeeklyGoal weeklyGoal)
     {
         super(bmr, weeklyGoal);
+
+        carbsPercentage = 30;
+        proteinPercentage = 40;
+        fatPercentage = 30;
+
+        setMacrosTarget();
     }
 
     public DietLowCarbs(final DietLowCarbs diet)
@@ -49,21 +61,18 @@ public class DietLowCarbs extends DietToLose {
         }
     }
 
+    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal) {
+        if (weeklyGoal.isGoalToLose()) {
+            totalCaloriesTarget = bmr + weeklyGoal.getCalories() - 100;
+        } else {
+            totalCaloriesTarget = -1;
+        }
+    }
+
     /*
      Em DietLowCarbs, a divisão dos macros será feita da seguinte maneira.
      30% | Carbs
      40% | Protein
      30% | Fat
      */
-
-    protected void setMacrosTarget()
-    {
-        double carbsCalories = totalCaloriesTarget / 30.0;
-        double proteinCalories = totalCaloriesTarget / 40.0;
-        double fatCalories = totalCaloriesTarget / 30.0;
-
-        carbsTarget = carbsCalories / 4;
-        proteinTarget = proteinCalories / 4;
-        fatTarget = fatCalories / 9;
-    }
 }

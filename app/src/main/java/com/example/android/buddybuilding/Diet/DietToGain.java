@@ -6,14 +6,31 @@ import com.example.android.buddybuilding.User.User;
  * Created by Alessandro on 19/04/2016.
  */
 public class DietToGain extends Diet{
+    /*
+     Em DietToGain, a divisão dos macros será feita da seguinte maneira.
+     50% | Carbs
+     30% | Protein
+     20% | Fat
+     */
+
     public DietToGain()
     {
         super();
+
+        carbsPercentage = 50;
+        proteinPercentage = 30;
+        fatPercentage = 20;
+
+        setMacrosTarget();
     }
 
     public DietToGain(int bmr, User.WeeklyGoal weeklyGoal)
     {
         setCaloriesTarget(bmr, weeklyGoal);
+
+        carbsPercentage = 50;
+        proteinPercentage = 30;
+        fatPercentage = 20;
 
         setMacrosTarget();
     }
@@ -44,23 +61,4 @@ public class DietToGain extends Diet{
     {
         return ".: DietToGain :." + super.toString();
     }
-
-    /*
-     Em DietToGain, a divisão dos macros será feita da seguinte maneira.
-     50% | Carbs
-     30% | Protein
-     20% | Fat
-     */
-
-    protected void setMacrosTarget()
-    {
-        double carbsCalories = (totalCaloriesTarget * 50.0) / 100.0;
-        double proteinCalories = (totalCaloriesTarget * 30.0) / 100.0;
-        double fatCalories = (totalCaloriesTarget * 20.0) / 100.0;
-
-        carbsTarget = carbsCalories / 4;
-        proteinTarget = proteinCalories / 4;
-        fatTarget = fatCalories / 9;
-    }
-
 }

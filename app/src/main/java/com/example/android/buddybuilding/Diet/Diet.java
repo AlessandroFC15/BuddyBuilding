@@ -1,5 +1,6 @@
 package com.example.android.buddybuilding.Diet;
 
+import com.example.android.buddybuilding.Activities.Nutrition;
 import com.example.android.buddybuilding.CaloriesMeasurable;
 import com.example.android.buddybuilding.Food.Food;
 import com.example.android.buddybuilding.Helper;
@@ -27,6 +28,10 @@ public abstract class Diet implements CaloriesMeasurable {
     protected double proteinTarget;
     protected double carbsTarget;
     protected double fatTarget;
+
+    protected double proteinPercentage;
+    protected double carbsPercentage;
+    protected double fatPercentage;
 
     private ArrayList<Food> allFoodsAdded = new ArrayList<>();
     private int lastMealChanged;
@@ -93,7 +98,7 @@ public abstract class Diet implements CaloriesMeasurable {
             totalCaloriesIntake += food.getCalories();
             proteinIntake += food.getProtein();
             carbsIntake += food.getCarbs();
-            fatIntake += food.getFat();
+            fatIntake += food.getTotalFat();
 
             lastMealChanged = nameOfmeal;
             hasDietChanged = true;
@@ -111,16 +116,6 @@ public abstract class Diet implements CaloriesMeasurable {
     }
 
     public abstract void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal);
-
-    /*
-    public void setCaloriesTarget(int target)
-    {
-        if (target > 0)
-        {
-            totalCaloriesTarget = target;
-        }
-    }
-    */
 
     public int getCaloriesTarget()
     {
@@ -207,8 +202,6 @@ public abstract class Diet implements CaloriesMeasurable {
         hasDietChanged = value;
     }
 
-    protected abstract void setMacrosTarget();
-
     public double getProteinIntake()
     {
         return proteinIntake;
@@ -237,5 +230,103 @@ public abstract class Diet implements CaloriesMeasurable {
     public double getFatTarget()
     {
         return fatTarget;
+    }
+
+    public int getTotalCaloriesIntake() { return totalCaloriesIntake; }
+
+    public double getProteinPercentageIntake()
+    {
+        if (totalCaloriesIntake > 0)
+        {
+            return (((proteinIntake * 4)/totalCaloriesIntake) * 100);
+        }
+
+        return 0;
+    }
+
+    public double getCarbsPercentageIntake()
+    {
+        if (totalCaloriesIntake > 0) {
+            return (((carbsIntake * 4) / totalCaloriesIntake) * 100);
+        }
+
+        return 0;
+    }
+
+    public double getFatPercentageIntake()
+    {
+        if (totalCaloriesIntake > 0) {
+            return (((fatIntake * 9) / totalCaloriesIntake) * 100);
+        }
+
+        return 0;
+    }
+
+    public double getProteinPercentageGoal()
+    {
+        return proteinPercentage;
+    }
+
+    public double getCarbsPercentageGoal()
+    {
+        return carbsPercentage;
+    }
+
+    public double getFatPercentageGoal()
+    {
+        return fatPercentage;
+    }
+
+    protected void setMacrosTarget()
+    {
+        double carbsCalories = (totalCaloriesTarget * carbsPercentage) / 100.0;
+        double proteinCalories = (totalCaloriesTarget * proteinPercentage) / 100.0;
+        double fatCalories = (totalCaloriesTarget * fatPercentage) / 100.0;
+
+        carbsTarget = carbsCalories / 4;
+        proteinTarget = proteinCalories / 4;
+        fatTarget = fatCalories / 9;
+    }
+    
+    public ArrayList<Food> getHighestFood(int parameter)
+    {
+        switch (parameter)
+        {
+            case (Nutrition.CALORIES_PARAM):
+                Collections.sort(allFoodsAdded, Collections.reverseOrder());
+                break;
+            case (Nutrition.PROTEIN_PARAM):
+                Collections.sort(allFoodsAdded, new Food.ProteinComparator());
+                Collections.reverse(allFoodsAdded);
+                break;
+            case (Nutrition.CARBS_PARAM):
+                Collections.sort(allFoodsAdded, new Food.CarbsComparator());
+                Collections.reverse(allFoodsAdded);
+                break;
+            case (Nutrition.FAT_PARAM):
+                Collections.sort(allFoodsAdded, new Food.FatComparator());
+                Collections.reverse(allFoodsAdded);
+                break;
+            default:
+                break;
+        }
+
+        if (allFoodsAdded.size() >= 0 && allFoodsAdded.size() <= 3)
+        {
+            return allFoodsAdded;
+        } else
+        {
+            ArrayList<Food> highest = new ArrayList<>();
+
+            Food first = allFoodsAdded.get(0);
+            Food second = allFoodsAdded.get(1);
+            Food third = allFoodsAdded.get(2);
+
+            highest.add(first);
+            highest.add(second);
+            highest.add(third);
+
+            return highest;
+        }
     }
 }
