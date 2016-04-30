@@ -182,6 +182,8 @@ public class Input5Goals extends AppCompatActivity {
         {
             if (isWeeklyGoalSelected())
             {
+                input.goalWeight = goalWeight;
+
                 startActivity(new Intent(this, Home.class));
             } else
             {

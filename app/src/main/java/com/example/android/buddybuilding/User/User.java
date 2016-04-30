@@ -24,6 +24,7 @@ public class User extends Person {
     protected Goal goal;
     private WeeklyGoal weeklyGoal;
     private Diet diet;
+    private double goalWeight;
 
     private static int numberOfUsers = 0;
 
@@ -33,6 +34,7 @@ public class User extends Person {
         goal = Goal.GAIN_WEIGHT;
         weeklyGoal = WeeklyGoal.GAIN_250G;
         diet = getCorrectDiet(goal);
+        goalWeight = weight + 5;
 
         numberOfUsers++;
     }
@@ -55,6 +57,7 @@ public class User extends Person {
         goal = user.goal;
         weeklyGoal = user.weeklyGoal;
         diet = user.diet;
+        goalWeight = user.goalWeight;
 
         numberOfUsers++;
     }
@@ -65,6 +68,7 @@ public class User extends Person {
         goal = input.goal;
         weeklyGoal = input.weeklyGoal;
         diet = getCorrectDiet(goal);
+        goalWeight = input.goalWeight;
 
         numberOfUsers++;
     }
@@ -139,11 +143,11 @@ public class User extends Person {
         diet.setCaloriesTarget(getBMR(), getWeeklyGoal());
     }
 
-    public double getCaloriesTarget() {
+    public int getCaloriesTarget() {
         return diet.getCaloriesTarget();
     }
 
-    public double getCaloriesIntake() {
+    public int getCaloriesIntake() {
         return diet.getCalories();
     }
 
@@ -177,9 +181,9 @@ public class User extends Person {
     }
 
     public enum WeeklyGoal {
-        GAIN_250G(500, "Gain 250G"), GAIN_500G(750, "Gain 500G"),
-        LOSE_250G(-200, "Lose 250G"), LOSE_500G(-300, "Lose 500G"),
-        LOSE_750G(-400, "Lose 750G"), LOSE_1KG(-500, "Lose 1KG"),
+        GAIN_250G(500, "Gain 250g per week"), GAIN_500G(750, "Gain 500g per week"),
+        LOSE_250G(-200, "Lose 250g per week"), LOSE_500G(-300, "Lose 500g per week"),
+        LOSE_750G(-400, "Lose 750g per week"), LOSE_1KG(-500, "Lose 1kg per week"),
         MAINTAIN(0, "Maintain Weight");
 
         private final int calories;
@@ -246,6 +250,17 @@ public class User extends Person {
 
     public int getBMR() {
         return 32 * (int) getWeight();
+    }
+
+    public double getGoalWeight() { return goalWeight; }
+
+    public void setWeight(double newWeight)
+    {
+        super.setWeight(newWeight);
+
+        diet.setCaloriesTarget(getBMR(), weeklyGoal);
+
+        diet.setMacrosTarget();
     }
 
 }

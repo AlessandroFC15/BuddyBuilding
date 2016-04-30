@@ -20,6 +20,7 @@ public class InputData {
     public int age;
     public double height;
     public double weight;
+    public double goalWeight;
 
     private InputData() {
 
