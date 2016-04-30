@@ -56,6 +56,8 @@ public class Nutrition extends AppCompatActivity
 
         updateNutrientsScreen();
 
+        updateMacrosScreen();
+
         changeScreen(findViewById(R.id.buttonCalories));
     }
 
@@ -67,6 +69,8 @@ public class Nutrition extends AppCompatActivity
         updateCaloriesScreen();
 
         updateNutrientsScreen();
+
+        updateMacrosScreen();
     }
 
     @Override
@@ -209,7 +213,7 @@ public class Nutrition extends AppCompatActivity
             text.setTextColor(Color.RED);
         }
 
-        printFoodsHighestInCalories();
+        printHighestFood(CALORIES_PARAM);
     }
 
     private void updateValue(int id, int value)
@@ -218,38 +222,27 @@ public class Nutrition extends AppCompatActivity
         text.setText(String.format("%d", value));
     }
 
-    private void printFoodsHighestInCalories()
-    {
-        ArrayList<Food> highestFoodCalories = userData.getDiet().getHighestFoodCalories();
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.foodsHighestCalories);
+    private void printFood(int position, Food newFood, LinearLayout layout, int param) {
 
-        layout.removeAllViews();
+        String text = "";
 
-        if (highestFoodCalories.isEmpty())
+        switch (param)
         {
-            TextView warning = new TextView(this);
-
-            warning.setText("No foods have been added yet!");
-
-            int padding = Helper.convertDPToPixel(15);
-
-            warning.setPadding(padding, padding, padding, padding);
-
-            warning.setGravity(Gravity.CENTER_HORIZONTAL);
-
-            layout.addView(warning, 0);
-        } else
-        {
-            for (int i = 0; i < highestFoodCalories.size(); i++)
-            {
-                printFood(i + 1, highestFoodCalories.get(i), layout);
-            }
+            case CALORIES_PARAM:
+                text = String.format("%d kcal", newFood.getCalories());
+                break;
+            case PROTEIN_PARAM:
+                text = String.format("Protein = %.0f g", newFood.getProtein());
+                break;
+            case CARBS_PARAM:
+                text = String.format("Carbs = %.0f g", newFood.getCarbs());
+                break;
+            case FAT_PARAM:
+                text = String.format("Fat = %.0f g", newFood.getTotalFat());
+                break;
         }
-    }
 
-
-    private void printFood(int position, Food newFood, LinearLayout layout) {
         RelativeLayout container = new RelativeLayout(this);
 
         TextView food = new TextView(this);
@@ -259,7 +252,7 @@ public class Nutrition extends AppCompatActivity
         food.setTextColor(Color.BLACK);
 
         TextView calories = new TextView(this);
-        calories.setText(String.format("%d kcal", newFood.getCalories()));
+        calories.setText(text);
         calories.setPadding(padding, padding, padding, padding);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -369,5 +362,76 @@ public class Nutrition extends AppCompatActivity
                 new LinearLayout.LayoutParams(0,
                         LinearLayout.LayoutParams.MATCH_PARENT, progress));
     }
+
+    private void updateMacrosScreen()
+    {
+        updatePercentValue(R.id.proteinPercentGoal, (userData.getDiet().getProteinPercentageGoal()));
+        updatePercentValue(R.id.carbsPercentGoal, (userData.getDiet().getCarbsPercentageGoal()));
+        updatePercentValue(R.id.fatPercentGoal, (userData.getDiet().getFatPercentageGoal()));
+
+        updatePercentValue(R.id.proteinPercentTotal, (userData.getDiet().getProteinPercentageIntake()));
+        updatePercentValue(R.id.carbsPercentTotal, (userData.getDiet().getCarbsPercentageIntake()));
+        updatePercentValue(R.id.fatPercentTotal, (userData.getDiet().getFatPercentageIntake()));
+
+        printHighestFood(PROTEIN_PARAM);
+        printHighestFood(CARBS_PARAM);
+        printHighestFood(FAT_PARAM);
+    }
+
+    private void updatePercentValue(int id, double value)
+    {
+        TextView text = (TextView) findViewById(id);
+        text.setText(String.format("%.0f%%", value));
+    }
+
+    private void printHighestFood(int parameter)
+    {
+        ArrayList<Food> highestFoods = userData.getDiet().getHighestFood(parameter);
+        LinearLayout layout = new LinearLayout(this);
+
+        switch (parameter)
+        {
+            case CALORIES_PARAM:
+                layout = (LinearLayout) findViewById(R.id.foodsHighestCalories);
+                break;
+            case PROTEIN_PARAM:
+                layout = (LinearLayout) findViewById(R.id.foodsHighestProtein);
+                break;
+            case CARBS_PARAM:
+                layout = (LinearLayout) findViewById(R.id.foodsHighestCarbs);
+                break;
+            case FAT_PARAM:
+                layout = (LinearLayout) findViewById(R.id.foodsHighestFat);
+                break;
+        }
+
+        layout.removeAllViews();
+
+        if (highestFoods.isEmpty())
+        {
+            TextView warning = new TextView(this);
+
+            warning.setText("No foods have been added yet!");
+
+            int padding = Helper.convertDPToPixel(15);
+
+            warning.setPadding(padding, padding, padding, padding);
+
+            warning.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            layout.addView(warning, 0);
+        } else
+        {
+            for (int i = 0; i < highestFoods.size(); i++)
+            {
+                printFood(i + 1, highestFoods.get(i), layout, parameter);
+            }
+        }
+    }
+
+    public static final int CALORIES_PARAM = 1;
+    public static final int PROTEIN_PARAM = 2;
+    public static final int CARBS_PARAM = 3;
+    public static final int FAT_PARAM = 4;
 }
 

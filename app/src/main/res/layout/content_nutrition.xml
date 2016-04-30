@@ -157,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -166,9 +166,7 @@
                     android:orientation="horizontal"
                     android:padding="15dp">
 
-                    <TextView
-                        style="@style/tableMacro"
-                        ></TextView>
+                    <TextView style="@style/tableMacro"></TextView>
 
                     <TextView
                         style="@style/tableLabel"
@@ -213,12 +211,10 @@
                         <TextView
                             android:id="@+id/proteinLeft"
                             style="@style/tableLabel"
-                            android:text="0g"
-                            />
+                            android:text="0g" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        style="@style/progressBarContainer">
+                    <LinearLayout style="@style/progressBarContainer">
 
                         <View
                             android:id="@+id/proteinProgress"
@@ -227,8 +223,7 @@
 
                 </LinearLayout>
 
-                <View
-                    style="@style/separatorLine"></View>
+                <View style="@style/separatorLine"></View>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -259,12 +254,10 @@
                         <TextView
                             android:id="@+id/carbsLeft"
                             style="@style/tableLabel"
-                            android:text="0g"
-                            />
+                            android:text="0g" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        style="@style/progressBarContainer">
+                    <LinearLayout style="@style/progressBarContainer">
 
                         <View
                             android:id="@+id/carbsProgress"
@@ -273,8 +266,7 @@
 
                 </LinearLayout>
 
-                <View
-                    style="@style/separatorLine"></View>
+                <View style="@style/separatorLine"></View>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -305,11 +297,10 @@
                         <TextView
                             android:id="@+id/fatLeft"
                             style="@style/tableLabel"
-                            android:text="0g"/>
+                            android:text="0g" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        style="@style/progressBarContainer">
+                    <LinearLayout style="@style/progressBarContainer">
 
                         <View
                             android:id="@+id/fatProgress"
@@ -318,28 +309,234 @@
 
                 </LinearLayout>
 
-                <View
-                    style="@style/separatorLine"></View>
+                <View style="@style/separatorLine"></View>
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/macrosScreen"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Macros" />
+                    android:layout_margin="10dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/tableMacro.macrosScreen"
+                            android:layout_weight="0.5"></TextView>
+
+                        <TextView
+                            style="@style/tableLabel.macrosScreen"
+                            android:layout_weight="0.25"
+                            android:text="Total" />
+
+                        <TextView
+                            style="@style/tableLabel.macrosScreen"
+                            android:layout_weight="0.25"
+                            android:text="Goal" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/tableMacro.macrosScreen"
+                                android:text="Protein" />
+
+                            <TextView
+                                android:id="@+id/proteinPercentTotal"
+                                style="@style/tableLabel.macrosScreen"
+                                android:text="0%" />
+
+                            <TextView
+                                android:id="@+id/proteinPercentGoal"
+                                android:textColor="@color/colorPrimary"
+                                style="@style/tableLabel.macrosScreen"
+                                android:text="0" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View style="@style/separatorLine"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:padding="15dp"
+
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/tableMacro.macrosScreen"
+                                android:text="Carbohydrates" />
+
+                            <TextView
+                                android:id="@+id/carbsPercentTotal"
+                                style="@style/tableLabel.macrosScreen"
+                                android:text="0" />
+
+                            <TextView
+                                android:id="@+id/carbsPercentGoal"
+                                android:textColor="@color/colorPrimary"
+                                style="@style/tableLabel.macrosScreen"
+                                android:text="0" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View style="@style/separatorLine"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/tableMacro.macrosScreen"
+                                android:text="Fat" />
+
+                            <TextView
+                                android:id="@+id/fatPercentTotal"
+                                style="@style/tableLabel.macrosScreen"
+                                android:text="0" />
+
+                            <TextView
+                                android:textColor="@color/colorPrimary"
+                                android:id="@+id/fatPercentGoal"
+                                style="@style/tableLabel.macrosScreen"
+                                android:text="0" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="Foods Highest in Protein"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <View style="@style/separatorLine" />
+
+                    <LinearLayout
+                        android:id="@+id/foodsHighestProtein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="Foods Highest in Carbohydrates"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <View style="@style/separatorLine" />
+
+                    <LinearLayout
+                        android:id="@+id/foodsHighestCarbs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="Foods Highest in Fat"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <View style="@style/separatorLine" />
+
+                    <LinearLayout
+                        android:id="@+id/foodsHighestFat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
-
 </LinearLayout>

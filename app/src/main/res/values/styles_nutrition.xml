@@ -27,6 +27,15 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="tableMacro.macrosScreen">
+        <item name="android:layout_weight">0.5</item>
+    </style>
+
+    <style name="tableLabel.macrosScreen">
+        <item name="android:layout_weight">0.25</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="progressBarContainer">
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:layout_width">match_parent</item>
