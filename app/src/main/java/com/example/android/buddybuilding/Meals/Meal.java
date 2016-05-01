@@ -8,20 +8,12 @@ import com.example.android.buddybuilding.Food.Food;
 import java.util.ArrayList;
 
 public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
-
-    public final static int BREAKFAST = 0;
-    public final static int LUNCH = 1;
-    public final static int DINNER = 2;
-    public final static int SNACKS = 3;
-    public final static int GENERIC_MEAL = 4;
-
     protected int name;
     protected double totalProtein;
     protected double totalCarbs;
     protected int totalCalories;
     protected double totalFat;
     protected ArrayList<Food> foods = new ArrayList<>();
-
     private static final int maxAmountOfFoods = 10;
 
     public Meal()
@@ -168,4 +160,10 @@ public abstract class Meal implements Comparable<Meal>, CaloriesMeasurable {
     {
         return totalFat;
     }
+    
+    public final static int BREAKFAST = 0;
+    public final static int LUNCH = 1;
+    public final static int DINNER = 2;
+    public final static int SNACKS = 3;
+    public final static int GENERIC_MEAL = 4;
 }
