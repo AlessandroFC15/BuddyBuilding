@@ -160,7 +160,9 @@ public abstract class Diet implements CaloriesMeasurable {
         return lastMealChanged;
     }
 
-    public static HashMap<String, Food> getRecommendedFoods() {return recommendedFoods; }
+    public static HashMap<String, Food> getRecommendedFoods() {
+        return recommendedFoods; 
+    }
 
     public void setFoodToBeAdded(Food food)
     {
