@@ -34,6 +34,14 @@ public class DietLowCarbs extends DietToLose {
 
         setMacrosTarget();
     }
+    
+    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal) {
+        if (weeklyGoal.isGoalToLose()) {
+            totalCaloriesTarget = bmr + weeklyGoal.getCalories() - 100;
+        } else {
+            totalCaloriesTarget = -1;
+        }
+    }
 
     public DietLowCarbs(final DietLowCarbs diet)
     {
@@ -61,13 +69,7 @@ public class DietLowCarbs extends DietToLose {
         }
     }
 
-    public void setCaloriesTarget(int bmr, User.WeeklyGoal weeklyGoal) {
-        if (weeklyGoal.isGoalToLose()) {
-            totalCaloriesTarget = bmr + weeklyGoal.getCalories() - 100;
-        } else {
-            totalCaloriesTarget = -1;
-        }
-    }
+    
 
     /*
      Em DietLowCarbs, a divisão dos macros será feita da seguinte maneira.
