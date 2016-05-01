@@ -4,15 +4,6 @@ import com.example.android.buddybuilding.Activities.InputActivities.InputData;
 import com.example.android.buddybuilding.Helper;
 
 public abstract class Person implements Comparable<Person>, PhysicallyActive {
-    public static final double MIN_HEIGHT = 57;
-    public static final double MAX_HEIGHT = 260;
-
-    public static final double MIN_WEIGHT = 0;
-    public static final double MAX_WEIGHT = 500;
-
-    public static final int MIN_AGE = 0;
-    public static final int MAX_AGE = 150;
-
     protected Gender gender;
     protected int age;
     protected double height;
@@ -134,5 +125,14 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
             return description;
         }
     }
+    
+    public static final double MIN_HEIGHT = 57;
+    public static final double MAX_HEIGHT = 260;
+
+    public static final double MIN_WEIGHT = 0;
+    public static final double MAX_WEIGHT = 500;
+
+    public static final int MIN_AGE = 0;
+    public static final int MAX_AGE = 150;
 }
 
