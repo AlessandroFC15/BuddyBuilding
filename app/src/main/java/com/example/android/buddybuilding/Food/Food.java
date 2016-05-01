@@ -35,12 +35,12 @@ public class Food implements Comparable<Food>, CaloriesMeasurable, Adjustable {
 
     public Food(String name, int servingSize, double protein, double carbohydrates, double totalFat)
     {
-        this.servingSize = servingSize;
-        this.name = name;
-        this.protein = protein;
-        this.carbohydrates = carbohydrates;
-        this.totalFat = totalFat;
-
+        setServingSize(servingSize);
+        setName(name);
+        setProtein(protein);
+        setCarbs(carbohydrates);
+        setTotalFat(totalFat);
+        
         calculateCalories();
 
         foodsCreated++;
