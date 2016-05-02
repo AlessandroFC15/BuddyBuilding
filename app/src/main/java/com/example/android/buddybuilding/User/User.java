@@ -14,22 +14,13 @@ import com.example.android.buddybuilding.Meals.Meal;
 import java.util.HashMap;
 
 public class User extends Person {
-
-    private static User userData = null;
-
-    public static User getInstance() {
-        return userData;
-    }
-
     protected Goal goal;
     private WeeklyGoal weeklyGoal;
     private Diet diet;
     private double goalWeight;
-
     private static int numberOfUsers = 0;
 
     // Construtores
-
     User() {
         goal = Goal.LOSE_WEIGHT;
         weeklyGoal = WeeklyGoal.LOSE_250G;
@@ -42,23 +33,18 @@ public class User extends Person {
     User(Gender gender, int age, double height, double weight, ActivityLevel activityLevel,
          WeeklyGoal weeklyGoal, Goal goal) {
         super(gender, age, height, weight, activityLevel);
-
         this.weeklyGoal = weeklyGoal;
         this.goal = goal;
-
         diet = getCorrectDiet(goal);
-
         numberOfUsers++;
     }
 
     User(final User user) {
         super(user);
-
         goal = user.goal;
         weeklyGoal = user.weeklyGoal;
         diet = user.diet;
         goalWeight = user.goalWeight;
-
         numberOfUsers++;
     }
 
@@ -114,6 +100,7 @@ public class User extends Person {
                 return null;
         }
     }
+    
 
     public void setWeeklyGoal(WeeklyGoal choice) {
         weeklyGoal = choice;
@@ -196,7 +183,8 @@ public class User extends Person {
 
         public boolean isGoalToLose()
         {
-            return this == LOSE_250G || this == LOSE_500G || this == LOSE_750G || this == LOSE_1KG;
+            return this == LOSE_250G || this == LOSE_500G 
+            || this == LOSE_750G || this == LOSE_1KG;
         }
 
         public int getCalories() {
@@ -223,6 +211,21 @@ public class User extends Person {
             return description;
         }
     }
+    
+    /*
+    Calculo da Taxa Metabólica Basal
+    Assumiu-se a formula 32 * kg
+     */
+
+    public int getBMR() {
+        if (gender == Gender.MALE){
+            return 66.5 + (13.75 * getWeight()) 
+            + (5.003 * getHeight()) – (6.755 * getAge());
+        } else if (gender == Gender.FEMALE) {
+            return 655.1 + ( 9.563 * getWeight()) 
+            + ( 1.850 * getHeight()) – ( 4.676 * getAge());
+        }
+    }
 
     public String toString() {
         return super.toString() +
@@ -243,14 +246,7 @@ public class User extends Person {
         return (diet instanceof DietToLose);
     }
 
-    /*
-    Calculo da Taxa Metabólica Basal
-    Assumiu-se a formula 32 * kg
-     */
-
-    public int getBMR() {
-        return 32 * (int) getWeight();
-    }
+    
 
     public double getGoalWeight() { return goalWeight; }
 
@@ -261,6 +257,12 @@ public class User extends Person {
         diet.setCaloriesTarget(getBMR(), weeklyGoal);
 
         diet.setMacrosTarget();
+    }
+    
+    private static User userData = null;
+
+    public static User getInstance() {
+        return userData;
     }
 
 }
