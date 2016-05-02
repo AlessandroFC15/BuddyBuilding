@@ -6,6 +6,8 @@ import com.example.android.buddybuilding.User.User;
  * Created by Alessandro on 19/04/2016.
  */
 public abstract class DietToLose extends Diet {
+
+
     public DietToLose() {
         super();
     }
@@ -24,5 +26,7 @@ public abstract class DietToLose extends Diet {
     public String toString() {
         return super.toString();
     }
+
+
 
 }

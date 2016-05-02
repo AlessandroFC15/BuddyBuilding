@@ -14,6 +14,7 @@ import com.example.android.buddybuilding.User.User;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 public abstract class Diet implements CaloriesMeasurable {
 
@@ -160,7 +161,7 @@ public abstract class Diet implements CaloriesMeasurable {
         return lastMealChanged;
     }
 
-    public static HashMap<String, Food> getRecommendedFoods() {return recommendedFoods; }
+
 
     public void setFoodToBeAdded(Food food)
     {
@@ -194,6 +195,8 @@ public abstract class Diet implements CaloriesMeasurable {
             return highest;
         }
     }
+
+    public static HashMap<String, Food> getRecommendedFoods() {return recommendedFoods; }
 
     public boolean hasDietChanged () {return hasDietChanged; }
 
@@ -287,6 +290,19 @@ public abstract class Diet implements CaloriesMeasurable {
         proteinTarget = proteinCalories / 4;
         fatTarget = fatCalories / 9;
     }
+
+    public Food getFoodSuggestion()
+    {
+        Object[] foods = recommendedFoods.values().toArray();
+
+        if (foods.length >= 1)
+        {
+            return (Food) foods[rand.nextInt(foods.length)];
+        } else
+        {
+            return new Food();
+        }
+    }
     
     public ArrayList<Food> getHighestFood(int parameter)
     {
@@ -329,4 +345,6 @@ public abstract class Diet implements CaloriesMeasurable {
             return highest;
         }
     }
+
+    private final Random rand = new Random();
 }

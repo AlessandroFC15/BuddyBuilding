@@ -11,9 +11,9 @@ import java.util.HashMap;
 public class DietLowFat extends DietToLose {
     static {
         recommendedFoods = new HashMap<>();
-        recommendedFoods.put("Fuck It", new Food("Fuck It"));
-        recommendedFoods.put("Stockton", new Food("Stockton"));
-        recommendedFoods.put("209", new Food("209"));
+        recommendedFoods.put("Cottage Cheese", new Food("Cottage Cheese", 50, 6.2, 1.1, 1.8));
+        recommendedFoods.put("Fat-free Yogurt", new Food("Fat-free Yogurt", 160, 5.8, 7.8, 0));
+        recommendedFoods.put("Fat-free milk", new Food("Fat-free milk", 20, 6.7, 10, 0));
     }
 
     public DietLowFat()

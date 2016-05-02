@@ -31,10 +31,10 @@ public class User extends Person {
     // Construtores
 
     User() {
-        goal = Goal.GAIN_WEIGHT;
-        weeklyGoal = WeeklyGoal.GAIN_250G;
+        goal = Goal.LOSE_WEIGHT;
+        weeklyGoal = WeeklyGoal.LOSE_250G;
         diet = getCorrectDiet(goal);
-        goalWeight = weight + 5;
+        goalWeight = weight - 5;
 
         numberOfUsers++;
     }
