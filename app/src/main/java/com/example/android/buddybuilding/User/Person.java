@@ -67,10 +67,19 @@ public abstract class Person implements Comparable<Person>, PhysicallyActive {
         }
     }
 
+    public int getAge()
+    {
+        return age;
+    }
+
     public void setHeight(double height) {
         if ((height >= MIN_HEIGHT) && (height <= MAX_HEIGHT)) {
             this.height = height;
         }
+    }
+
+    public double getHeight() {
+        return height;
     }
 
     public void setWeight(double weight) {
