@@ -219,12 +219,14 @@ public class User extends Person {
 
     public int getBMR() {
         if (gender == Gender.MALE){
-            return 66.5 + (13.75 * getWeight()) 
-            + (5.003 * getHeight()) – (6.755 * getAge());
+            return (int) (66.5 + (13.75 * getWeight())
+            + (5.003 * getHeight()) - (6.755 * getAge()));
         } else if (gender == Gender.FEMALE) {
-            return 655.1 + ( 9.563 * getWeight()) 
-            + ( 1.850 * getHeight()) – ( 4.676 * getAge());
+            return (int) (655.1 + ( 9.563 * getWeight())
+            + ( 1.850 * getHeight()) - (4.676 * getAge()));
         }
+
+        return 0;
     }
 
     public String toString() {
@@ -234,19 +236,10 @@ public class User extends Person {
                 "\nDiet (Calories Target): " + diet.getCaloriesTarget() + " kcal";
     }
 
-    public static int getNumberOfUsers() {
-        return numberOfUsers;
-    }
-
-    public static void resetNumberOfUsers() {
-        numberOfUsers = 0;
-    }
 
     public boolean isDietToLose() {
         return (diet instanceof DietToLose);
     }
-
-    
 
     public double getGoalWeight() { return goalWeight; }
 
